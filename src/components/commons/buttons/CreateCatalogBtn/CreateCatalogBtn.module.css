@@ -1,0 +1,62 @@
+.wrapper {
+  margin: 0 auto;
+  padding: 50px 0;
+  text-align: center;
+
+  /*___Анимация, эффект появления текста___*/
+  animation-name: slideFromTop;
+  animation-duration: 5s;
+}
+
+.item {
+  width: 118px;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 142%;
+  letter-spacing: -0.01em;
+  color: var(--white-color);
+  background: var(--green100-color);
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.item:hover {
+  color: var(--white-color);
+  background: var(--orange200-color);
+  cursor: pointer;
+}
+
+.item:active {
+  color: var(--black-color);
+  background: var(--orange100-color);
+  cursor: pointer;
+}
+
+/*___Анимация, эффект появления текста___*/
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translate(300%, 100%) rotateZ(360deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotateZ(0deg);
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .wrapper {
+    padding: 46px 0 56px 0;
+  }
+
+  .item {
+    width: 114px;
+    font-size: 16px;
+  }
+}

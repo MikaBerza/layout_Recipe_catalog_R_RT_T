@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    url('../../../assets/images/productsImg.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+}
+
+.inner {
+  max-width: 900px;
+  padding: 20px;
+}
+
+.title {
+  margin: 0 auto;
+  font-size: 76px;
+  font-weight: 700;
+  line-height: 109%;
+  text-align: center;
+  letter-spacing: 1.92px;
+  color: var(--white-color);
+
+  /*___Анимация, эффект появления текста___*/
+  animation-name: slideFromLeft;
+  animation-duration: 5s;
+}
+
+.subtitle {
+  max-width: 562px;
+  margin: 0 auto;
+  padding-top: 50px;
+
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 142%;
+  text-align: center;
+  color: var(--white-color);
+
+  /*___Анимация, эффект появления текста___*/
+  animation-name: slideFromRight;
+  animation-duration: 5s;
+}
+
+/*___Анимация, эффект появления текста___*/
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateY(200%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(2);
+  }
+}
+
+/*770px___________________________________________________*/
+@media (max-width: 770px) {
+
+  .title {
+    font-size: 48px;
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .title {
+    max-width: 360px;
+    padding-top: 50px;
+    font-size: 34px;
+    line-height: 112%;
+    letter-spacing: 0.68px;
+  }
+}

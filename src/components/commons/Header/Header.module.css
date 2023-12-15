@@ -1,0 +1,48 @@
+.wrapper {
+  position: absolute;
+  width: 100%;
+}
+
+.logo {
+  display: block;
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px 20px;
+
+}
+
+.logo svg {
+  width: 75px;
+}
+
+
+.logo svg g {
+  fill: var(--green100-color);
+  transition: fill 0.3s ease;
+}
+
+
+.logo svg g:hover {
+  fill: var(--orange200-color);
+  cursor: pointer;
+}
+
+.logo svg path g:hover {
+  fill: var(--white-color);
+}
+
+/* .logo svg g:active {
+  fill: var(--orange100-color);
+  cursor: pointer;
+}
+
+.logo svg path:active {
+  fill: black;
+  cursor: pointer;
+} */
+
+/* .logo svg:active {
+  fill: var(--black-color);
+  background: var(--orange100-color);
+  cursor: pointer;
+} */
