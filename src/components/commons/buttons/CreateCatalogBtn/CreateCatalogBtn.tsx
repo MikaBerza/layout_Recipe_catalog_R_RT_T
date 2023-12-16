@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import styles from './CreateCatalogBtn.module.css';
 
-const CreateCatalogBtn = ({ name }: { name: string }) => {
+const CreateCatalogBtn = ({ name, link }: { name: string; link: string }) => {
   return (
     <div className={styles.wrapper}>
-      <a className={styles.item} href='#collect-tour'>
+      <Link className={styles.linkBtn} to={link}>
         {name}
-      </a>
+      </Link>
     </div>
   );
 };

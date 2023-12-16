@@ -3,46 +3,41 @@
   width: 100%;
 }
 
-.logo {
+.logoLink {
   display: block;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: auto;
   padding: 20px 20px;
-
 }
 
-.logo svg {
+.logo {
   width: 75px;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+  /*___Анимация, эффект кручения вокруг оси Y___*/
+  animation-name: twistY;
+  animation-duration: 5s;
 }
 
-
-.logo svg g {
-  fill: var(--green100-color);
-  transition: fill 0.3s ease;
+.logo:hover {
+  opacity: 1;
 }
 
-
-.logo svg g:hover {
-  fill: var(--orange200-color);
-  cursor: pointer;
+.logo:active {
+  position: relative;
+  top: 2px;
+  opacity: 1;
 }
 
-.logo svg path g:hover {
-  fill: var(--white-color);
+/*___Анимация, эффект кручения вокруг оси Y___*/
+@keyframes twistY {
+  0% {
+    opacity: 0;
+    transform: rotateY(2160deg);
+  }
+
+  100% {
+    opacity: 0.7;
+    transform: rotateY(0deg);
+  }
 }
-
-/* .logo svg g:active {
-  fill: var(--orange100-color);
-  cursor: pointer;
-}
-
-.logo svg path:active {
-  fill: black;
-  cursor: pointer;
-} */
-
-/* .logo svg:active {
-  fill: var(--black-color);
-  background: var(--orange100-color);
-  cursor: pointer;
-} */

@@ -1,0 +1,46 @@
+.title {
+  margin: 0 auto;
+  padding-top: 150px;
+  font-size: 76px;
+  font-weight: 700;
+  line-height: 109%;
+  text-align: center;
+  letter-spacing: 1.92px;
+  color: var(--lightgrey-color);
+  /*___Анимация, эффект появления текста слева___*/
+  animation-name: slideFromLeft;
+  animation-duration: 5s;
+}
+
+/*770px___________________________________________________*/
+@media (max-width: 770px) {
+
+  .title {
+    font-size: 48px;
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .title {
+    max-width: 360px;
+    padding-top: 100px;
+    font-size: 34px;
+    line-height: 112%;
+    letter-spacing: 0.68px;
+  }
+}
+
+/*___Анимация, эффект появления текста слева___*/
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

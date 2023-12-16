@@ -2,49 +2,47 @@
   margin: 0 auto;
   padding: 50px 0;
   text-align: center;
-
-  /*___Анимация, эффект появления текста___*/
-  animation-name: slideFromTop;
+  /*___Анимация, эффект кручения вокруг оси X___*/
+  animation-name: twistX;
   animation-duration: 5s;
 }
 
-.item {
+.linkBtn {
   width: 118px;
   padding: 15px;
   font-size: 17px;
   font-weight: 600;
   line-height: 142%;
   letter-spacing: -0.01em;
+  opacity: 0.7;
   color: var(--white-color);
   background: var(--green100-color);
   border: none;
   border-radius: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: opacity 0.3s ease;
   cursor: pointer;
 }
 
-.item:hover {
-  color: var(--white-color);
-  background: var(--orange200-color);
-  cursor: pointer;
+.linkBtn:hover {
+  opacity: 1;
 }
 
-.item:active {
-  color: var(--black-color);
-  background: var(--orange100-color);
-  cursor: pointer;
+.linkBtn:active {
+  position: relative;
+  top: 2px;
+  opacity: 1;
 }
 
-/*___Анимация, эффект появления текста___*/
-@keyframes slideFromTop {
-  from {
+/*___Анимация, эффект кручения вокруг оси X___*/
+@keyframes twistX {
+  0% {
     opacity: 0;
-    transform: translate(300%, 100%) rotateZ(360deg);
+    transform: rotateX(2160deg);
   }
 
-  to {
+  100% {
     opacity: 1;
-    transform: translate(0, 0) rotateZ(0deg);
+    transform: rotateX(0deg);
   }
 }
 
@@ -55,7 +53,7 @@
     padding: 46px 0 56px 0;
   }
 
-  .item {
+  .linkBtn {
     width: 114px;
     font-size: 16px;
   }

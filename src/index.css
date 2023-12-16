@@ -46,6 +46,8 @@
 :root {
   --white-color: #FFFFFF;
 
+  --lightgrey-color: lightgrey;
+
   --black-color: #1B1F2B;
 
   --orange100-color: #F8E6BE;
@@ -66,6 +68,7 @@ a {
   text-decoration: none;
 }
 
-.maw-1 {
-  max-width: 1920px;
+#root {
+  position: relative;
+  min-height: 100%;
 }

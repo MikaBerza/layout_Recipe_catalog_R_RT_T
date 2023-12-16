@@ -1,27 +1,14 @@
-/* .wrapper {
-  position: absolute;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 0.8;
-
-  backdrop-filter: blur(27px);
-  background-color: rgba(243, 239, 232, 0.6);
-} */
-
 .wrapper {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
+  backdrop-filter: blur(40px);
 }
 
 .inner {
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  backdrop-filter: blur(27px);
 }
 
 .text {

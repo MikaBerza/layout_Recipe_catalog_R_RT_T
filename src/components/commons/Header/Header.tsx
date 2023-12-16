@@ -1,15 +1,13 @@
-import React from 'react';
-// import Logo from '../../../assets/images/logo.png';
-import Logo2 from './Logo';
+import { Link } from 'react-router-dom';
+import Logo from '../../../assets/images/logo.png';
 import styles from './Header.module.css';
 
 const Header = () => {
   return (
     <header className={styles.wrapper}>
-      <a className={styles.logo} href='#sasda'>
-        {/* <img src={Logo} alt='logo' /> */}
-        <Logo2 />
-      </a>
+      <Link className={styles.logoLink} to='/'>
+        <img className={styles.logo} src={Logo} alt='logo' />
+      </Link>
     </header>
   );
 };
