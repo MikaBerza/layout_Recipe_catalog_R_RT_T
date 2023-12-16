@@ -17,7 +17,6 @@ const RecipeCatalogPage = () => {
       <h1>adsasd</h1>
       <h1>adsasd</h1>
       <h1>adsasd</h1>
-      <h1>adsasd</h1>
 
       <h1>adsasd</h1>
       <h1>adsasd</h1>

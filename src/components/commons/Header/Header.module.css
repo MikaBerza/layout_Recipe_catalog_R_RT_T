@@ -1,6 +1,8 @@
 .wrapper {
   position: absolute;
+  position: fixed;
   width: 100%;
+  backdrop-filter: blur(40px);
 }
 
 .logoLink {
@@ -27,6 +29,13 @@
   position: relative;
   top: 2px;
   opacity: 1;
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+  .logo {
+    width: 50px;
+  }
 }
 
 /*___Анимация, эффект кручения вокруг оси Y___*/
