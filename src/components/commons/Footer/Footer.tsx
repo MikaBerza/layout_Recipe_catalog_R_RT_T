@@ -1,8 +1,7 @@
-import React from 'react';
 import LogoGit from './LogoGit';
 import styles from './Footer.module.css';
 
-const Footer = React.memo(() => {
+const Footer = () => {
   return (
     <footer className={styles.wrapper}>
       <div className={styles.inner}>
@@ -14,7 +13,7 @@ const Footer = React.memo(() => {
       </div>
     </footer>
   );
-});
+};
 
 Footer.displayName = 'Footer';
 export default Footer;
