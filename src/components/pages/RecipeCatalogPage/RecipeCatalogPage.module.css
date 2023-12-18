@@ -1,3 +1,36 @@
 .wrapper {
+  overflow: auto;
   min-height: 100vh;
+  padding-bottom: 60px;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    url('../../../assets/images/stonePlateImg.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.table {
+  max-width: 1600px;
+  margin: auto;
+  padding: 50px 20px 20px 20px;
+  table-layout: fixed;
+}
+
+.table th {
+  padding: 10px;
+  font-weight: bold;
+  background: #efefef;
+  border: 1px solid #dddddd;
+}
+
+.table td {
+  padding: 5px 10px;
+  text-align: left;
+  background: #efefef;
+  border: 1px solid #eee;
+}
+
+.buttonsGroup {
+  display: flex;
 }
