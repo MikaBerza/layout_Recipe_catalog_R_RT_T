@@ -47,6 +47,7 @@
   --white-color: #FFFFFF;
 
   --lightgrey-color: lightgrey;
+  --lightgrey200-color: #EEECEC;
 
   --black-color: #1B1F2B;
 
@@ -54,6 +55,7 @@
   --orange200-color: #E8793E;
 
   --green100-color: #8bc34a;
+  --green200-color: #3D642D;
 }
 
 html {

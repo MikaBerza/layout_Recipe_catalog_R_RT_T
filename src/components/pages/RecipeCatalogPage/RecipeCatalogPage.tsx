@@ -1,78 +1,80 @@
 import styles from './RecipeCatalogPage.module.css';
 import { MainTitle } from '../../commons/MainTitle';
+import { TheadIcon } from '../../commons/TheadIcon';
+
+import gridIcon from '../../../assets/images/tableIcon/gridIcon.png';
+import paintIcon from '../../../assets/images/tableIcon/paintIcon.png';
+import dateIcon from '../../../assets/images/tableIcon/dateIcon.png';
+import titleIcon from '../../../assets/images/tableIcon/titleIcon.png';
+import recipeIcon from '../../../assets/images/tableIcon/recipeIcon.png';
+import timeIcon from '../../../assets/images/tableIcon/timeIcon.png';
+
+import { tableListItemData } from '../../../utils/listsOfData';
+import { splitSentenceWithLineBreak } from '../../../utils/modules';
 
 const RecipeCatalogPage = () => {
-  // const arrData = [
-  //   {
-  //     id: 1,
-  //     date: '30/11/23, 21:01',
-  //     nameOfTheDish: 'Салат Цезарь',
-  //     recipe: `
-  //     Ингредиенты: куриное филе, салат Айсберг, помидоры, сыр Пармезан, хлеб для гренок, соус Цезарь.
-  //     Приготовление: обжарить куриное филе, нарезать салат и помидоры, смешать все ингредиенты и заправить соусом.
-  //     `,
-  //   },
-  //   {
-  //     id: 2,
-  //     date: '29/10/23, 22:01',
-  //     nameOfTheDish: 'Паста с креветками',
-  //     recipe: `
-  //     Ингредиенты: спагетти, креветки, чеснок, оливковое масло, петрушка.
-  //     Приготовление: сварить спагетти, обжарить креветки с чесноком на оливковом масле, смешать с пастой и посыпать петрушкой.
-  //     `,
-  //   },
-  // ];
-
   return (
     <main className={styles.wrapper}>
       <MainTitle textTitle={'Каталог рецептов'} />
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr>
-            <th>№</th>
-            <th>Дата</th>
-            <th>Название</th>
-            <th>Рецепт</th>
+            <th>
+              <TheadIcon patchIcon={gridIcon} tooltip='Номер пункта' />
+            </th>
+            <th>
+              <TheadIcon patchIcon={paintIcon} tooltip='Персональный цвет' />
+            </th>
+            <th>
+              <TheadIcon patchIcon={dateIcon} tooltip='Дата добавления' />
+            </th>
+            <th>
+              <TheadIcon patchIcon={titleIcon} tooltip='Название блюда' />
+            </th>
+            <th>
+              <TheadIcon patchIcon={recipeIcon} tooltip='Рецепт блюда' />
+            </th>
+            <th>
+              <TheadIcon
+                patchIcon={timeIcon}
+                tooltip='Время приготовления блюда'
+              />
+            </th>
+            <th></th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>30/11/23, 21:01</td>
-            <td>Салат Цезарь</td>
-            <td className={styles.recipe}>
-              Ингредиенты: куриное филе, салат Айсберг, помидоры, сыр Пармезан,
-              хлеб для гренок, соус Цезарь. <br /> <br />
-              Приготовление: обжарить куриное филе, нарезать салат и помидоры,
-              смешать все ингредиенты и заправить соусом.
-              <div className={styles.buttonsGroup}>
-                <button>Просмотр</button>
-                <button>Подробнее</button>
-              </div>
-            </td>
-            <td>
-              <button>Редактировать</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>29/10/23, 22:01</td>
-            <td>Паста с креветками</td>
-            <td className={styles.recipe}>
-              Ингредиенты: спагетти, креветки, чеснок, оливковое масло,
-              петрушка. <br /> <br />
-              Приготовление: сварить спагетти, обжарить креветки с чесноком на
-              оливковом масле, смешать с пастой и посыпать петрушкой.
-              <div className={styles.buttonsGroup}>
-                <button>Просмотр</button>
-                <button>Подробнее</button>
-              </div>
-            </td>
-            <td>
-              <button>Редактировать</button>
-            </td>
-          </tr>
+          {tableListItemData.map((item, index) => {
+            return (
+              <tr key={item.id}>
+                <td>{index + 1}</td>
+                <td>
+                  <span style={{ backgroundColor: `${item.paint}` }}></span>
+                </td>
+                <td>{item.date}</td>
+                <td>{item.title}</td>
+                <td>
+                  {splitSentenceWithLineBreak(item.recipe).map(
+                    (elem, index) => {
+                      return <p key={index}>{elem}</p>;
+                    }
+                  )}
+                </td>
+                <td>{item.time}ч</td>
+                <td>
+                  <button>Подробнее</button>
+                </td>
+                <td>
+                  <button>Просмотр</button>
+                </td>
+                <td>
+                  <button>Редактировать</button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
