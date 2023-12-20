@@ -11,7 +11,7 @@ import timeIcon from '../../../assets/images/tableIcon/timeIcon.png';
 
 import { tableListItemData } from '../../../utils/listsOfData';
 import { splitSentenceWithLineBreak } from '../../../utils/modules';
-import { ButtonCatalog } from '../../commons/buttons';
+import { ButtonCatalog, ButtonCreateEntry } from '../../commons/buttons';
 import { Search } from '../../commons/Search';
 
 const RecipeCatalogPage = () => {
@@ -23,7 +23,6 @@ const RecipeCatalogPage = () => {
         <caption>
           <div className={styles.searchCont}>
             <Search />
-            <ButtonCatalog name='Добавить' styleName='btnAdd' />
           </div>
         </caption>
         <thead className={styles.thead}>
@@ -49,9 +48,12 @@ const RecipeCatalogPage = () => {
                 tooltip='Время приготовления блюда'
               />
             </th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th colSpan={3}>
+              <ButtonCreateEntry
+                name='Создать запись'
+                link='#modal-window-create-a-record'
+              />
+            </th>
           </tr>
         </thead>
         <tbody>

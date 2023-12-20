@@ -1,0 +1,29 @@
+.linkBtn {
+  padding: 12px 36px;
+  font-size: 20px;
+  font-weight: 600px;
+  opacity: 0.85;
+  color: var(--white-color);
+
+  background-color: var(--dodgerBlue-color100);
+  box-shadow:
+    4px 4px 4px var(--lightgrey400-color),
+    -4px -4px 12px var(--dodgerBlue-color100);
+
+  border: 1px solid var(--dodgerBlue-color100);
+  border-radius: 8px;
+  transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  cursor: pointer;
+
+
+}
+
+.linkBtn:hover {
+  opacity: 1;
+  background-color: var(--dodgerBlue-color200);
+}
+
+.linkBtn:active {
+  position: relative;
+  top: 2px;
+}

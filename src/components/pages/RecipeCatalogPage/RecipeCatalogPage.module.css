@@ -23,7 +23,7 @@
   padding: 15px;
   font-weight: bold;
   background: var(--lightgrey300-color);
-  border-bottom: 6px solid var(--green200-color);
+  border-bottom: 6px solid var(--white-color200);
 }
 
 .table td {
@@ -34,7 +34,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   background: var(--lightgrey300-color);
-  border-bottom: 2px solid var(--green200-color);
+  border-bottom: 2px solid var(--white-color200);
 }
 
 .table th:first-child,
@@ -79,7 +79,6 @@
 .searchCont {
   display: grid;
   height: 50px;
-  grid-template-columns: 1fr 200px;
-  /* gap: 100px; */
+  grid-template-columns: 1fr;
   padding: 50px 20px 0 20px;
 }
