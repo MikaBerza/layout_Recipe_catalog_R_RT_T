@@ -1,9 +1,16 @@
+.wrapper {
+  display: grid;
+  height: 50px;
+  grid-template-columns: 1fr;
+  padding: 50px 20px 0 20px;
+}
+
 .input {
   position: relative;
   box-sizing: border-box;
   padding: 6px 20px;
-  background: #f2f2f2;
-  border: 1px solid #f2f2f2;
+  background-color: var(--white-color200);
+  border: 1px solid var(--white-color200);
   outline: none;
   transition: background-color 0.3s ease;
 }
@@ -14,5 +21,5 @@
 }
 
 .input:hover {
-  background-color: white;
+  background-color: var(--white-color);
 }

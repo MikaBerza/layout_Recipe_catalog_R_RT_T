@@ -24,9 +24,7 @@ const RecipeCatalogPage = () => {
 
       <table className={styles.table}>
         <caption>
-          <div className={styles.searchCont}>
-            <Search />
-          </div>
+          <Search />
         </caption>
         <thead className={styles.thead}>
           <tr>

@@ -1,8 +1,10 @@
-import style from './Search.module.css';
+import styles from './Search.module.css';
 
 const Search = () => {
   return (
-    <input className={style.input} type='search' placeholder='Поиск блюд' />
+    <div className={styles.wrapper}>
+      <input className={styles.input} type='search' placeholder='Поиск блюд' />
+    </div>
   );
 };
 
