@@ -28,13 +28,21 @@
 
 .table td {
   overflow: hidden;
-  max-width: 160px;
+  max-width: 170px;
   padding: 10px 10px;
   text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
   background: var(--lightgrey200-color);
   border-bottom: 2px solid var(--green200-color);
+}
+
+.table td:first-child {
+  padding-left: 20px;
+}
+
+.table td:last-child {
+  padding-right: 20px;
 }
 
 .table td p {

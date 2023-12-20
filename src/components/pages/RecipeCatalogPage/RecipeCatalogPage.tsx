@@ -11,6 +11,7 @@ import timeIcon from '../../../assets/images/tableIcon/timeIcon.png';
 
 import { tableListItemData } from '../../../utils/listsOfData';
 import { splitSentenceWithLineBreak } from '../../../utils/modules';
+import { ButtonCatalogItem } from '../../commons/buttons';
 
 const RecipeCatalogPage = () => {
   return (
@@ -64,13 +65,13 @@ const RecipeCatalogPage = () => {
                 </td>
                 <td>{item.time}ч</td>
                 <td>
-                  <button>Подробнее</button>
+                  <ButtonCatalogItem name='Подробнее' />
                 </td>
                 <td>
-                  <button>Просмотр</button>
+                  <ButtonCatalogItem name='Просмотр' />
                 </td>
                 <td>
-                  <button>Редактировать</button>
+                  <ButtonCatalogItem name='Редактировать' />
                 </td>
               </tr>
             );
