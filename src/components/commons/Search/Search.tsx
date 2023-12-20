@@ -1,4 +1,4 @@
-import style from './search.module.css';
+import style from './QSearch.module.css';
 
 const Search = () => {
   return (
