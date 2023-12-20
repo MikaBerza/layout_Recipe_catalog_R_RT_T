@@ -1,2 +1,2 @@
 export { default as ButtonCreateCatalog } from './ButtonCreateCatalog/ButtonCreateCatalog';
-export { default as ButtonCatalogItem } from './ButtonCatalogItem/ButtonCatalogItem';
+export { default as ButtonCatalog } from './ButtonCatalog/ButtonCatalog';

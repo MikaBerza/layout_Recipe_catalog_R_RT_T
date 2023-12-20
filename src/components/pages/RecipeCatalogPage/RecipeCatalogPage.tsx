@@ -11,19 +11,19 @@ import timeIcon from '../../../assets/images/tableIcon/timeIcon.png';
 
 import { tableListItemData } from '../../../utils/listsOfData';
 import { splitSentenceWithLineBreak } from '../../../utils/modules';
-import { ButtonCatalogItem } from '../../commons/buttons';
+import { ButtonCatalog } from '../../commons/buttons';
 import { Search } from '../../commons/Search';
 
 const RecipeCatalogPage = () => {
   return (
     <main className={styles.wrapper}>
-      <MainTitle textTitle={'Каталог рецептов'} />
+      <MainTitle textTitle='Каталог рецептов' />
 
       <table className={styles.table}>
         <caption>
           <div className={styles.searchCont}>
             <Search />
-            <ButtonCatalogItem name='Добавить' />
+            <ButtonCatalog name='Добавить' styleName='btnAdd' />
           </div>
         </caption>
         <thead className={styles.thead}>
@@ -73,13 +73,13 @@ const RecipeCatalogPage = () => {
                 </td>
                 <td>{item.time}ч</td>
                 <td>
-                  <ButtonCatalogItem name='Подробнее' />
+                  <ButtonCatalog name='Подробнее' styleName='btnGroup' />
                 </td>
                 <td>
-                  <ButtonCatalogItem name='Просмотр' />
+                  <ButtonCatalog name='Просмотр' styleName='btnGroup' />
                 </td>
                 <td>
-                  <ButtonCatalogItem name='Редактировать' />
+                  <ButtonCatalog name='Редактировать' styleName='btnGroup' />
                 </td>
               </tr>
             );
