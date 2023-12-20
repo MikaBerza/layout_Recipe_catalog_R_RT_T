@@ -1,0 +1,18 @@
+.input {
+  position: relative;
+  box-sizing: border-box;
+  padding: 6px 20px;
+  background: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.input::placeholder {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.input:hover {
+  background-color: white;
+}

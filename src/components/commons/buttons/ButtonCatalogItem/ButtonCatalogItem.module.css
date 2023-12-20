@@ -5,8 +5,7 @@
   opacity: 0.8;
   color: var(--lightgrey-color);
   background-color: var(--green200-color);
-  border: 2px solid var(--lightgrey-color);
-  border-radius: 8px;
+  border: 0;
 
   transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
   cursor: pointer;
@@ -15,7 +14,7 @@
 .btn:hover {
   color: var(--white-color);
   background-color: var(--green100-color);
-  border: 2px solid var(--white-color);
+  border: 0;
 }
 
 .btn:active {
