@@ -1,6 +1,6 @@
 import styles from './RecipeCatalogPage.module.css';
 import { MainTitle } from '../../commons/MainTitle';
-import { TheadIcon } from '../../commons/TheadIcon';
+import { Icon } from '../../commons/Icon';
 
 import gridIcon from '../../../assets/images/tableIcon/gridIcon.png';
 import paintIcon from '../../../assets/images/tableIcon/paintIcon.png';
@@ -29,25 +29,22 @@ const RecipeCatalogPage = () => {
         <thead className={styles.thead}>
           <tr>
             <th>
-              <TheadIcon patchIcon={gridIcon} tooltip='Номер пункта' />
+              <Icon patchIcon={gridIcon} tooltip='Номер пункта' />
             </th>
             <th>
-              <TheadIcon patchIcon={paintIcon} tooltip='Персональный цвет' />
+              <Icon patchIcon={paintIcon} tooltip='Персональный цвет' />
             </th>
             <th>
-              <TheadIcon patchIcon={dateIcon} tooltip='Дата добавления' />
+              <Icon patchIcon={dateIcon} tooltip='Дата добавления' />
             </th>
             <th>
-              <TheadIcon patchIcon={titleIcon} tooltip='Название блюда' />
+              <Icon patchIcon={titleIcon} tooltip='Название блюда' />
             </th>
             <th>
-              <TheadIcon patchIcon={recipeIcon} tooltip='Рецепт блюда' />
+              <Icon patchIcon={recipeIcon} tooltip='Рецепт блюда' />
             </th>
             <th>
-              <TheadIcon
-                patchIcon={timeIcon}
-                tooltip='Время приготовления блюда'
-              />
+              <Icon patchIcon={timeIcon} tooltip='Время приготовления блюда' />
             </th>
             <th colSpan={3}>
               <ButtonCreateEntry

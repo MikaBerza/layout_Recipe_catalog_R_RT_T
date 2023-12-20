@@ -1,13 +1,13 @@
-.logo {
+.img {
   width: 35px;
   height: 35px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  cursor: pointer;
+  cursor: help;
 }
 
-.logo[title]:hover:after {
+.img[title]:hover:after {
   position: absolute;
   z-index: 1;
   padding: 5px;
