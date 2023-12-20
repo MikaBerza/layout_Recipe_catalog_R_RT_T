@@ -1,4 +1,4 @@
-export type TableListItemDataType = {
+export type catalogDataType = {
   id: string;
   paint: string;
   date: string;

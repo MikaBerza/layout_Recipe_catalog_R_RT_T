@@ -1,7 +1,7 @@
 import { generateId } from './modules';
-import { TableListItemDataType } from '../types/customType';
+import { catalogDataType } from '../types/customType';
 
-export const tableListItemData: TableListItemDataType[] = [
+export const catalogData: catalogDataType[] = [
   {
     id: generateId(),
     date: '20/11/23, 10:00',
