@@ -1,5 +1,5 @@
 import { MainTitle } from '../../commons/MainTitle';
-import { Table } from '../../commons/Table';
+import { Table } from '../../commons/tables';
 
 import styles from './RecipeCatalogPage.module.css';
 

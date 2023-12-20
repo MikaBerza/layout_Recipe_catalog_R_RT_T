@@ -1,19 +1,19 @@
-import { Search } from '../Search';
-import { Icon } from '../Icon';
+import { Search } from '../../Search';
+import { Icon } from '../../Icon';
 import {
   ButtonControlCatalogEntry,
   ButtonCreateEntry,
-} from '../../commons/buttons';
+} from '../../buttons';
 
-import gridIcon from '../../../assets/images/tableIcon/gridIcon.png';
-import paintIcon from '../../../assets/images/tableIcon/paintIcon.png';
-import dateIcon from '../../../assets/images/tableIcon/dateIcon.png';
-import titleIcon from '../../../assets/images/tableIcon/titleIcon.png';
-import recipeIcon from '../../../assets/images/tableIcon/recipeIcon.png';
-import timeIcon from '../../../assets/images/tableIcon/timeIcon.png';
+import gridIcon from '../../../../assets/images/tableIcon/gridIcon.png';
+import paintIcon from '../../../../assets/images/tableIcon/paintIcon.png';
+import dateIcon from '../../../../assets/images/tableIcon/dateIcon.png';
+import titleIcon from '../../../../assets/images/tableIcon/titleIcon.png';
+import recipeIcon from '../../../../assets/images/tableIcon/recipeIcon.png';
+import timeIcon from '../../../../assets/images/tableIcon/timeIcon.png';
 
-import { catalogData } from '../../../utils/listsOfData';
-import { splitSentenceWithLineBreak } from '../../../utils/modules';
+import { catalogData } from '../../../../utils/listsOfData';
+import { splitSentenceWithLineBreak } from '../../../../utils/modules';
 import styles from './Table.module.css';
 
 const Table = () => {
