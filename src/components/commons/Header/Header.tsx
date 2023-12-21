@@ -5,9 +5,11 @@ import styles from './Header.module.css';
 const Header = () => {
   return (
     <header className={styles.wrapper}>
-      <Link className={styles.logoLink} to='/'>
-        <img className={styles.logo} src={Logo} alt='logo' />
-      </Link>
+      <div className={styles.inner}>
+        <Link className={styles.logoLink} to='/'>
+          <img className={styles.logo} src={Logo} alt='logo' />
+        </Link>
+      </div>
     </header>
   );
 };
