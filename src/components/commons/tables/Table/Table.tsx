@@ -1,16 +1,6 @@
 import { Search } from '../../Search';
-import { Icon } from '../../Icon';
-import {
-  ButtonControlCatalogEntry,
-  ButtonCreateEntry,
-} from '../../buttons';
-
-import gridIcon from '../../../../assets/images/tableIcon/gridIcon.png';
-import paintIcon from '../../../../assets/images/tableIcon/paintIcon.png';
-import dateIcon from '../../../../assets/images/tableIcon/dateIcon.png';
-import titleIcon from '../../../../assets/images/tableIcon/titleIcon.png';
-import recipeIcon from '../../../../assets/images/tableIcon/recipeIcon.png';
-import timeIcon from '../../../../assets/images/tableIcon/timeIcon.png';
+import { Thead } from '../index';
+import { ButtonControlCatalogEntry } from '../../buttons';
 
 import { catalogData } from '../../../../utils/listsOfData';
 import { splitSentenceWithLineBreak } from '../../../../utils/modules';
@@ -22,34 +12,7 @@ const Table = () => {
       <caption>
         <Search />
       </caption>
-      <thead className={styles.thead}>
-        <tr>
-          <th>
-            <Icon patchIcon={gridIcon} tooltip='Номер пункта' />
-          </th>
-          <th>
-            <Icon patchIcon={paintIcon} tooltip='Персональный цвет' />
-          </th>
-          <th>
-            <Icon patchIcon={dateIcon} tooltip='Дата добавления' />
-          </th>
-          <th>
-            <Icon patchIcon={titleIcon} tooltip='Название блюда' />
-          </th>
-          <th>
-            <Icon patchIcon={recipeIcon} tooltip='Рецепт блюда' />
-          </th>
-          <th>
-            <Icon patchIcon={timeIcon} tooltip='Время приготовления блюда' />
-          </th>
-          <th colSpan={3}>
-            <ButtonCreateEntry
-              name='Создать запись'
-              link='#modal-window-create-a-record'
-            />
-          </th>
-        </tr>
-      </thead>
+      <Thead />
       <tbody>
         {catalogData.map((item, index) => {
           return (

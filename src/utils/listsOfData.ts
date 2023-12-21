@@ -1,7 +1,40 @@
 import { generateId } from './modules';
-import { catalogDataType } from '../types/customType';
+import { TheadDataDataType, CatalogDataType } from '../types/customType';
 
-export const catalogData: catalogDataType[] = [
+export const theadData: TheadDataDataType[] = [
+  {
+    id: generateId(),
+    tooltip: 'Номер пункта',
+    patch: require('../assets/images/tableIcon/gridIcon.png'),
+  },
+  {
+    id: generateId(),
+    tooltip: 'Персональный цвет',
+    patch: require('../assets/images/tableIcon/paintIcon.png'),
+  },
+  {
+    id: generateId(),
+    tooltip: 'Дата добавления',
+    patch: require('../assets/images/tableIcon/dateIcon.png'),
+  },
+  {
+    id: generateId(),
+    tooltip: 'Название блюда',
+    patch: require('../assets/images/tableIcon/titleIcon.png'),
+  },
+  {
+    id: generateId(),
+    tooltip: 'Рецепт блюда',
+    patch: require('../assets/images/tableIcon/recipeIcon.png'),
+  },
+  {
+    id: generateId(),
+    tooltip: 'Время приготовления блюда',
+    patch: require('../assets/images/tableIcon/timeIcon.png'),
+  },
+];
+
+export const catalogData: CatalogDataType[] = [
   {
     id: generateId(),
     date: '20/11/23, 10:00',
@@ -52,5 +85,4 @@ export const catalogData: catalogDataType[] = [
       `,
     time: '00:50',
   },
-  
 ];

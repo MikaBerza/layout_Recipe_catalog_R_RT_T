@@ -1,0 +1,19 @@
+.wrapper {
+  margin: auto;
+  padding: 0 20px 20px 20px;
+  table-layout: fixed;
+  border-spacing: 0;
+
+  font-size: 20px;
+}
+
+.wrapper th {
+  padding: 15px;
+  font-weight: bold;
+  background: var(--lightgrey300-color);
+  border-bottom: 6px solid var(--white-color200);
+}
+
+.wrapper th:first-child {
+  padding-left: 20px;
+}
