@@ -1,4 +1,4 @@
-import { FieldSignature } from '..';
+import { SignatureField } from '..';
 import styles from './TextareaField.module.css';
 import { FormItemPropsType } from '../../../../types/customType';
 
@@ -12,7 +12,7 @@ const TextareaField = ({
 }: FormItemPropsType) => {
   return (
     <div className={styles.wrapper}>
-      <FieldSignature
+      <SignatureField
         titleNameStyles={signatureNameStyles}
         htmlForAttr={id}
         text={signature}

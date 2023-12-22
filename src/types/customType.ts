@@ -20,7 +20,7 @@ export type FormItemPropsType = {
   name: string;
   type?: string;
   id: string;
-  
+
   placeholder?: string;
   pattern?: string;
   validationHintText?: string;
@@ -28,7 +28,7 @@ export type FormItemPropsType = {
   value?: string;
 };
 
-export type FieldSignaturePropsType = {
+export type SignatureFieldPropsType = {
   titleNameStyles: string;
   htmlForAttr: string;
   text: string;
