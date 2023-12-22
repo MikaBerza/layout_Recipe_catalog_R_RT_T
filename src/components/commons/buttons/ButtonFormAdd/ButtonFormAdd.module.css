@@ -9,23 +9,21 @@
   transition: background-color 0.3s ease;
 }
 
-
 .btn {
-  color: var(--green400-color);
-  background: var(--green600-color);
+  background: var(--green400-color);
 }
 
 .btn:hover {
-  background: var(--gray100-color);
+  background: var(--green300-color);
   cursor: pointer;
 }
 
 .btn:active {
-  background: var(--gray200-color);
+  background: var(--green500-color);
 }
 
-@media (max-width: 1024px) {
 
+@media (max-width: 1024px) {
 
   .btn {
     width: 235px;
@@ -36,16 +34,21 @@
 /*770px___________________________________________________*/
 @media (max-width: 770px) {
 
-
   .btn {
     width: 177px;
   }
 }
 
+/*660px___________________________________________________*/
+@media (max-width: 660px) {
+
+  .btn {
+    margin-right: 10px;
+  }
+}
 
 /*550px___________________________________________________*/
 @media (max-width: 550px) {
-
 
   .btn {
     width: 134px;

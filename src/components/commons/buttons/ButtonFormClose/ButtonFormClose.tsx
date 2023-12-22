@@ -3,13 +3,7 @@ import { setModalActive } from '../../../../redux/slices/modalCreateSlice';
 
 import styles from './ButtonFormClose.module.css';
 
-const ButtonFormClose = ({
-  nameBtn,
-  nameStyles,
-}: {
-  nameBtn: string;
-  nameStyles: string;
-}) => {
+const ButtonFormClose = ({ nameBtn }: { nameBtn: string }) => {
   const dispatch = useDispatch();
 
   // функция, закрыть модальное окно для создания записи
@@ -19,10 +13,7 @@ const ButtonFormClose = ({
   };
 
   return (
-    <button
-      className={styles[nameStyles]}
-      onClick={closeModalWindowToCreateEntry}
-    >
+    <button className={styles.btn} onClick={closeModalWindowToCreateEntry}>
       {nameBtn}
     </button>
   );

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { ButtonFormClose } from '../../buttons';
+import { ButtonFormAdd, ButtonFormClose } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import styles from './ModalCreate.module.css';
 
@@ -55,8 +55,8 @@ const ModalCreate = () => {
         />
         {/* Группа кнопок */}
         <div className={styles.buttonsGroup}>
-          <ButtonFormClose nameBtn='Добавить' nameStyles='add' />
-          <ButtonFormClose nameBtn='Закрыть' nameStyles='exit' />
+          <ButtonFormAdd nameBtn='Добавить' />
+          <ButtonFormClose nameBtn='Закрыть' />
         </div>
       </form>
     </div>
