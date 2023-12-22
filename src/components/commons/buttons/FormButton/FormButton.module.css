@@ -1,0 +1,86 @@
+.add,
+.exit {
+  align-items: center;
+  width: 235px;
+  padding: 18px 30px;
+  font-size: 20px;
+  color: var(--white-color);
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.add {
+  background: var(--green400-color);
+}
+
+.add:hover {
+  background: var(--green300-color);
+  cursor: pointer;
+}
+
+.add:active {
+  background: var(--green500-color);
+}
+
+.exit {
+  color: var(--green400-color);
+  background: var(--green600-color);
+}
+
+.exit:hover {
+  background: var(--gray100-color);
+  cursor: pointer;
+}
+
+.exit:active {
+  background: var(--gray200-color);
+}
+
+@media (max-width: 1024px) {
+
+  .add,
+  .exit {
+    width: 235px;
+    font-size: 20px;
+  }
+}
+
+/*770px___________________________________________________*/
+@media (max-width: 770px) {
+
+  .add,
+  .exit {
+    width: 177px;
+  }
+}
+
+/*660px___________________________________________________*/
+@media (max-width: 660px) {
+
+  .add {
+    margin-right: 10px;
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .add,
+  .exit {
+    width: 134px;
+    padding: 14px 29px;
+    font-size: 16px;
+  }
+}
+
+/*359px___________________________________________________*/
+@media (max-width: 359px) {
+
+  .add,
+  .exit {
+    width: 90px;
+    padding: 12px 12px;
+    font-size: 14px;
+  }
+}

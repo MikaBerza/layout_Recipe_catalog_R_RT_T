@@ -1,12 +1,17 @@
+import React from 'react';
 import { Table } from '../../commons/tables';
+import { ModalCreate } from '../../commons/modal';
 
 import styles from './RecipeCatalogPage.module.css';
 
 const RecipeCatalogPage = () => {
   return (
-    <main className={styles.wrapper}>
-      <Table />
-    </main>
+    <>
+      <main className={styles.wrapper}>
+        <Table />
+      </main>
+      <ModalCreate />
+    </>
   );
 };
 

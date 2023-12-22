@@ -1,0 +1,32 @@
+.textSignature {
+  color: var(--black-color);
+}
+
+.personalColor::after,
+.cookingTime::after,
+.nameOfTheDish::after,
+.recipe::after {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  background-size: cover;
+  content: "";
+}
+
+.personalColor::after {
+  background-image: url('../../../../assets/images/tableIcon/paintIcon.png');
+}
+
+.cookingTime::after {
+  background-image: url('../../../../assets/images/tableIcon/timeIcon.png');
+}
+
+.nameOfTheDish::after {
+  background-image: url('../../../../assets/images/tableIcon/titleIcon.png');
+}
+
+.recipe::after {
+  background-image: url('../../../../assets/images/tableIcon/recipeIcon.png');
+}
