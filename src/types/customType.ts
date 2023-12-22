@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export type TheadDataDataType = {
   id: string;
   tooltip: string;
@@ -14,6 +16,9 @@ export type CatalogDataType = {
 };
 
 export type FormItemPropsType = {
+  onBlur: (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   signature: string;
   signatureNameStyles: string;
 

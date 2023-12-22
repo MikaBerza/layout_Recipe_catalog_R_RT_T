@@ -4,7 +4,7 @@
 
 .personalColor::after,
 .cookingTime::after,
-.nameOfTheDish::after,
+.nameDish::after,
 .recipe::after {
   display: inline-block;
   width: 20px;
@@ -23,7 +23,7 @@
   background-image: url('../../../../assets/images/tableIcon/timeIcon.png');
 }
 
-.nameOfTheDish::after {
+.nameDish::after {
   background-image: url('../../../../assets/images/tableIcon/titleIcon.png');
 }
 
