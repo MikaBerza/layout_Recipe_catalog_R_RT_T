@@ -7,7 +7,9 @@ const ButtonFormClose = ({ nameBtn }: { nameBtn: string }) => {
   const dispatch = useDispatch();
 
   // функция, закрыть модальное окно для создания записи
-  const closeModalWindowToCreateEntry = (event: any) => {
+  const closeModalWindowToCreateEntry = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     dispatch(setModalActive(false));
   };
