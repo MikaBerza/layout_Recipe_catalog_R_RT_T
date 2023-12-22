@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../../../redux/slices/modalCreateSlice';
 
-import styles from './ButtonForm.module.css';
+import styles from './ButtonFormClose.module.css';
 
-const ButtonForm = ({
+const ButtonFormClose = ({
   nameBtn,
   nameStyles,
 }: {
@@ -28,5 +28,5 @@ const ButtonForm = ({
   );
 };
 
-ButtonForm.displayName = 'ButtonForm';
-export default ButtonForm;
+ButtonFormClose.displayName = 'ButtonFormClose';
+export default ButtonFormClose;
