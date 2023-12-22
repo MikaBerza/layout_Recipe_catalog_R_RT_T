@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '../../commons/tables';
-import { ModalCreate } from '../../commons/modals';
+import { ModalForm } from '../../commons/modals';
 
 import styles from './RecipeCatalogPage.module.css';
 
@@ -10,7 +10,7 @@ const RecipeCatalogPage = () => {
       <main className={styles.wrapper}>
         <Table />
       </main>
-      <ModalCreate />
+      <ModalForm />
     </>
   );
 };

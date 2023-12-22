@@ -1,1 +1,1 @@
-export { default as ModalCreate} from './ModalCreate/ModalCreate';
+export { default as ModalForm} from './ModalForm/ModalForm';

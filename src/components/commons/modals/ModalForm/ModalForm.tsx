@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { ButtonFormAdd, ButtonFormClose } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
-import styles from './ModalCreate.module.css';
+import styles from './ModalForm.module.css';
 
-const ModalCreate = () => {
+const ModalForm = () => {
   const { modalActive } = useSelector(
     (state: { modalCreateSlice: { modalActive: boolean } }) =>
       state.modalCreateSlice
@@ -97,5 +97,5 @@ const ModalCreate = () => {
   );
 };
 
-ModalCreate.displayName = 'ModalCreate';
-export default ModalCreate;
+ModalForm.displayName = 'ModalForm';
+export default ModalForm;
