@@ -1,4 +1,4 @@
-import FormButton from '../../buttons/FormButton/FormButton';
+import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import styles from './ModalCreate.module.css';
 
@@ -48,8 +48,8 @@ const ModalCreate = () => {
         />
         {/* Группа кнопок */}
         <div className={styles.buttonsGroup}>
-          <FormButton nameBtn='Добавить' nameStyles='add' />
-          <FormButton nameBtn='Выйти' nameStyles='exit' />
+          <ButtonForm nameBtn='Добавить' nameStyles='add' />
+          <ButtonForm nameBtn='Выйти' nameStyles='exit' />
         </div>
       </form>
     </div>

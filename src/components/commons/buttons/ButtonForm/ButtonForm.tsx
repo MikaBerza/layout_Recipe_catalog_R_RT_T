@@ -1,6 +1,6 @@
-import styles from './FormButton.module.css';
+import styles from './ButtonForm.module.css';
 
-const FormButton = ({
+const ButtonForm = ({
   nameBtn,
   nameStyles,
 }: {
@@ -10,5 +10,5 @@ const FormButton = ({
   return <button className={styles[nameStyles]}>{nameBtn}</button>;
 };
 
-FormButton.displayName = 'FormButton';
-export default FormButton;
+ButtonForm.displayName = 'ButtonForm';
+export default ButtonForm;
