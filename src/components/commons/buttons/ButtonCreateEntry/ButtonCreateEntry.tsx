@@ -1,12 +1,21 @@
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setModalActive } from '../../../../redux/slices/modalCreateSlice';
+
 import styles from './ButtonCreateEntry.module.css';
 
-const ButtonCreateEntry = ({ name, link }: { name: string; link: string }) => {
+const ButtonCreateEntry = ({ name }: { name: string }) => {
+  const dispatch = useDispatch();
+
+  // функция, открыть модальное окно для создания записи
+  const openModalWindowToCreateEntry = () => {
+    dispatch(setModalActive(true));
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.linkBtn} to={link}>
+      <button className={styles.linkBtn} onClick={openModalWindowToCreateEntry}>
         {name}
-      </Link>
+      </button>
     </div>
   );
 };

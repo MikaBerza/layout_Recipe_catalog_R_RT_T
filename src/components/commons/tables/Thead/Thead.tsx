@@ -22,10 +22,7 @@ const Thead = () => {
       <tr>
         {theadData.map(generateHeaderCellWithIcon)}
         <th colSpan={3}>
-          <ButtonCreateEntry
-            name='Создать запись'
-            link='#modal-window-create-a-record'
-          />
+          <ButtonCreateEntry name='Создать запись' />
         </th>
       </tr>
     </thead>

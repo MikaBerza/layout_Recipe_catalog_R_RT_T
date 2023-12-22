@@ -33,7 +33,7 @@ const InputField = ({
         title={validationHintText}
         //
         maxLength={maxLength}
-        value={value}
+        defaultValue={value}
         required
       />
     </div>

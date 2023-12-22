@@ -1,10 +1,17 @@
+import { useSelector } from 'react-redux';
+
 import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import styles from './ModalCreate.module.css';
 
 const ModalCreate = () => {
+  const { modalActive } = useSelector(
+    (state: { modalCreateSlice: { modalActive: boolean } }) =>
+      state.modalCreateSlice
+  );
+
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${!modalActive && styles.dn}`}>
       <form className={styles.formFill} action='#'>
         <div className={styles.container}>
           {/* Ввод персонального цвет */}
