@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setModalActive } from '../../../../redux/slices/modalCreateSlice';
+import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 
 import styles from './ButtonCreateEntry.module.css';
 

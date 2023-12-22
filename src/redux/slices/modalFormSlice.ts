@@ -5,8 +5,8 @@ const initialState = {
   modalActive: false,
 };
 
-export const modalCreateSlice = createSlice({
-  name: 'modalCreate',
+export const modalFormSlice = createSlice({
+  name: 'modalForm',
   initialState,
   reducers: {
     setModalActive(state, action) {
@@ -15,5 +15,5 @@ export const modalCreateSlice = createSlice({
   },
 });
 
-export const { setModalActive } = modalCreateSlice.actions;
-export default modalCreateSlice.reducer;
+export const { setModalActive } = modalFormSlice.actions;
+export default modalFormSlice.reducer;

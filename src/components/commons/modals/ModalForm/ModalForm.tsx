@@ -7,8 +7,8 @@ import styles from './ModalForm.module.css';
 
 const ModalForm = () => {
   const { modalActive } = useSelector(
-    (state: { modalCreateSlice: { modalActive: boolean } }) =>
-      state.modalCreateSlice
+    (state: { modalFormSlice: { modalActive: boolean } }) =>
+      state.modalFormSlice
   );
   const [formData, setFormData] = React.useState({
     personalColor: '',
