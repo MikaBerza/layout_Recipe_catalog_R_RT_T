@@ -1,7 +1,7 @@
 import { generateId } from './modules';
-import { TheadDataDataType, CatalogDataType } from '../types/customType';
+import { TheadDataType, CatalogDataType } from '../types/customType';
 
-export const theadData: TheadDataDataType[] = [
+export const theadData: TheadDataType[] = [
   {
     id: generateId(),
     tooltip: 'Номер пункта',

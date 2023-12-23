@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 
-import { ButtonFormAdd, ButtonFormClose } from '../../buttons';
+import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
+// import { generateId, getTheCurrentDate } from '../../../../utils/modules';
 import styles from './ModalForm.module.css';
 
 const ModalForm = () => {
@@ -10,31 +12,49 @@ const ModalForm = () => {
     (state: { modalFormSlice: { modalActive: boolean } }) =>
       state.modalFormSlice
   );
-  const [formData, setFormData] = React.useState({
-    personalColor: '',
-    nameDish: '',
-    recipe: '',
-    cookingTime: '',
-  });
+  const dispatch = useDispatch();
 
-  // функция, обработать ввод и изменения текстового поля
-  const handleInputAndTextareaChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+  // функция, закрыть модальное окно для создания записи
+  const closeModalWindowToCreateEntry = () => {
+    dispatch(setModalActive(false));
   };
+
+  //   // создадим объект с данными для добавления
+  //   const objData = {
+  //     id: generateId(),
+  //     positionNumber: '1',
+  //     personalColor: formData.personalColor,
+  //     date: getTheCurrentDate(),
+  //     nameDish: formData.nameDish,
+  //     recipe: formData.recipe,
+  //     cookingTime: formData.cookingTime,
+  //   };
 
   // функция, обработать нажатие кнопки добавить форму
   const handleClickOfTheAddFormButton = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
+    /* 
+    __оператор (as) используется для приведения типа. Он говорит компилятору TS 
+      принять тип EventTarget свойства target как тип HTMLFormElement
+    __formData.entries() возвращает итератор, содержащий все пары ключ-значение из объекта FormData
+    __Object.fromEntries() принимает массив пар ключ-значение и создает новый объект, где каждая пара становится свойством этого объекта
+    */
+
+    // отменяет действие по умолчанию
     event.preventDefault();
-    console.log(formData);
+    // создадим объект, используя данные из HTML-формы
+    const formData = new FormData(event.currentTarget);
+    // преобразует объект formData в обычный JavaScript-объект
+    const formJson = Object.fromEntries(formData.entries());
+
+    // если все поля заполнены
+    if (Object.values(formJson).length) {
+      // 1_очищаем значение полей формы
+      event.currentTarget.reset();
+      // 2_закрываем фому
+      closeModalWindowToCreateEntry();
+    }
   };
 
   return (
@@ -46,7 +66,6 @@ const ModalForm = () => {
         <div className={styles.container}>
           {/* Ввод персонального цвет */}
           <InputField
-            onBlur={handleInputAndTextareaChange}
             signature='Персональный цвет'
             signatureNameStyles='personalColor'
             name='personalColor'
@@ -56,7 +75,6 @@ const ModalForm = () => {
           />
           {/* Ввод времени приготовления блюда */}
           <InputField
-            onBlur={handleInputAndTextareaChange}
             signature='Время приготовления блюда'
             signatureNameStyles='cookingTime'
             name='cookingTime'
@@ -66,7 +84,6 @@ const ModalForm = () => {
 
           {/* Ввод названия блюда */}
           <InputField
-            onBlur={handleInputAndTextareaChange}
             signature='Название блюда'
             signatureNameStyles='nameDish'
             name='nameDish'
@@ -79,7 +96,6 @@ const ModalForm = () => {
         </div>
         {/* Ввод рецепта блюда */}
         <TextareaField
-          onBlur={handleInputAndTextareaChange}
           signature='Рецепт блюда'
           signatureNameStyles='recipe'
           name='recipe'
@@ -89,8 +105,12 @@ const ModalForm = () => {
         />
         {/* Группа кнопок */}
         <div className={styles.buttonsGroup}>
-          <ButtonFormAdd nameBtn='Добавить' />
-          <ButtonFormClose nameBtn='Закрыть' />
+          <ButtonForm nameBtn='Добавить' nameType='submit' />
+          <ButtonForm
+            nameBtn='Закрыть'
+            nameType='reset'
+            onClick={closeModalWindowToCreateEntry}
+          />
         </div>
       </form>
     </div>

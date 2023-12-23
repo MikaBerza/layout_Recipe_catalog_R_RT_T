@@ -5,7 +5,6 @@ import { FormItemPropsType } from '../../../../types/customType';
 
 const InputField = React.memo(
   ({
-    onBlur,
     signature,
     signatureNameStyles,
     name,
@@ -25,10 +24,6 @@ const InputField = React.memo(
           text={signature}
         />
         <input
-        /* Используем событие onBlur вместо onChange. 
-        Если обработчик изменения не требуется в реальном времени, то обновление не происходит,
-        тем самым уменьшаем количество обновлений компонента. */
-          onBlur={onBlur}
           className={styles.input}
           name={name}
           //

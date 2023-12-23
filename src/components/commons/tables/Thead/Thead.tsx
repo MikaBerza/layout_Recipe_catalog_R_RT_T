@@ -2,13 +2,13 @@ import { Icon } from '../../Icon';
 import { ButtonCreateEntry } from '../../buttons';
 
 import { theadData } from '../../../../utils/listsOfData';
-import { TheadDataDataType } from '../../../../types/customType';
+import { TheadDataType } from '../../../../types/customType';
 import styles from './Thead.module.css';
 
 const Thead = () => {
   // функция, сгенерировать ячейки заголовка со значком
   const generateHeaderCellWithIcon = (
-    item: TheadDataDataType
+    item: TheadDataType
   ): React.JSX.Element => {
     return (
       <th key={item.id}>

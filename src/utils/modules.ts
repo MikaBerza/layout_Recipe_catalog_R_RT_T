@@ -23,3 +23,15 @@ export const splitSentenceWithLineBreak = (text: string): string[] => {
   }
   return splitSentences;
 };
+
+// функция, получить текущую дату
+export const getTheCurrentDate = () => {
+  // формируем объект с текущей датой
+  return new Date(Date.now()).toLocaleDateString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+  });
+};

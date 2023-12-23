@@ -9,18 +9,30 @@
   transition: background-color 0.3s ease;
 }
 
+.submit {
+  background: var(--green400-color);
+}
 
-.btn {
+.submit:hover {
+  background: var(--green300-color);
+  cursor: pointer;
+}
+
+.submit:active {
+  background: var(--green500-color);
+}
+
+.reset {
   color: var(--green400-color);
   background: var(--green600-color);
 }
 
-.btn:hover {
+.reset:hover {
   background: var(--gray100-color);
   cursor: pointer;
 }
 
-.btn:active {
+.reset:active {
   background: var(--gray200-color);
 }
 
@@ -42,6 +54,13 @@
   }
 }
 
+/*660px___________________________________________________*/
+@media (max-width: 660px) {
+
+  .submit {
+    margin-right: 10px;
+  }
+}
 
 /*550px___________________________________________________*/
 @media (max-width: 550px) {
