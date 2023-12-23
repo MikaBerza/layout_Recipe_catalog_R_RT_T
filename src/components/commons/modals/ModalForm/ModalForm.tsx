@@ -4,8 +4,9 @@ import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 
 import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
-// import { generateId, getTheCurrentDate } from '../../../../utils/modules';
+import { generateId, getTheCurrentDate } from '../../../../utils/modules';
 import styles from './ModalForm.module.css';
+import { CatalogDataType } from '../../../../types/customType';
 
 const ModalForm = () => {
   const { modalActive } = useSelector(
@@ -19,23 +20,11 @@ const ModalForm = () => {
     dispatch(setModalActive(false));
   };
 
-  //   // создадим объект с данными для добавления
-  //   const objData = {
-  //     id: generateId(),
-  //     color: formData.personalColor,
-  //     date: getTheCurrentDate(),
-  //     title: formData.nameDish,
-  //     recipe: formData.recipe,
-  //     cookingTime: formData.cookingTime,
-  //   };
-
   // функция, обработать нажатие кнопки добавить форму
   const handleClickOfTheAddFormButton = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     /* 
-    __оператор (as) используется для приведения типа. Он говорит компилятору TS 
-      принять тип EventTarget свойства target как тип HTMLFormElement
     __formData.entries() возвращает итератор, содержащий все пары ключ-значение из объекта FormData
     __Object.fromEntries() принимает массив пар ключ-значение и создает новый объект, где каждая пара становится свойством этого объекта
     */
@@ -49,10 +38,47 @@ const ModalForm = () => {
 
     // если все поля заполнены
     if (Object.values(formJson).length) {
-      // 1_очищаем значение полей формы
-      event.currentTarget.reset();
-      // 2_закрываем фому
-      closeModalWindowToCreateEntry();
+      // формируем объект с данными
+      const objCatalogData: CatalogDataType = {
+        id: generateId(),
+        color: formJson.personalColor.toString(),
+        date: getTheCurrentDate(),
+        title: formJson.nameDish.toString(),
+        recipe: formJson.recipe.toString(),
+        cookingTime: formJson.cookingTime.toString(),
+      };
+
+      if (window.localStorage.getItem('catalogRecipeDataset') === null) {
+        // создадим пустой массив
+        const arr: any = [];
+        // добавим в пустой массив данные каталога
+        arr.unshift(objCatalogData);
+        // сохраняем массив c данными в localStorage
+        localStorage.setItem('catalogRecipeDataset', JSON.stringify(arr));
+        console.log('Первая запись');
+      } else if (window.localStorage.getItem('catalogRecipeDataset') !== null) {
+        // получим данные из localStorage
+        const dataLocalStorage = window.localStorage.getItem(
+          'catalogRecipeDataset'
+        );
+
+        if (dataLocalStorage !== null) {
+          // создадим пустой массив
+          let arr: any = [];
+          // преобразуем строку JSON в объект
+          const arrDataLocalStorage = JSON.parse(dataLocalStorage);
+          // запишем данные в массив
+          arr = [objCatalogData, ...arrDataLocalStorage];
+          // сохраняем массив c данными в localStorage
+          localStorage.setItem('catalogRecipeDataset', JSON.stringify(arr));
+          console.log('Очередная запись');
+        }
+      }
+      //____Последнее действие____!
+      // очищаем значение полей формы
+      // event.currentTarget.reset();
+      // закрываем фому
+      // closeModalWindowToCreateEntry();
     }
   };
 
