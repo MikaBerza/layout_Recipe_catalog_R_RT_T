@@ -6,11 +6,11 @@ export type TheadDataType = {
 
 export type CatalogDataType = {
   id: string;
-  paint: string;
+  color: string;
   date: string;
   title: string;
   recipe: string;
-  time: string;
+  cookingTime: string;
 };
 
 export type FormItemPropsType = {

@@ -22,10 +22,9 @@ const ModalForm = () => {
   //   // создадим объект с данными для добавления
   //   const objData = {
   //     id: generateId(),
-  //     positionNumber: '1',
-  //     personalColor: formData.personalColor,
+  //     color: formData.personalColor,
   //     date: getTheCurrentDate(),
-  //     nameDish: formData.nameDish,
+  //     title: formData.nameDish,
   //     recipe: formData.recipe,
   //     cookingTime: formData.cookingTime,
   //   };

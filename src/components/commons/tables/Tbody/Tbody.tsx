@@ -19,12 +19,12 @@ const Tbody = () => {
           <tr key={item.id}>
             <td>{index + 1}</td>
             <td>
-              <span style={{ backgroundColor: `${item.paint}` }} />
+              <span style={{ backgroundColor: `${item.color}` }} />
             </td>
             <td>{item.date}</td>
             <td>{item.title}</td>
             <td>{generateRecipesForDishes(item.recipe)}</td>
-            <td>{item.time}ч</td>
+            <td>{item.cookingTime}ч</td>
 
             <td>
               <ButtonControlCatalogEntry name='Подробнее' />
