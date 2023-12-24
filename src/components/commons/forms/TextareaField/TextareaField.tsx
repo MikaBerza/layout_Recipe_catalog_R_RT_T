@@ -1,6 +1,7 @@
+import React from 'react';
 import { SignatureField } from '..';
 import styles from './TextareaField.module.css';
-import { FormItemPropsType } from '../../../../types/customType';
+import { InputFieldPropsType } from '../../../../types/customType';
 
 const TextareaField = ({
   signature,
@@ -11,7 +12,7 @@ const TextareaField = ({
   maxLength,
   onChange,
   value,
-}: FormItemPropsType) => {
+}: InputFieldPropsType) => {
   return (
     <div className={styles.wrapper}>
       <SignatureField
@@ -35,5 +36,17 @@ const TextareaField = ({
   );
 };
 
+/* Оптимизируем компонент от лишних перерисовок
+compareInputValues сравнивает значение (value) prevProps и nextProps, 
+если значение (value) не изменилось, то функция вернет true, 
+что позволит React пропустить повторное рендеринг компонента */
+// функция, сравнить входные значения
+const compareInputValues = (
+  prevProps: InputFieldPropsType,
+  nextProps: InputFieldPropsType
+) => {
+  return prevProps.value === nextProps.value;
+};
+
 TextareaField.displayName = 'TextareaField';
-export default TextareaField;
+export default React.memo(TextareaField, compareInputValues);

@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './ButtonForm.module.css';
 import { ButtonFormType } from '../../../../types/customType';
 
@@ -14,4 +15,4 @@ const ButtonForm = ({ nameBtn, nameType, onClick }: ButtonFormType) => {
 };
 
 ButtonForm.displayName = 'ButtonForm';
-export default ButtonForm;
+export default React.memo(ButtonForm);

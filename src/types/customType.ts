@@ -15,7 +15,7 @@ export type CatalogDataType = {
   cookingTime: string;
 };
 
-export type FormItemPropsType = {
+export type InputFieldPropsType = {
   signature: string;
   signatureNameStyles: string;
   name: string;
