@@ -1,6 +1,19 @@
+import { CatalogDataType } from '../types/customType';
+
+// функция, сохранить набор данных в localStorage
+export const saveDatasetToLocalStorage = (
+  nameKey: string,
+  dataset: CatalogDataType[]
+): void => {
+  localStorage.setItem(nameKey, JSON.stringify(dataset));
+};
+
 // функция для генерации id
 export const generateId = (): string =>
   Math.round(Math.random() * 100000000000000).toString(16);
+
+// функция, проверяет длину строки
+export const checkLengthOfTheString = (str: string) => str.trim().length > 0;
 
 // функция, разделить предложение с разрывом строки
 export const splitSentenceWithLineBreak = (text: string): string[] => {

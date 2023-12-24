@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export type TheadDataType = {
   id: string;
   tooltip: string;
@@ -16,7 +18,6 @@ export type CatalogDataType = {
 export type FormItemPropsType = {
   signature: string;
   signatureNameStyles: string;
-
   name: string;
   type?: string;
   id: string;
@@ -25,7 +26,11 @@ export type FormItemPropsType = {
   pattern?: string;
   validationHintText?: string;
   maxLength?: number;
-  value?: string;
+
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  value: string;
 };
 
 export type SignatureFieldPropsType = {

@@ -9,6 +9,8 @@ const TextareaField = ({
   id,
   placeholder,
   maxLength,
+  onChange,
+  value,
 }: FormItemPropsType) => {
   return (
     <div className={styles.wrapper}>
@@ -24,7 +26,9 @@ const TextareaField = ({
         placeholder={placeholder}
         autoComplete='off'
         maxLength={maxLength}
-        defaultValue=''
+        //
+        onChange={onChange}
+        value={value}
         required
       />
     </div>

@@ -4,7 +4,11 @@ import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 
 import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
-import { generateId, getTheCurrentDate } from '../../../../utils/modules';
+import {
+  saveDatasetToLocalStorage,
+  generateId,
+  getTheCurrentDate,
+} from '../../../../utils/modules';
 import styles from './ModalForm.module.css';
 import { CatalogDataType } from '../../../../types/customType';
 
@@ -15,71 +19,74 @@ const ModalForm = () => {
   );
   const dispatch = useDispatch();
 
-  // функция, закрыть модальное окно для создания записи
-  const closeModalWindowToCreateEntry = () => {
+  const [formData, setFormData] = React.useState({
+    color: '#000000',
+    nameDish: '',
+    recipe: '',
+    cookingTime: '',
+  });
+
+  // функция, обработать изменения ввода и текстового поля
+  const handleInputAndTextareaChanges = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // функция, закрыть модальное окно создания записи
+  const closeModalWindowCreateEntry = () => {
+    // изменяем флаг true на false
     dispatch(setModalActive(false));
+    // очищаем значение полей формы
+    setFormData({
+      color: '#000000',
+      nameDish: '',
+      recipe: '',
+      cookingTime: '',
+    });
   };
 
   // функция, обработать нажатие кнопки добавить форму
   const handleClickOfTheAddFormButton = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
-    /* 
-    __formData.entries() возвращает итератор, содержащий все пары ключ-значение из объекта FormData
-    __Object.fromEntries() принимает массив пар ключ-значение и создает новый объект, где каждая пара становится свойством этого объекта
-    */
-
     // отменяет действие по умолчанию
     event.preventDefault();
-    // создадим объект, используя данные из HTML-формы
-    const formData = new FormData(event.currentTarget);
-    // преобразует объект formData в обычный JavaScript-объект
-    const formJson = Object.fromEntries(formData.entries());
+    // формируем объект с данными каталога
+    const objCatalogData: CatalogDataType = {
+      id: generateId(),
+      color: formData.color,
+      date: getTheCurrentDate(),
+      title: formData.nameDish.trim(),
+      recipe: formData.recipe.trim(),
+      cookingTime: formData.cookingTime,
+    };
+    // набор данных LocalStorage
+    const datasetLocalStorage: string | null = window.localStorage.getItem(
+      'catalogRecipeDataset'
+    );
 
-    // если все поля заполнены
-    if (Object.values(formJson).length) {
-      // формируем объект с данными
-      const objCatalogData: CatalogDataType = {
-        id: generateId(),
-        color: formJson.personalColor.toString(),
-        date: getTheCurrentDate(),
-        title: formJson.nameDish.toString(),
-        recipe: formJson.recipe.toString(),
-        cookingTime: formJson.cookingTime.toString(),
-      };
-
-      if (window.localStorage.getItem('catalogRecipeDataset') === null) {
-        // создадим пустой массив
-        const arr: any = [];
-        // добавим в пустой массив данные каталога
-        arr.unshift(objCatalogData);
-        // сохраняем массив c данными в localStorage
-        localStorage.setItem('catalogRecipeDataset', JSON.stringify(arr));
-        console.log('Первая запись');
-      } else if (window.localStorage.getItem('catalogRecipeDataset') !== null) {
-        // получим данные из localStorage
-        const dataLocalStorage = window.localStorage.getItem(
-          'catalogRecipeDataset'
-        );
-
-        if (dataLocalStorage !== null) {
-          // создадим пустой массив
-          let arr: any = [];
-          // преобразуем строку JSON в объект
-          const arrDataLocalStorage = JSON.parse(dataLocalStorage);
-          // запишем данные в массив
-          arr = [objCatalogData, ...arrDataLocalStorage];
-          // сохраняем массив c данными в localStorage
-          localStorage.setItem('catalogRecipeDataset', JSON.stringify(arr));
-          console.log('Очередная запись');
-        }
-      }
-      //____Последнее действие____!
-      // очищаем значение полей формы
-      // event.currentTarget.reset();
-      // закрываем фому
-      // closeModalWindowToCreateEntry();
+    if (datasetLocalStorage === null) {
+      // добавляем объект в массив данных
+      const newCatalogData = [objCatalogData];
+      // сохраняем массив с данными в localStorage
+      saveDatasetToLocalStorage('catalogRecipeDataset', newCatalogData);
+      console.log('Первая запись');
+    } else {
+      // преобразуем строку JSON в объект
+      const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
+      // обновляем массив с данными
+      const updateCatalogData = [objCatalogData, ...arrDataLocalStorage];
+      // сохраняем массив с данными в localStorage
+      saveDatasetToLocalStorage('catalogRecipeDataset', updateCatalogData);
     }
+    // закрываем фому
+    closeModalWindowCreateEntry();
   };
 
   return (
@@ -96,7 +103,9 @@ const ModalForm = () => {
             name='personalColor'
             type='color'
             id='personalColor'
-            value='#e66465'
+            //
+            onChange={handleInputAndTextareaChanges}
+            value={formData.color}
           />
           {/* Ввод времени приготовления блюда */}
           <InputField
@@ -105,6 +114,9 @@ const ModalForm = () => {
             name='cookingTime'
             type='time'
             id='cookingTime'
+            //
+            onChange={handleInputAndTextareaChanges}
+            value={formData.cookingTime}
           />
 
           {/* Ввод названия блюда */}
@@ -117,6 +129,9 @@ const ModalForm = () => {
             placeholder='Введите название блюда'
             pattern='^[а-яА-Яa-zA-Z]+$'
             validationHintText='Только буквы русского и английского алфавита'
+            //
+            onChange={handleInputAndTextareaChanges}
+            value={formData.nameDish}
           />
         </div>
         {/* Ввод рецепта блюда */}
@@ -127,6 +142,9 @@ const ModalForm = () => {
           id='recipe'
           placeholder='Напишите рецепт блюда'
           maxLength={2300}
+          //
+          onChange={handleInputAndTextareaChanges}
+          value={formData.recipe}
         />
         {/* Группа кнопок */}
         <div className={styles.buttonsGroup}>
@@ -134,7 +152,7 @@ const ModalForm = () => {
           <ButtonForm
             nameBtn='Закрыть'
             nameType='reset'
-            onClick={closeModalWindowToCreateEntry}
+            onClick={closeModalWindowCreateEntry}
           />
         </div>
       </form>

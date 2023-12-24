@@ -14,6 +14,7 @@ const InputField = React.memo(
     pattern,
     validationHintText,
     maxLength,
+    onChange,
     value,
   }: FormItemPropsType) => {
     return (
@@ -26,16 +27,16 @@ const InputField = React.memo(
         <input
           className={styles.input}
           name={name}
-          //
           type={type}
           id={id}
           autoComplete='off'
           placeholder={placeholder}
           pattern={pattern}
           title={validationHintText}
-          //
           maxLength={maxLength}
-          defaultValue={value}
+          //
+          onChange={onChange}
+          value={value}
           required
         />
       </div>
