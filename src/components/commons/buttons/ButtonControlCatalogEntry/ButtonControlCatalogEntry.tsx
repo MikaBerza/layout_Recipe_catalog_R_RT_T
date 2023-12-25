@@ -1,7 +1,12 @@
+import { ButtonType } from '../../../../types/customType';
 import styles from './ButtonControlCatalogEntry.module.css';
 
-const ButtonControlCatalogEntry = ({ name }: { name: string }) => {
-  return <button className={styles.btn}>{name}</button>;
+const ButtonControlCatalogEntry = ({ nameBtn, onClick }: ButtonType) => {
+  return (
+    <button className={styles.btn} onClick={onClick}>
+      {nameBtn}
+    </button>
+  );
 };
 
 ButtonControlCatalogEntry.displayName = 'ButtonControlCatalogEntry';

@@ -2,7 +2,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { ButtonControlCatalogEntry } from '../../buttons';
 
-import { splitSentenceWithLineBreak } from '../../../../utils/modules';
+import {
+  splitSentenceWithLineBreak,
+  viewSavedCatalogItemData,
+} from '../../../../utils/modules';
 import styles from './Tbody.module.css';
 import { CatalogDataType } from '../../../../types/customType';
 
@@ -33,13 +36,16 @@ const Tbody = () => {
             <td>{item.cookingTime}ч</td>
 
             <td>
-              <ButtonControlCatalogEntry name='Подробнее' />
+              <ButtonControlCatalogEntry nameBtn='Подробнее' />
             </td>
             <td>
-              <ButtonControlCatalogEntry name='Просмотр' />
+              <ButtonControlCatalogEntry
+                nameBtn='Просмотр'
+                onClick={() => viewSavedCatalogItemData(item)}
+              />
             </td>
             <td>
-              <ButtonControlCatalogEntry name='Редактировать' />
+              <ButtonControlCatalogEntry nameBtn='Редактировать' />
             </td>
           </tr>
         );

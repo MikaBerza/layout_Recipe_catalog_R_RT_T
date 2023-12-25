@@ -39,9 +39,9 @@ export type SignatureFieldPropsType = {
   text: string;
 };
 
-export type ButtonFormType = {
+export type ButtonType = {
   nameBtn: string;
-  nameType: 'submit' | 'reset';
+  nameType?: 'submit' | 'reset';
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 

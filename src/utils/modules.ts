@@ -48,3 +48,22 @@ export const getTheCurrentDate = () => {
     year: '2-digit',
   });
 };
+
+// функция, получить формат JSON с новыми строками
+export const getFormatJSONWithNewLines = (obj: CatalogDataType): string => {
+  // Преобразуем объект в строку JSON с отступами
+  let jsonString = JSON.stringify(obj, null, 2);
+  // Заменяем отступы перед каждым полем на перенос строки
+  jsonString = jsonString.replace(/"(.*?)":/g, '___$&');
+  // Удаляем отступы перед открывающейся скобкой
+  jsonString = jsonString.replace(/^s+/g, '');
+
+  return jsonString;
+};
+
+// функция, посмотреть сохраненные данные элемента каталога
+export const viewSavedCatalogItemData = (obj: CatalogDataType): void => {
+  if (obj) {
+    alert(getFormatJSONWithNewLines(obj));
+  }
+};

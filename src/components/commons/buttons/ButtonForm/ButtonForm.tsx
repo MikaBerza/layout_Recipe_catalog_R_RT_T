@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './ButtonForm.module.css';
-import { ButtonFormType } from '../../../../types/customType';
+import { ButtonType } from '../../../../types/customType';
 
-const ButtonForm = ({ nameBtn, nameType, onClick }: ButtonFormType) => {
+const ButtonForm = ({ nameBtn, nameType, onClick }: ButtonType) => {
   return (
     <button
-      className={`${styles.btn} ${styles[nameType]}`}
+      className={`${styles.btn} ${nameType && styles[nameType]}`}
       type={nameType}
       onClick={onClick}
     >
