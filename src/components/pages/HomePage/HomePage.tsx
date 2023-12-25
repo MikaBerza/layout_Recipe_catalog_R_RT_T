@@ -1,4 +1,4 @@
-import { MainTitle } from '../../commons/MainTitle';
+import { MainTitle } from '../../commons/titles';
 import { ButtonGoToCatalog } from '../../commons/buttons/index';
 import styles from './HomePage.module.css';
 
@@ -9,10 +9,7 @@ const HomePage = () => {
       <p className={styles.subtitle}>
         Создавайте, сохраняйте и редактируйте свои персональные рецепты
       </p>
-      <ButtonGoToCatalog
-        name='Перейти в каталог'
-        link='/recipe-catalog-page'
-      />
+      <ButtonGoToCatalog name='Перейти в каталог' link='/recipe-catalog-page' />
     </main>
   );
 };

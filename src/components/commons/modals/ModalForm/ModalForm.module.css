@@ -24,17 +24,17 @@
   background-color: var(--white-color);
 }
 
-.formFill>* {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 142%;
-}
-
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+}
+
+.container>* {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 142%;
 }
 
 .buttonsGroup {
@@ -47,7 +47,7 @@
 /*550px___________________________________________________*/
 @media (max-width: 550px) {
 
-  .formFill>* {
+  .container>* {
     font-size: 16px;
   }
 

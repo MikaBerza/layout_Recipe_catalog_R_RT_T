@@ -4,6 +4,7 @@ import { RootState } from '../../../../redux/store';
 import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 import { setRecipeCatalogData } from '../../../../redux/slices/recipeCatalogSlice';
 
+import { FormTitle } from '../../titles';
 import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import {
@@ -86,6 +87,7 @@ const ModalForm = () => {
         className={styles.formFill}
         onSubmit={handleClickOfTheAddFormButton}
       >
+        <FormTitle textTitle='Создание записи' />
         <div className={styles.container}>
           {/* Ввод персонального цвет */}
           <InputField
@@ -109,7 +111,6 @@ const ModalForm = () => {
             onChange={(e) => setFormDataCookingTime(e.target.value)}
             value={formDataCookingTime}
           />
-
           {/* Ввод названия блюда */}
           <InputField
             signature='Название блюда'

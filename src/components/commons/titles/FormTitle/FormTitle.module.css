@@ -1,0 +1,41 @@
+.title {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 109%;
+  text-align: center;
+  color: var(--black-color);
+  /*___Анимация, эффект появления текста___*/
+  animation-name: appearance;
+  animation-duration: 5s;
+}
+
+/*770px___________________________________________________*/
+@media (max-width: 770px) {
+
+  .title {
+    font-size: 30px;
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .title {
+    font-size: 25px;
+    line-height: 112%;
+    letter-spacing: 0.68px;
+  }
+}
+
+/*___Анимация, эффект появления текста___*/
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

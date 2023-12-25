@@ -1,4 +1,4 @@
-import { MainTitle } from '../../MainTitle';
+import { MainTitle } from '../../titles';
 import { Search } from '../../Search';
 import { Thead, Tbody } from '../index';
 import styles from './Table.module.css';
