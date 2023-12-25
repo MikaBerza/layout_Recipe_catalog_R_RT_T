@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ModalActiveInitialStateType } from '../../types/customType';
 
 // первое состояние
-const initialState = {
+const initialState: ModalActiveInitialStateType = {
   modalActive: false,
 };
 

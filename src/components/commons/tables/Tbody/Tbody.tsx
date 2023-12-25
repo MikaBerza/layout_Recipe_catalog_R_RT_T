@@ -1,10 +1,16 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
 import { ButtonControlCatalogEntry } from '../../buttons';
 
-import { catalogData } from '../../../../utils/listsOfData';
 import { splitSentenceWithLineBreak } from '../../../../utils/modules';
 import styles from './Tbody.module.css';
+import { CatalogDataType } from '../../../../types/customType';
 
 const Tbody = () => {
+  const recipeCatalogData = useSelector(
+    (state: RootState) => state.recipeCatalogData.recipeCatalogData
+  );
+
   // функция, сгенерировать рецепты блюд
   const generateRecipesForDishes = (str: string) => {
     return splitSentenceWithLineBreak(str).map((elem, index) => {
@@ -14,7 +20,7 @@ const Tbody = () => {
 
   return (
     <tbody className={styles.wrapper}>
-      {catalogData.map((item, index) => {
+      {recipeCatalogData.map((item: CatalogDataType, index: number) => {
         return (
           <tr key={item.id}>
             <td>{index + 1}</td>

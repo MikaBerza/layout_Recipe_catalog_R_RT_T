@@ -44,3 +44,11 @@ export type ButtonFormType = {
   nameType: 'submit' | 'reset';
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
+export type ModalActiveInitialStateType = {
+  modalActive: boolean;
+};
+
+export type CatalogDataInitialStateType = {
+  recipeCatalogData: CatalogDataType[] | [];
+};

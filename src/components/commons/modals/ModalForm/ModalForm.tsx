@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../../redux/store';
 import { setModalActive } from '../../../../redux/slices/modalFormSlice';
+import { setRecipeCatalogData } from '../../../../redux/slices/recipeCatalogSlice';
 
 import { ButtonForm } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
@@ -9,15 +11,16 @@ import {
   generateId,
   getTheCurrentDate,
 } from '../../../../utils/modules';
+
 import styles from './ModalForm.module.css';
 import { CatalogDataType } from '../../../../types/customType';
 
 const ModalForm = () => {
   const { modalActive } = useSelector(
-    (state: { modalFormSlice: { modalActive: boolean } }) =>
-      state.modalFormSlice
+    (state: RootState) => state.modalFormSlice
   );
   const dispatch = useDispatch();
+
   const [formDataColor, setFormDataColor] = React.useState('#000000');
   const [formDataNameDish, setFormDataNameDish] = React.useState('');
   const [formDataRecipe, setFormDataRecipe] = React.useState('');
@@ -55,20 +58,25 @@ const ModalForm = () => {
     );
 
     if (datasetLocalStorage === null) {
+      // ___Первая запись
       // добавляем объект в массив данных
       const newCatalogData = [objCatalogData];
       // сохраняем массив с данными в localStorage
       saveDatasetToLocalStorage('catalogRecipeDataset', newCatalogData);
-      console.log('Первая запись');
+      // сохраняем массив с данными в store (redux toolkit)
+      dispatch(setRecipeCatalogData(newCatalogData));
     } else {
+      // ___Очередная запись
       // преобразуем строку JSON в объект
       const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
       // обновляем массив с данными
       const updateCatalogData = [objCatalogData, ...arrDataLocalStorage];
       // сохраняем массив с данными в localStorage
       saveDatasetToLocalStorage('catalogRecipeDataset', updateCatalogData);
+      // сохраняем массив с данными в store (redux toolkit)
+      dispatch(setRecipeCatalogData(updateCatalogData));
     }
-    // закрываем фому
+    // закрываем модальное окно с формой
     closeModalWindowCreateEntry();
   };
 
@@ -110,7 +118,7 @@ const ModalForm = () => {
             type='text'
             id='nameDish'
             placeholder='Введите название блюда'
-            pattern='^[а-яА-Яa-zA-Z]+$'
+            pattern='^[а-яА-Яa-zA-Z\s]+$'
             validationHintText='Только буквы русского и английского алфавита'
             //
             onChange={(e) => setFormDataNameDish(e.target.value)}

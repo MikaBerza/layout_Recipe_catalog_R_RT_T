@@ -23,7 +23,7 @@ export const splitSentenceWithLineBreak = (text: string): string[] => {
   */
   // разделенные предложения
   const splitSentences = text
-    .split(' \n')
+    .split('\n')
     .filter((sentence) => sentence.trim() !== '');
 
   if (splitSentences.length > 1) {
