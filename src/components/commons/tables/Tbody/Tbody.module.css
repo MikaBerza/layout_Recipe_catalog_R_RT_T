@@ -1,0 +1,47 @@
+.wrapper td {
+  overflow: hidden;
+  max-width: 170px;
+  padding: 10px 10px;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: var(--lightgrey300-color);
+  border-bottom: 2px solid var(--white-color200);
+}
+
+.wrapper td:first-child {
+  padding-left: 20px;
+}
+
+.wrapper td:last-child {
+  padding-right: 20px;
+}
+
+.wrapper td p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wrapper td:nth-child(1) {
+  max-width: 40px;
+}
+
+.wrapper td:nth-child(4) {
+  text-align: left;
+}
+
+.wrapper td:nth-child(5) {
+  max-width: 800px;
+  text-align: left;
+}
+
+.wrapper td:nth-child(6) {
+  max-width: 70px;
+}
+
+.wrapper td span {
+  display: block;
+  width: 40px;
+  height: 20px;
+}

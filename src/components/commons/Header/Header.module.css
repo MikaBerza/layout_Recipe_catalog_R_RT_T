@@ -1,14 +1,18 @@
 .wrapper {
   position: absolute;
   position: fixed;
+  z-index: 2;
   width: 100%;
   backdrop-filter: blur(40px);
 }
 
-.logoLink {
-  display: block;
-  max-width: 1600px;
+.inner {
+  max-width: 1920px;
   margin: auto;
+}
+
+.logoLink {
+  display: inline-block;
   padding: 20px 20px;
 }
 

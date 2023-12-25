@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  height: 50px;
+  grid-template-columns: 1fr;
+  padding: 50px 20px 0 20px;
+}
+
+.input {
+  position: relative;
+  box-sizing: border-box;
+  padding: 6px 20px;
+  background-color: var(--white-color200);
+  border: 1px solid var(--white-color200);
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.input::placeholder {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.input:hover {
+  background-color: var(--white-color);
+}
