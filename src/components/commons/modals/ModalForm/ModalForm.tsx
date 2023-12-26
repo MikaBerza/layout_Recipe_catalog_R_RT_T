@@ -199,7 +199,16 @@ const ModalForm = () => {
         modalActive === false && modalEditingActive === false ? styles.dn : ''
       }`}
     >
-      <form className={styles.formFill}>
+      <form
+        className={styles.formFill}
+        onSubmit={
+          modalActive
+            ? handleAddEntries
+            : modalEditingActive
+            ? handleSaveEditingEntries
+            : undefined
+        }
+      >
         <FormTitle textTitle={defineTitleName} />
         <div className={styles.container}>
           {/* Ввод персонального цвет */}
@@ -259,7 +268,6 @@ const ModalForm = () => {
               <ButtonForm
                 nameBtn='Добавить'
                 nameType='submit'
-                onClick={handleAddEntries}
               />
               <ButtonForm
                 nameBtn='Закрыть'
@@ -274,7 +282,6 @@ const ModalForm = () => {
               <ButtonForm
                 nameBtn='Сохранить'
                 nameType='submit'
-                onClick={handleSaveEditingEntries}
               />
               <ButtonForm
                 nameBtn='Удалить'

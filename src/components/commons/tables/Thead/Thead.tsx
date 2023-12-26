@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
 import { Icon } from '../../Icon';
 import { ButtonCreateEntry } from '../../buttons';
 
@@ -6,12 +8,19 @@ import { TheadDataType } from '../../../../types/customType';
 import styles from './Thead.module.css';
 
 const Thead = () => {
+  const recipeCatalogData = useSelector(
+    (state: RootState) => state.recipeCatalogData.recipeCatalogData
+  );
+
   // функция, сгенерировать ячейки заголовка со значком
   const generateHeaderCellWithIcon = (
     item: TheadDataType
   ): React.JSX.Element => {
     return (
-      <th key={item.id}>
+      <th
+        key={item.id}
+        className={recipeCatalogData.length === 0 ? styles.dn : ''}
+      >
         <Icon patch={item.patch} tooltip={item.tooltip} />
       </th>
     );

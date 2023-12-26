@@ -1,6 +1,6 @@
 .wrapper {
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 50px 0 100px 0;
   text-align: center;
   /*___Анимация, эффект кручения вокруг оси X___*/
   animation-name: twistX;
@@ -48,10 +48,6 @@
 
 /*550px___________________________________________________*/
 @media (max-width: 550px) {
-
-  .wrapper {
-    padding: 46px 0 56px 0;
-  }
 
   .linkBtn {
     width: 114px;

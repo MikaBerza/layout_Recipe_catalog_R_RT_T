@@ -17,3 +17,7 @@
 .wrapper th:first-child {
   padding-left: 20px;
 }
+
+.dn {
+  display: none;
+}
