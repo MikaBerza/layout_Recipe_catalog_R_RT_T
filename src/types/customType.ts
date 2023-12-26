@@ -52,7 +52,7 @@ export type ButtonType = {
 export type ModalActiveInitialStateType = {
   modalActive: boolean;
   modalEditingActive: boolean;
-  //
+  elementId: string;
   formDataColor: string;
   formDataNameDish: string;
   formDataRecipe: string;

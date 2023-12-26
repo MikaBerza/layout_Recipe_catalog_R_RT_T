@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import {
   setModalEditingActive,
-  //
+  setElementId,
   setFormDataColor,
   setFormDataNameDish,
   setFormDataRecipe,
@@ -32,8 +32,10 @@ const Tbody = () => {
   };
 
   // функция, открыть модальное окно для редактирования записи
-  const openModalWindowToEditingEntry = (obj: CatalogDataType) => {
+  const openModalWindowToEditingEntries = (obj: CatalogDataType) => {
     dispatch(setModalEditingActive(true));
+    // установи значение id элемента
+    dispatch(setElementId(obj.id));
     // установим значения в input
     dispatch(setFormDataColor(obj.color));
     dispatch(setFormDataNameDish(obj.title));
@@ -67,7 +69,7 @@ const Tbody = () => {
             <td>
               <ButtonControlCatalogEntry
                 nameBtn='Редактировать'
-                onClick={() => openModalWindowToEditingEntry(item)}
+                onClick={() => openModalWindowToEditingEntries(item)}
               />
             </td>
           </tr>

@@ -5,7 +5,7 @@ import { ModalActiveInitialStateType } from '../../types/customType';
 const initialState: ModalActiveInitialStateType = {
   modalActive: false,
   modalEditingActive: false,
-  //
+  elementId: '',
   formDataColor: '#000000',
   formDataNameDish: '',
   formDataRecipe: '',
@@ -19,11 +19,12 @@ export const modalFormSlice = createSlice({
     setModalActive(state, action) {
       state.modalActive = action.payload;
     },
-
     setModalEditingActive(state, action) {
       state.modalEditingActive = action.payload;
     },
-    //
+    setElementId(state, action) {
+      state.elementId = action.payload;
+    },
     setFormDataColor(state, action) {
       state.formDataColor = action.payload;
     },
@@ -42,6 +43,7 @@ export const modalFormSlice = createSlice({
 export const {
   setModalActive,
   setModalEditingActive,
+  setElementId,
   setFormDataColor,
   setFormDataNameDish,
   setFormDataRecipe,

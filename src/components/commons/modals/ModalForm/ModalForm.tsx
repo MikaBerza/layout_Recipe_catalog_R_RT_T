@@ -4,7 +4,6 @@ import { RootState } from '../../../../redux/store';
 import {
   setModalActive,
   setModalEditingActive,
-  //
   setFormDataColor,
   setFormDataNameDish,
   setFormDataRecipe,
@@ -28,17 +27,16 @@ const ModalForm = () => {
   const {
     modalActive,
     modalEditingActive,
-    //
+    elementId,
     formDataColor,
     formDataNameDish,
     formDataRecipe,
     formDataCookingTime,
   } = useSelector((state: RootState) => state.modalFormSlice);
-
   const dispatch = useDispatch();
 
   // функция, определить имя заголовка
-  const defineTitleName = React.useCallback((): string => {
+  const defineTitleName = React.useMemo((): string => {
     let str = '';
     if (modalActive) {
       str = 'Создание записи';
@@ -48,8 +46,19 @@ const ModalForm = () => {
     return str;
   }, [modalActive, modalEditingActive]);
 
-  // функция, закрыть модальное окно формы
-  const closeModalWindowForm = React.useCallback(() => {
+  // функция, обновить данные каталога
+  const updateCatalogData = React.useCallback(
+    (newData: CatalogDataType[]) => {
+      // сохраняем массив с данными в localStorage
+      saveDatasetToLocalStorage('catalogRecipeDataset', newData);
+      // сохраняем массив с данными в store (redux toolkit)
+      dispatch(setRecipeCatalogData(newData));
+    },
+    [dispatch]
+  );
+
+  // функция, обработать закрытие модального окна формы
+  const handleCloseModalWindowForm = React.useCallback(() => {
     // изменяем флаг true на false
     if (modalActive) {
       dispatch(setModalActive(false));
@@ -63,64 +72,135 @@ const ModalForm = () => {
     dispatch(setFormDataCookingTime(''));
   }, [dispatch, modalActive, modalEditingActive]);
 
-  // функция, обработать нажатие кнопки добавить форму
-  const handleClickOfTheAddFormButton = (
-    event:
-      | React.FormEvent<HTMLFormElement>
-      | React.MouseEvent<HTMLButtonElement>
-  ) => {
-    // отменяет действие по умолчанию
-    event.preventDefault();
-    // формируем объект с данными каталога
-    const objCatalogData: CatalogDataType = {
-      id: generateId(),
-      color: formDataColor,
-      date: getTheCurrentDate(),
-      title: formDataNameDish.trim(),
-      recipe: formDataRecipe.trim(),
-      cookingTime: formDataCookingTime,
-    };
+  // функция, обработать добавление записи
+  const handleAddEntries = React.useCallback(
+    (
+      event:
+        | React.FormEvent<HTMLFormElement>
+        | React.MouseEvent<HTMLButtonElement>
+    ) => {
+      // отменяет действие по умолчанию
+      event.preventDefault();
+      // формируем объект с данными каталога
+      const objCatalogData: CatalogDataType = {
+        id: generateId(),
+        color: formDataColor,
+        date: getTheCurrentDate(),
+        title: formDataNameDish.trim(),
+        recipe: formDataRecipe.trim(),
+        cookingTime: formDataCookingTime,
+      };
+      // набор данных LocalStorage
+      const datasetLocalStorage: string | null = window.localStorage.getItem(
+        'catalogRecipeDataset'
+      );
+
+      if (datasetLocalStorage === null) {
+        // ___Первая запись
+        // добавляем объект в массив данных
+        const newCatalogData = [objCatalogData];
+        // обновляем данные каталога
+        updateCatalogData(newCatalogData);
+      } else {
+        // ___Очередная запись
+        // преобразуем строку JSON в объект
+        const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
+        // обновляем массив с данными
+        const newCatalogData = [objCatalogData, ...arrDataLocalStorage];
+        // обновляем данные каталога
+        updateCatalogData(newCatalogData);
+      }
+      // закрываем модальное окно с формой
+      handleCloseModalWindowForm();
+    },
+
+    [
+      handleCloseModalWindowForm,
+      formDataColor,
+      formDataCookingTime,
+      formDataNameDish,
+      formDataRecipe,
+      updateCatalogData,
+    ]
+  );
+
+  // функция, обработать сохранение редактируемой записи
+  const handleSaveEditingEntries = React.useCallback(
+    (
+      event:
+        | React.FormEvent<HTMLFormElement>
+        | React.MouseEvent<HTMLButtonElement>
+    ) => {
+      event.preventDefault();
+      const objCatalogData: CatalogDataType = {
+        id: generateId(),
+        color: formDataColor,
+        date: getTheCurrentDate(),
+        title: formDataNameDish.trim(),
+        recipe: formDataRecipe.trim(),
+        cookingTime: formDataCookingTime,
+      };
+
+      const datasetLocalStorage: string | null = window.localStorage.getItem(
+        'catalogRecipeDataset'
+      );
+      if (datasetLocalStorage !== null) {
+        const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
+
+        // Создаем новый массив, заменяя объект с нужным идентификатором
+        const newCatalogData = arrDataLocalStorage.map(
+          (item: CatalogDataType) => {
+            if (item.id === elementId) {
+              return objCatalogData;
+            }
+            return item;
+          }
+        );
+        // обновляем данные каталога
+        updateCatalogData(newCatalogData);
+      }
+      // закрываем модальное окно с формой
+      handleCloseModalWindowForm();
+    },
+    [
+      handleCloseModalWindowForm,
+      elementId,
+      formDataColor,
+      formDataCookingTime,
+      formDataNameDish,
+      formDataRecipe,
+      updateCatalogData,
+    ]
+  );
+
+  // функция, обработать удаление записи
+  const handleRemoveEntries = React.useCallback(() => {
     // набор данных LocalStorage
     const datasetLocalStorage: string | null = window.localStorage.getItem(
       'catalogRecipeDataset'
     );
-
-    if (datasetLocalStorage === null) {
-      // ___Первая запись
-      // добавляем объект в массив данных
-      const newCatalogData = [objCatalogData];
-      // сохраняем массив с данными в localStorage
-      saveDatasetToLocalStorage('catalogRecipeDataset', newCatalogData);
-      // сохраняем массив с данными в store (redux toolkit)
-      dispatch(setRecipeCatalogData(newCatalogData));
-    } else {
-      // ___Очередная запись
+    if (datasetLocalStorage !== null) {
       // преобразуем строку JSON в объект
       const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
-      // обновляем массив с данными
-      const updateCatalogData = [objCatalogData, ...arrDataLocalStorage];
-      // сохраняем массив с данными в localStorage
-      saveDatasetToLocalStorage('catalogRecipeDataset', updateCatalogData);
-      // сохраняем массив с данными в store (redux toolkit)
-      dispatch(setRecipeCatalogData(updateCatalogData));
+      // удаляем задачу из списка, обновляем массив с данными
+      const newCatalogData = arrDataLocalStorage.filter(
+        (item: CatalogDataType) => item.id !== elementId
+      );
+      // обновляем данные каталога
+      updateCatalogData(newCatalogData);
     }
     // закрываем модальное окно с формой
-    closeModalWindowForm();
-  };
-
-  // функция, удалить запись
-  const removeEntry = () => {
-    // набор данных LocalStorage
-    // const datasetLocalStorage: string | null = window.localStorage.getItem(
-    //   'catalogRecipeDataset'
-    // );
-    console.log('удалить запись');
-  };
+    handleCloseModalWindowForm();
+  }, [handleCloseModalWindowForm, elementId, updateCatalogData]);
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${
+        modalActive === false && modalEditingActive === false ? styles.dn : ''
+      }`}
+    >
       <form className={styles.formFill}>
-        <FormTitle textTitle={defineTitleName()} />
+        <FormTitle textTitle={defineTitleName} />
         <div className={styles.container}>
           {/* Ввод персонального цвет */}
           <InputField
@@ -179,12 +259,12 @@ const ModalForm = () => {
               <ButtonForm
                 nameBtn='Добавить'
                 nameType='submit'
-                onClick={handleClickOfTheAddFormButton}
+                onClick={handleAddEntries}
               />
               <ButtonForm
                 nameBtn='Закрыть'
                 nameType='reset'
-                onClick={closeModalWindowForm}
+                onClick={handleCloseModalWindowForm}
               />
             </>
           )}
@@ -194,12 +274,12 @@ const ModalForm = () => {
               <ButtonForm
                 nameBtn='Сохранить'
                 nameType='submit'
-                onClick={handleClickOfTheAddFormButton}
+                onClick={handleSaveEditingEntries}
               />
               <ButtonForm
                 nameBtn='Удалить'
                 nameType='reset'
-                onClick={removeEntry}
+                onClick={handleRemoveEntries}
               />
             </>
           )}

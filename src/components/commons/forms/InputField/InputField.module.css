@@ -17,6 +17,7 @@
   border: 1px solid var(--beige200-color);
   border-radius: 10px;
   outline: none;
+  cursor: text;
 }
 
 .input::placeholder {
@@ -26,7 +27,7 @@
 
 .input:hover {
   background: var(--beige200-color);
-  cursor: pointer;
+  cursor: text;
 }
 
 .input:focus {
