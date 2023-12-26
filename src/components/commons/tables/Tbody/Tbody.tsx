@@ -1,5 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import {
+  setModalEditingActive,
+  //
+  setFormDataColor,
+  setFormDataNameDish,
+  setFormDataRecipe,
+  setFormDataCookingTime,
+} from '../../../../redux/slices/modalFormSlice';
+
 import { ButtonControlCatalogEntry } from '../../buttons';
 
 import {
@@ -10,6 +19,7 @@ import styles from './Tbody.module.css';
 import { CatalogDataType } from '../../../../types/customType';
 
 const Tbody = () => {
+  const dispatch = useDispatch();
   const recipeCatalogData = useSelector(
     (state: RootState) => state.recipeCatalogData.recipeCatalogData
   );
@@ -19,6 +29,16 @@ const Tbody = () => {
     return splitSentenceWithLineBreak(str).map((elem, index) => {
       return <p key={index}>{elem}</p>;
     });
+  };
+
+  // функция, открыть модальное окно для редактирования записи
+  const openModalWindowToEditingEntry = (obj: CatalogDataType) => {
+    dispatch(setModalEditingActive(true));
+    // установим значения в input
+    dispatch(setFormDataColor(obj.color));
+    dispatch(setFormDataNameDish(obj.title));
+    dispatch(setFormDataRecipe(obj.recipe));
+    dispatch(setFormDataCookingTime(obj.cookingTime));
   };
 
   return (
@@ -45,7 +65,10 @@ const Tbody = () => {
               />
             </td>
             <td>
-              <ButtonControlCatalogEntry nameBtn='Редактировать' />
+              <ButtonControlCatalogEntry
+                nameBtn='Редактировать'
+                onClick={() => openModalWindowToEditingEntry(item)}
+              />
             </td>
           </tr>
         );

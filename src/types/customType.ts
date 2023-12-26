@@ -42,11 +42,21 @@ export type SignatureFieldPropsType = {
 export type ButtonType = {
   nameBtn: string;
   nameType?: 'submit' | 'reset';
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FormEvent<HTMLFormElement>
+  ) => void;
 };
 
 export type ModalActiveInitialStateType = {
   modalActive: boolean;
+  modalEditingActive: boolean;
+  //
+  formDataColor: string;
+  formDataNameDish: string;
+  formDataRecipe: string;
+  formDataCookingTime: string;
 };
 
 export type CatalogDataInitialStateType = {
