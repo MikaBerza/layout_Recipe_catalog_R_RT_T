@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/layout_Recipe_catalog_R_RT_T/static/css/main.21f1c3b2.css",
-    "main.js": "/layout_Recipe_catalog_R_RT_T/static/js/main.217cdb18.js",
+    "main.js": "/layout_Recipe_catalog_R_RT_T/static/js/main.c0349f94.js",
     "static/media/productsImg.png": "/layout_Recipe_catalog_R_RT_T/static/media/productsImg.9d9e0f2fbf244f93ae76.png",
     "static/media/stonePlateImg.png": "/layout_Recipe_catalog_R_RT_T/static/media/stonePlateImg.05f85ebe90110803569e.png",
     "static/media/Roboto-Medium.ttf": "/layout_Recipe_catalog_R_RT_T/static/media/Roboto-Medium.7c8d04cd831df3033c8a.ttf",
@@ -16,10 +16,10 @@
     "static/media/titleIcon.png": "/layout_Recipe_catalog_R_RT_T/static/media/titleIcon.dbc2ffd7021ea239a1d2.png",
     "index.html": "/layout_Recipe_catalog_R_RT_T/index.html",
     "main.21f1c3b2.css.map": "/layout_Recipe_catalog_R_RT_T/static/css/main.21f1c3b2.css.map",
-    "main.217cdb18.js.map": "/layout_Recipe_catalog_R_RT_T/static/js/main.217cdb18.js.map"
+    "main.c0349f94.js.map": "/layout_Recipe_catalog_R_RT_T/static/js/main.c0349f94.js.map"
   },
   "entrypoints": [
     "static/css/main.21f1c3b2.css",
-    "static/js/main.217cdb18.js"
+    "static/js/main.c0349f94.js"
   ]
 }
