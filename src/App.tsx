@@ -8,8 +8,11 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/recipe-catalog-page' element={<RecipeCatalogPage />} />
+        <Route path='/layout_Recipe_catalog_R_RT_T' element={<HomePage />} />
+        <Route
+          path='/layout_Recipe_catalog_R_RT_T/recipe-catalog-page'
+          element={<RecipeCatalogPage />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

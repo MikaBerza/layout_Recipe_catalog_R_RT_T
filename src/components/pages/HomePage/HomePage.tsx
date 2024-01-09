@@ -9,7 +9,10 @@ const HomePage = () => {
       <p className={styles.subtitle}>
         Создавайте, сохраняйте и редактируйте свои персональные рецепты
       </p>
-      <ButtonGoToCatalog name='Перейти в каталог' link='/recipe-catalog-page' />
+      <ButtonGoToCatalog
+        name='Перейти в каталог'
+        link='/layout_Recipe_catalog_R_RT_T/recipe-catalog-page'
+      />
     </main>
   );
 };
