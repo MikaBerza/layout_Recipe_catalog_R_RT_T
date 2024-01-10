@@ -241,8 +241,8 @@ const ModalForm = () => {
             type='text'
             id='nameDish'
             placeholder='Введите название блюда'
-            pattern='^[а-яА-Яa-zA-Z\s]+$'
-            validationHintText='Только буквы русского и английского алфавита'
+            pattern='^[а-яА-Яa-zA-Z\d\s]+$'
+            validationHintText='Только цифры, буквы русского и английского алфавита'
             //
             onChange={(e) => dispatch(setFormDataNameDish(e.target.value))}
             value={formDataNameDish}
