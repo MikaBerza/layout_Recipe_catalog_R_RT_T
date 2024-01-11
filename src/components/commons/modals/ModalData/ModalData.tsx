@@ -13,9 +13,9 @@ import {
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-import styles from './ModalData.module.css';
-// import { CatalogItemDataType } from '../../../../types/customType';
 import { convertObjectToIndentedLines } from '../../../../utils/modules';
+
+import styles from './ModalData.module.css';
 
 const ModalData = () => {
   const { modalDataActive, dataItem } = useSelector(
@@ -37,11 +37,13 @@ const ModalData = () => {
   }, [dispatch, modalDataActive]);
 
   // данные текстовой записи
-  const textRecordData = convertObjectToIndentedLines(dataItem).map(
-    (item: string, index: number) => {
-      return <p key={index}>{item}</p>;
-    }
-  );
+  const textRecordData: JSX.Element[] = React.useMemo(() => {
+    return convertObjectToIndentedLines(dataItem).map(
+      (item: string, index: number) => {
+        return <p key={index}>{item}</p>;
+      }
+    );
+  }, [dataItem]);
 
   return (
     <div
