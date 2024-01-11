@@ -6,7 +6,7 @@ export type TheadDataType = {
   patch: string;
 };
 
-export type CatalogDataType = {
+export type CatalogItemDataType = {
   id: string;
   color: string;
   date: string;
@@ -52,13 +52,11 @@ export type ButtonType = {
 export type ModalActiveInitialStateType = {
   modalActive: boolean;
   modalEditingActive: boolean;
-  elementId: string;
-  formDataColor: string;
-  formDataNameDish: string;
-  formDataRecipe: string;
-  formDataCookingTime: string;
+  modalDataActive: boolean;
+  //
+  dataItem:CatalogItemDataType;
 };
 
 export type CatalogDataInitialStateType = {
-  recipeCatalogData: CatalogDataType[] | [];
+  recipeCatalogData: CatalogItemDataType[] | [];
 };

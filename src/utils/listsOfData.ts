@@ -1,5 +1,5 @@
 import { generateId } from './modules';
-import { TheadDataType, CatalogDataType } from '../types/customType';
+import { TheadDataType, CatalogItemDataType } from '../types/customType';
 
 export const theadData: TheadDataType[] = [
   {
@@ -34,7 +34,7 @@ export const theadData: TheadDataType[] = [
   },
 ];
 
-export const catalogData: CatalogDataType[] = [
+export const catalogData: CatalogItemDataType[] = [
   {
     id: generateId(),
     color: '#e66465',

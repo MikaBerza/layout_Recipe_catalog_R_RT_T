@@ -2,21 +2,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import {
   setModalEditingActive,
-  setElementId,
-  setFormDataColor,
-  setFormDataNameDish,
-  setFormDataRecipe,
-  setFormDataCookingTime,
+  setModalDataActive,
+  //
+  setId,
+  setColor,
+  setDate,
+  setTitle,
+  setRecipe,
+  setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
 
 import { ButtonControlCatalogEntry } from '../../buttons';
 
-import {
-  splitSentenceWithLineBreak,
-  viewSavedCatalogItemData,
-} from '../../../../utils/modules';
+import { splitSentenceWithLineBreak } from '../../../../utils/modules';
 import styles from './Tbody.module.css';
-import { CatalogDataType } from '../../../../types/customType';
+import { CatalogItemDataType } from '../../../../types/customType';
 
 const Tbody = () => {
   const dispatch = useDispatch();
@@ -31,21 +31,32 @@ const Tbody = () => {
     });
   };
 
+  // функция, установить значения
+  const setValues = (obj: CatalogItemDataType) => {
+    // установим значения
+    dispatch(setId(obj.id));
+    dispatch(setColor(obj.color));
+    dispatch(setDate(obj.date));
+    dispatch(setTitle(obj.title));
+    dispatch(setRecipe(obj.recipe));
+    dispatch(setCookingTime(obj.cookingTime));
+  };
+
   // функция, открыть модальное окно для редактирования записи
-  const openModalWindowToEditingEntries = (obj: CatalogDataType) => {
+  const openModalWindowToEditingEntries = (obj: CatalogItemDataType) => {
     dispatch(setModalEditingActive(true));
-    // установи значение id элемента
-    dispatch(setElementId(obj.id));
-    // установим значения в input
-    dispatch(setFormDataColor(obj.color));
-    dispatch(setFormDataNameDish(obj.title));
-    dispatch(setFormDataRecipe(obj.recipe));
-    dispatch(setFormDataCookingTime(obj.cookingTime));
+    setValues(obj);
+  };
+
+  // функция, открыть модальное окно для просмотра записи
+  const openModalWindowToViewingEntries = (obj: CatalogItemDataType) => {
+    dispatch(setModalDataActive(true));
+    setValues(obj);
   };
 
   return (
     <tbody className={styles.wrapper}>
-      {recipeCatalogData.map((item: CatalogDataType, index: number) => {
+      {recipeCatalogData.map((item: CatalogItemDataType, index: number) => {
         return (
           <tr key={item.id}>
             <td>{index + 1}</td>
@@ -63,7 +74,7 @@ const Tbody = () => {
             <td>
               <ButtonControlCatalogEntry
                 nameBtn='Просмотр'
-                onClick={() => viewSavedCatalogItemData(item)}
+                onClick={() => openModalWindowToViewingEntries(item)}
               />
             </td>
             <td>

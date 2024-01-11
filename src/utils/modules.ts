@@ -1,9 +1,9 @@
-import { CatalogDataType } from '../types/customType';
+import { CatalogItemDataType } from '../types/customType';
 
 // функция, сохранить набор данных в localStorage
 export const saveDatasetToLocalStorage = (
   nameKey: string,
-  dataset: CatalogDataType[]
+  dataset: CatalogItemDataType[]
 ): void => {
   localStorage.setItem(nameKey, JSON.stringify(dataset));
 };
@@ -26,9 +26,12 @@ export const splitSentenceWithLineBreak = (text: string): string[] => {
     .split('\n')
     .filter((sentence) => sentence.trim() !== '');
 
+  // счетчик новых строк
+  const newlineCounter = splitSentences.length - 1;
+
   if (splitSentences.length > 1) {
     // первое предложение
-    const firstSentence = splitSentences.splice(0, 1);
+    const firstSentence = splitSentences.splice(0, newlineCounter);
     // другие предложения
     const otherSentences = splitSentences.join('.');
     // формируем новый массив с первым и другими предложениями
@@ -49,21 +52,11 @@ export const getTheCurrentDate = () => {
   });
 };
 
-// функция, получить формат JSON с новыми строками
-export const getFormatJSONWithNewLines = (obj: CatalogDataType): string => {
-  // Преобразуем объект в строку JSON с отступами
-  let jsonString = JSON.stringify(obj, null, 2);
-  // Заменяем отступы перед каждым полем на перенос строки
-  jsonString = jsonString.replace(/"(.*?)":/g, '___$&');
-  // Удаляем отступы перед открывающейся скобкой
-  jsonString = jsonString.replace(/^s+/g, '');
-
-  return jsonString;
-};
-
-// функция, посмотреть сохраненные данные элемента каталога
-export const viewSavedCatalogItemData = (obj: CatalogDataType): void => {
-  if (obj) {
-    alert(getFormatJSONWithNewLines(obj));
-  }
+// функция, преобразовать объект в строки с отступом
+export const convertObjectToIndentedLines = (obj: CatalogItemDataType): any => {
+  // преобразуем объект в строку JSON с отступами
+  let jsonString: string = JSON.stringify(obj, null, 2);
+  // разделенные строки, разбиение строки на массив строк по символу новой строки
+  const separatedLines: string[] = jsonString.split('\n');
+  return separatedLines;
 };

@@ -5,11 +5,16 @@ import { ModalActiveInitialStateType } from '../../types/customType';
 const initialState: ModalActiveInitialStateType = {
   modalActive: false,
   modalEditingActive: false,
-  elementId: '',
-  formDataColor: '#000000',
-  formDataNameDish: '',
-  formDataRecipe: '',
-  formDataCookingTime: '',
+  modalDataActive: false,
+  //
+  dataItem: {
+    id: '',
+    color: '#000000',
+    date: '',
+    title: '',
+    recipe: '',
+    cookingTime: '',
+  },
 };
 
 export const modalFormSlice = createSlice({
@@ -22,20 +27,27 @@ export const modalFormSlice = createSlice({
     setModalEditingActive(state, action) {
       state.modalEditingActive = action.payload;
     },
-    setElementId(state, action) {
-      state.elementId = action.payload;
+    setModalDataActive(state, action) {
+      state.modalDataActive = action.payload;
     },
-    setFormDataColor(state, action) {
-      state.formDataColor = action.payload;
+    //
+    setId(state, action) {
+      state.dataItem.id = action.payload;
     },
-    setFormDataNameDish(state, action) {
-      state.formDataNameDish = action.payload;
+    setColor(state, action) {
+      state.dataItem.color = action.payload;
     },
-    setFormDataRecipe(state, action) {
-      state.formDataRecipe = action.payload;
+    setDate(state, action) {
+      state.dataItem.date = action.payload;
     },
-    setFormDataCookingTime(state, action) {
-      state.formDataCookingTime = action.payload;
+    setTitle(state, action) {
+      state.dataItem.title = action.payload;
+    },
+    setRecipe(state, action) {
+      state.dataItem.recipe = action.payload;
+    },
+    setCookingTime(state, action) {
+      state.dataItem.cookingTime = action.payload;
     },
   },
 });
@@ -43,10 +55,13 @@ export const modalFormSlice = createSlice({
 export const {
   setModalActive,
   setModalEditingActive,
-  setElementId,
-  setFormDataColor,
-  setFormDataNameDish,
-  setFormDataRecipe,
-  setFormDataCookingTime,
+  setModalDataActive,
+  //
+  setId,
+  setColor,
+  setDate,
+  setTitle,
+  setRecipe,
+  setCookingTime,
 } = modalFormSlice.actions;
 export default modalFormSlice.reducer;

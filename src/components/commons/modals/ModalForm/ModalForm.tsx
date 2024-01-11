@@ -4,10 +4,11 @@ import { RootState } from '../../../../redux/store';
 import {
   setModalActive,
   setModalEditingActive,
-  setFormDataColor,
-  setFormDataNameDish,
-  setFormDataRecipe,
-  setFormDataCookingTime,
+  //
+  setColor,
+  setTitle,
+  setRecipe,
+  setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
 import { setRecipeCatalogData } from '../../../../redux/slices/recipeCatalogSlice';
 
@@ -21,17 +22,14 @@ import {
 } from '../../../../utils/modules';
 
 import styles from './ModalForm.module.css';
-import { CatalogDataType } from '../../../../types/customType';
+import { CatalogItemDataType } from '../../../../types/customType';
 
 const ModalForm = () => {
   const {
     modalActive,
     modalEditingActive,
-    elementId,
-    formDataColor,
-    formDataNameDish,
-    formDataRecipe,
-    formDataCookingTime,
+    //
+    dataItem,
   } = useSelector((state: RootState) => state.modalFormSlice);
   const dispatch = useDispatch();
 
@@ -48,7 +46,7 @@ const ModalForm = () => {
 
   // функция, обновить данные каталога
   const updateCatalogData = React.useCallback(
-    (newData: CatalogDataType[]) => {
+    (newData: CatalogItemDataType[]) => {
       // сохраняем массив с данными в localStorage
       saveDatasetToLocalStorage('catalogRecipeDataset', newData);
       // сохраняем массив с данными в store (redux toolkit)
@@ -66,10 +64,10 @@ const ModalForm = () => {
       dispatch(setModalEditingActive(false));
     }
     // очищаем значение полей формы
-    dispatch(setFormDataColor('#000000'));
-    dispatch(setFormDataNameDish(''));
-    dispatch(setFormDataRecipe(''));
-    dispatch(setFormDataCookingTime(''));
+    dispatch(setColor('#000000'));
+    dispatch(setCookingTime(''));
+    dispatch(setTitle(''));
+    dispatch(setRecipe(''));
   }, [dispatch, modalActive, modalEditingActive]);
 
   // функция, обработать добавление записи
@@ -82,13 +80,13 @@ const ModalForm = () => {
       // отменяет действие по умолчанию
       event.preventDefault();
       // формируем объект с данными каталога
-      const objCatalogData: CatalogDataType = {
+      const objCatalogData: CatalogItemDataType = {
         id: generateId(),
-        color: formDataColor,
+        color: dataItem.color,
         date: getTheCurrentDate(),
-        title: formDataNameDish.trim(),
-        recipe: formDataRecipe.trim(),
-        cookingTime: formDataCookingTime,
+        title: dataItem.title.trim(),
+        recipe: dataItem.recipe.trim(),
+        cookingTime: dataItem.cookingTime,
       };
       // набор данных LocalStorage
       const datasetLocalStorage: string | null = window.localStorage.getItem(
@@ -115,11 +113,11 @@ const ModalForm = () => {
     },
 
     [
+      dataItem.color,
+      dataItem.title,
+      dataItem.recipe,
+      dataItem.cookingTime,
       handleCloseModalWindowForm,
-      formDataColor,
-      formDataCookingTime,
-      formDataNameDish,
-      formDataRecipe,
       updateCatalogData,
     ]
   );
@@ -132,13 +130,13 @@ const ModalForm = () => {
         | React.MouseEvent<HTMLButtonElement>
     ) => {
       event.preventDefault();
-      const objCatalogData: CatalogDataType = {
+      const objCatalogData: CatalogItemDataType = {
         id: generateId(),
-        color: formDataColor,
+        color: dataItem.color,
         date: getTheCurrentDate(),
-        title: formDataNameDish.trim(),
-        recipe: formDataRecipe.trim(),
-        cookingTime: formDataCookingTime,
+        title: dataItem.title.trim(),
+        recipe: dataItem.recipe.trim(),
+        cookingTime: dataItem.cookingTime,
       };
 
       const datasetLocalStorage: string | null = window.localStorage.getItem(
@@ -149,8 +147,8 @@ const ModalForm = () => {
 
         // Создаем новый массив, заменяя объект с нужным идентификатором
         const newCatalogData = arrDataLocalStorage.map(
-          (item: CatalogDataType) => {
-            if (item.id === elementId) {
+          (item: CatalogItemDataType) => {
+            if (item.id === dataItem.id) {
               return objCatalogData;
             }
             return item;
@@ -163,12 +161,12 @@ const ModalForm = () => {
       handleCloseModalWindowForm();
     },
     [
+      dataItem.color,
+      dataItem.title,
+      dataItem.recipe,
+      dataItem.cookingTime,
+      dataItem.id,
       handleCloseModalWindowForm,
-      elementId,
-      formDataColor,
-      formDataCookingTime,
-      formDataNameDish,
-      formDataRecipe,
       updateCatalogData,
     ]
   );
@@ -184,14 +182,14 @@ const ModalForm = () => {
       const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
       // удаляем задачу из списка, обновляем массив с данными
       const newCatalogData = arrDataLocalStorage.filter(
-        (item: CatalogDataType) => item.id !== elementId
+        (item: CatalogItemDataType) => item.id !== dataItem.id
       );
       // обновляем данные каталога
       updateCatalogData(newCatalogData);
     }
     // закрываем модальное окно с формой
     handleCloseModalWindowForm();
-  }, [handleCloseModalWindowForm, elementId, updateCatalogData]);
+  }, [handleCloseModalWindowForm, updateCatalogData, dataItem.id]);
 
   return (
     <div
@@ -219,8 +217,8 @@ const ModalForm = () => {
             type='color'
             id='personalColor'
             //
-            onChange={(e) => dispatch(setFormDataColor(e.target.value))}
-            value={formDataColor}
+            onChange={(e) => dispatch(setColor(e.target.value))}
+            value={dataItem.color}
           />
           {/* Ввод времени приготовления блюда */}
           <InputField
@@ -230,8 +228,8 @@ const ModalForm = () => {
             type='time'
             id='cookingTime'
             //
-            onChange={(e) => dispatch(setFormDataCookingTime(e.target.value))}
-            value={formDataCookingTime}
+            onChange={(e) => dispatch(setCookingTime(e.target.value))}
+            value={dataItem.cookingTime}
           />
           {/* Ввод названия блюда */}
           <InputField
@@ -244,8 +242,8 @@ const ModalForm = () => {
             pattern='^[а-яА-Яa-zA-Z\d\s]+$'
             validationHintText='Только цифры, буквы русского и английского алфавита'
             //
-            onChange={(e) => dispatch(setFormDataNameDish(e.target.value))}
-            value={formDataNameDish}
+            onChange={(e) => dispatch(setTitle(e.target.value))}
+            value={dataItem.title}
           />
         </div>
         {/* Ввод рецепта блюда */}
@@ -257,18 +255,15 @@ const ModalForm = () => {
           placeholder='Напишите рецепт блюда'
           maxLength={2300}
           //
-          onChange={(e) => dispatch(setFormDataRecipe(e.target.value))}
-          value={formDataRecipe}
+          onChange={(e) => dispatch(setRecipe(e.target.value))}
+          value={dataItem.recipe}
         />
         {/* Группа кнопок */}
         <div className={styles.buttonsGroup}>
           {/* Кнопки для модального окна при создании записи */}
           {modalActive && (
             <>
-              <ButtonForm
-                nameBtn='Добавить'
-                nameType='submit'
-              />
+              <ButtonForm nameBtn='Добавить' nameType='submit' />
               <ButtonForm
                 nameBtn='Закрыть'
                 nameType='reset'
@@ -279,10 +274,7 @@ const ModalForm = () => {
           {/* Кнопки для модального окна при редактировании записи */}
           {modalEditingActive && (
             <>
-              <ButtonForm
-                nameBtn='Сохранить'
-                nameType='submit'
-              />
+              <ButtonForm nameBtn='Сохранить' nameType='submit' />
               <ButtonForm
                 nameBtn='Удалить'
                 nameType='reset'
