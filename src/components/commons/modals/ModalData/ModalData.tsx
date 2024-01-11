@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
 import { FormTitle } from '../../titles';
-import { ButtonForm } from '../../buttons';
+import { ButtonModal } from '../../buttons';
 
 import {
   setModalDataActive,
@@ -56,7 +56,7 @@ const ModalData = () => {
         <div className={styles.textData}>{textRecordData}</div>
 
         <div className={styles.buttons}>
-          <ButtonForm
+          <ButtonModal
             nameBtn='Закрыть'
             nameType='reset'
             onClick={handleCloseModalWindow}

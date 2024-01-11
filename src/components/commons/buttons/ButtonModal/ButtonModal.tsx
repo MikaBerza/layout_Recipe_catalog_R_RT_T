@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './ButtonForm.module.css';
+import styles from './ButtonModal.module.css';
 import { ButtonType } from '../../../../types/customType';
 
-const ButtonForm = ({ nameBtn, nameType, onClick }: ButtonType) => {
+const ButtonModal = ({ nameBtn, nameType, onClick }: ButtonType) => {
   return (
     <button
       className={`${styles.btn} ${nameType && styles[nameType]}`}
@@ -14,5 +14,5 @@ const ButtonForm = ({ nameBtn, nameType, onClick }: ButtonType) => {
   );
 };
 
-ButtonForm.displayName = 'ButtonForm';
-export default React.memo(ButtonForm);
+ButtonModal.displayName = 'ButtonModal';
+export default React.memo(ButtonModal);

@@ -13,7 +13,7 @@ import {
 import { setRecipeCatalogData } from '../../../../redux/slices/recipeCatalogSlice';
 
 import { FormTitle } from '../../titles';
-import { ButtonForm } from '../../buttons';
+import { ButtonModal } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import {
   saveDatasetToLocalStorage,
@@ -263,8 +263,8 @@ const ModalForm = () => {
           {/* Кнопки для модального окна при создании записи */}
           {modalActive && (
             <>
-              <ButtonForm nameBtn='Добавить' nameType='submit' />
-              <ButtonForm
+              <ButtonModal nameBtn='Добавить' nameType='submit' />
+              <ButtonModal
                 nameBtn='Закрыть'
                 nameType='reset'
                 onClick={handleCloseModalWindowForm}
@@ -274,8 +274,8 @@ const ModalForm = () => {
           {/* Кнопки для модального окна при редактировании записи */}
           {modalEditingActive && (
             <>
-              <ButtonForm nameBtn='Сохранить' nameType='submit' />
-              <ButtonForm
+              <ButtonModal nameBtn='Сохранить' nameType='submit' />
+              <ButtonModal
                 nameBtn='Удалить'
                 nameType='reset'
                 onClick={handleRemoveEntries}
