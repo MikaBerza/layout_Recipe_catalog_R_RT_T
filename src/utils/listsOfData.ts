@@ -4,7 +4,7 @@ import { TheadDataType, CatalogItemDataType } from '../types/customType';
 export const theadData: TheadDataType[] = [
   {
     id: generateId(),
-    tooltip: 'Номер пункта',
+    tooltip: 'Номер блюда',
     patch: require('../assets/images/tableIcon/gridIcon.png'),
   },
   {

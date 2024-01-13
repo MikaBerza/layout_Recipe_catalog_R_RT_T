@@ -9,7 +9,7 @@ import styles from './Thead.module.css';
 
 const Thead = () => {
   const recipeCatalogData = useSelector(
-    (state: RootState) => state.recipeCatalogData.recipeCatalogData
+    (state: RootState) => state.recipeCatalogDataSlice.recipeCatalogData
   );
 
   // функция, сгенерировать ячейки заголовка со значком

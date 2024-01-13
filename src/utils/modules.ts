@@ -60,3 +60,18 @@ export const convertObjectToIndentedLines = (obj: CatalogItemDataType): any => {
   const separatedLines: string[] = jsonString.split('\n');
   return separatedLines;
 };
+
+// функция, поиск по названию
+export const searchForTitle = (
+  data: CatalogItemDataType[],
+  textValue: string
+): CatalogItemDataType[] => {
+  const textValueUpperCase = textValue.toUpperCase();
+
+  // метод includes проверяет наличие элемента в массиве (метод возвращает либо true, либо false)
+  const newData = data.filter((item) =>
+    item.title.toUpperCase().includes(textValueUpperCase)
+  );
+
+  return newData;
+};

@@ -54,7 +54,12 @@ export type ModalActiveInitialStateType = {
   modalEditingActive: boolean;
   modalDataActive: boolean;
   //
-  dataItem:CatalogItemDataType;
+  dataItem: CatalogItemDataType;
+};
+
+export type SearchType = {
+  searchValue: string;
+  searchFlag: boolean;
 };
 
 export type CatalogDataInitialStateType = {

@@ -38,14 +38,16 @@ import {
 // импортируем модуль, который предоставляет доступ к хранилищу для сохранения состояния Redux
 import storage from 'redux-persist/lib/storage';
 // импортируем slice (часть) состояния и действий для модальной формы
-import recipeCatalogData from './slices/recipeCatalogSlice';
+import recipeCatalogDataSlice from './slices/recipeCatalogSlice';
 import modalFormSlice from './slices/modalFormSlice';
+import searchSlice from './slices/searchSlice';
 
 /* объединяет нескольких reducers в один корневой reducer
 любой новый reducer добавляется сюда, как ключ значение */
 const rootReducer = combineReducers({
-  recipeCatalogData: recipeCatalogData,
+  recipeCatalogDataSlice: recipeCatalogDataSlice,
   modalFormSlice: modalFormSlice,
+  searchSlice:searchSlice,
 });
 
 /* Создаем конфигурацию для (Redux Persist), 
