@@ -47,6 +47,7 @@ export type ButtonType = {
       | React.MouseEvent<HTMLButtonElement>
       | React.FormEvent<HTMLFormElement>
   ) => void;
+  link?: string | null;
 };
 
 export type ModalActiveInitialStateType = {

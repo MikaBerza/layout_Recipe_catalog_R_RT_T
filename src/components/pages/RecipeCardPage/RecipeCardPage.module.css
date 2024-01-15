@@ -1,0 +1,104 @@
+.wrapper {
+  overflow: auto;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    url('../../../assets/images/platesImg.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 180px auto 50px;
+  padding: 0 20px;
+}
+
+.content {
+  max-width: 1480px;
+  padding: 40px;
+  background: var(--beige200-color);
+  border-radius: 15px;
+}
+
+.dishNumber {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 122%;
+  text-align: end;
+}
+
+.title {
+  margin: 0;
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.recipe {
+  margin: 20px 0 0;
+}
+
+.recipeText {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  word-break: break-all;
+  color: var(--black-color);
+}
+
+.recipeText:nth-child(n+3) {
+  margin-top: 15px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.dateText {
+  padding-right: 50px;
+}
+
+.linkBtn {
+  cursor: pointer;
+}
+
+.personalColor {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 19px 38px, rgba(0, 0, 0, 0.7) 0px 15px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 100px;
+}
+
+.linkBtn:active {
+  position: relative;
+  top: 2px;
+  opacity: 1;
+}
+
+.secondaryText {
+  display: block;
+  font-size: 17px;
+  line-height: 142%;
+  letter-spacing: -0.17px;
+  color: var(--gray300-color);
+}
+
+.dishNumber,
+.title,
+.dateText,
+.secondaryText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

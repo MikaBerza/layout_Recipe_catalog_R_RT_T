@@ -19,7 +19,6 @@ import { CatalogItemDataType } from '../../../../types/customType';
 const Trow = React.memo(
   ({ item, dishNumber }: { item: CatalogItemDataType; dishNumber: number }) => {
     const dispatch = useDispatch();
-
     // функция, сгенерировать рецепты блюд
     const generateRecipesForDishes = (str: string) =>
       splitSentenceWithLineBreak(str).map((elem, index) => (
@@ -51,7 +50,13 @@ const Trow = React.memo(
         <td>{item.cookingTime}ч</td>
 
         <td>
-          <ButtonControlCatalogEntry nameBtn='Подробнее' />
+          <ButtonControlCatalogEntry
+            nameBtn='Подробнее'
+            link={
+              '/layout_Recipe_catalog_R_RT_T/recipe-catalog-page/recipe-card-page/' +
+              dishNumber
+            }
+          />
         </td>
         <td>
           <ButtonControlCatalogEntry
