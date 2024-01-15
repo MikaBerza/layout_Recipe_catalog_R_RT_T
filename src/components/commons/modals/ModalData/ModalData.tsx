@@ -1,10 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-
-import { FormTitle } from '../../titles';
-import { ButtonModal } from '../../buttons';
-
 import {
   setModalDataActive,
   //
@@ -13,15 +9,23 @@ import {
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-import { convertObjectToIndentedLines } from '../../../../utils/modules';
 
+import { FormTitle } from '../../titles';
+import { ButtonModal } from '../../buttons';
+import { splitSentenceWithLineBreak } from '../../../../utils/modules';
 import styles from './ModalData.module.css';
 
 const ModalData = () => {
+  const dispatch = useDispatch();
   const { modalDataActive, dataItem } = useSelector(
     (state: RootState) => state.modalFormSlice
   );
-  const dispatch = useDispatch();
+
+  // используем деструктуризацию для получения данных из (dataItem)
+  const { title, cookingTime, recipe } = dataItem;
+  const recipeText = splitSentenceWithLineBreak(recipe).map((item, index) => (
+    <p key={index}>{item}</p>
+  ));
 
   // функция, обработать закрытие модального окна
   const handleCloseModalWindow = React.useCallback(() => {
@@ -36,15 +40,6 @@ const ModalData = () => {
     dispatch(setRecipe(''));
   }, [dispatch, modalDataActive]);
 
-  // данные текстовой записи
-  const textRecordData: JSX.Element[] = React.useMemo(() => {
-    return convertObjectToIndentedLines(dataItem).map(
-      (item: string, index: number) => {
-        return <p key={index}>{item}</p>;
-      }
-    );
-  }, [dataItem]);
-
   return (
     <div
       className={`${styles.wrapper} ${
@@ -52,15 +47,21 @@ const ModalData = () => {
       }`}
     >
       <div className={styles.inner}>
-        <FormTitle textTitle='Сохраненные данные' />
-        <div className={styles.textData}>{textRecordData}</div>
+        <div className={styles.content}>
+          <FormTitle textTitle={title} />
 
-        <div className={styles.buttons}>
-          <ButtonModal
-            nameBtn='Закрыть'
-            nameType='reset'
-            onClick={handleCloseModalWindow}
-          />
+          <div className={styles.text}>
+            {recipeText}
+            <span>Время приготовления {cookingTime}</span>
+          </div>
+
+          <div className={styles.buttons}>
+            <ButtonModal
+              nameBtn='Закрыть'
+              nameType='reset'
+              onClick={handleCloseModalWindow}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
-import styles from './RecipeCardPage.module.css';
 import {
   splitSentenceWithLineBreak,
   getCatalogItem,
 } from '../../../utils/modules';
+import styles from './RecipeCardPage.module.css';
 
 const RecipeCardPage = () => {
   const { dishNumber } = useParams();
@@ -15,23 +15,18 @@ const RecipeCardPage = () => {
     (state: RootState) => state.recipeCatalogDataSlice
   );
 
-  // функция, генерация текста рецепта
-  const recipeTextGeneration = (itemText: string, index: number) => {
-    return (
-      <p className={styles.recipeText} key={index}>
-        {itemText}
-      </p>
-    );
-  };
-
   // элемент каталога
   const catalogItem = React.useMemo(
     () => getCatalogItem(recipeCatalogData, Number(dishNumber)),
     [recipeCatalogData, dishNumber]
   );
-
   // используем деструктуризацию для получения данных из константы (catalogItem)
   const { id, title, cookingTime, recipe, date, color } = catalogItem[0];
+  const recipeText = splitSentenceWithLineBreak(recipe).map((item, index) => (
+    <p className={styles.recipeText} key={index}>
+      {item}
+    </p>
+  ));
 
   return (
     <main className={styles.wrapper}>
@@ -42,12 +37,7 @@ const RecipeCardPage = () => {
           <span className={styles.secondaryText}>
             Время приготовления {cookingTime}
           </span>
-
-          <div className={styles.recipe}>
-            {splitSentenceWithLineBreak(recipe).map((item, index) =>
-              recipeTextGeneration(item, index)
-            )}
-          </div>
+          <div className={styles.recipe}>{recipeText}</div>
           <div className={styles.footer}>
             <div className={styles.dateText}>
               <span className={styles.secondaryText}>Дата добавления</span>

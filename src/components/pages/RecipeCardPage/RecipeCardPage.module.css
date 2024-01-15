@@ -83,7 +83,6 @@
 .linkBtn:active {
   position: relative;
   top: 2px;
-  opacity: 1;
 }
 
 .secondaryText {
