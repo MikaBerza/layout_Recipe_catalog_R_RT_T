@@ -39,28 +39,19 @@
   font-weight: 500;
 }
 
-.recipe {
-  margin: 20px 0 0;
-}
-
-.recipeText {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 28px;
-  word-break: break-all;
-  color: var(--black-color);
-}
-
-.recipeText:nth-child(n+3) {
-  margin-top: 15px;
+.secondaryText {
+  display: block;
+  font-size: 17px;
+  line-height: 142%;
+  letter-spacing: -0.17px;
+  color: var(--gray300-color);
 }
 
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 
 .dateText {
@@ -83,14 +74,6 @@
 .linkBtn:active {
   position: relative;
   top: 2px;
-}
-
-.secondaryText {
-  display: block;
-  font-size: 17px;
-  line-height: 142%;
-  letter-spacing: -0.17px;
-  color: var(--gray300-color);
 }
 
 .dishNumber,

@@ -2,11 +2,8 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-
-import {
-  splitSentenceWithLineBreak,
-  getCatalogItem,
-} from '../../../utils/modules';
+import { Recipe } from '../../commons/Recipe';
+import { getCatalogItem } from '../../../utils/modules';
 import styles from './RecipeCardPage.module.css';
 
 const RecipeCardPage = () => {
@@ -22,11 +19,6 @@ const RecipeCardPage = () => {
   );
   // используем деструктуризацию для получения данных из константы (catalogItem)
   const { id, title, cookingTime, recipe, date, color } = catalogItem[0];
-  const recipeText = splitSentenceWithLineBreak(recipe).map((item, index) => (
-    <p className={styles.recipeText} key={index}>
-      {item}
-    </p>
-  ));
 
   return (
     <main className={styles.wrapper}>
@@ -37,7 +29,7 @@ const RecipeCardPage = () => {
           <span className={styles.secondaryText}>
             Время приготовления {cookingTime}
           </span>
-          <div className={styles.recipe}>{recipeText}</div>
+          <Recipe str={recipe} />
           <div className={styles.footer}>
             <div className={styles.dateText}>
               <span className={styles.secondaryText}>Дата добавления</span>

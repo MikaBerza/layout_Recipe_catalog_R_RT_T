@@ -11,19 +11,15 @@ import {
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
+
 import { ButtonControlCatalogEntry } from '../../buttons';
-import { splitSentenceWithLineBreak } from '../../../../utils/modules';
+import { Recipe } from '../../Recipe';
 import styles from './Trow.module.css';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const Trow = React.memo(
   ({ item, dishNumber }: { item: CatalogItemDataType; dishNumber: number }) => {
     const dispatch = useDispatch();
-    // функция, сгенерировать рецепты блюд
-    const generateRecipesForDishes = (str: string) =>
-      splitSentenceWithLineBreak(str).map((elem, index) => (
-        <p key={index}>{elem}</p>
-      ));
 
     // функция, открыть модальное окно
     const openModalWindow = (obj: CatalogItemDataType, editing: boolean) => {
@@ -46,7 +42,9 @@ const Trow = React.memo(
         </td>
         <td>{item.date}</td>
         <td>{item.title}</td>
-        <td>{generateRecipesForDishes(item.recipe)}</td>
+        <td>
+          <Recipe str={item.recipe} />
+        </td>
         <td>{item.cookingTime}ч</td>
 
         <td>

@@ -1,0 +1,16 @@
+.text {
+  margin: 20px 0;
+}
+
+.line {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  word-break: break-all;
+  color: var(--black-color);
+}
+
+.line:nth-child(n+2) {
+  margin-top: 15px;
+}

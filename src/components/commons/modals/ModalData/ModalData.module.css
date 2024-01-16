@@ -23,23 +23,14 @@
   background-color: var(--white-color);
 }
 
-.text {
+.box {
   margin-bottom: 40px;
-  padding: 40px;
+  padding: 20px 40px;
   background: var(--beige200-color);
   border-radius: 15px;
 }
 
-.text p {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 28px;
-  word-break: break-all;
-  color: var(--black-color);
-}
-
-.text span {
+.box span {
   margin: 0;
   font-size: 17px;
   line-height: 142%;

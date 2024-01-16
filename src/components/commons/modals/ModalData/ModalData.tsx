@@ -11,8 +11,8 @@ import {
 } from '../../../../redux/slices/modalFormSlice';
 
 import { FormTitle } from '../../titles';
+import { Recipe } from '../../Recipe';
 import { ButtonModal } from '../../buttons';
-import { splitSentenceWithLineBreak } from '../../../../utils/modules';
 import styles from './ModalData.module.css';
 
 const ModalData = () => {
@@ -20,12 +20,8 @@ const ModalData = () => {
   const { modalDataActive, dataItem } = useSelector(
     (state: RootState) => state.modalFormSlice
   );
-
   // используем деструктуризацию для получения данных из (dataItem)
   const { title, cookingTime, recipe } = dataItem;
-  const recipeText = splitSentenceWithLineBreak(recipe).map((item, index) => (
-    <p key={index}>{item}</p>
-  ));
 
   // функция, обработать закрытие модального окна
   const handleCloseModalWindow = React.useCallback(() => {
@@ -49,9 +45,8 @@ const ModalData = () => {
       <div className={styles.inner}>
         <div className={styles.content}>
           <FormTitle textTitle={title} />
-
-          <div className={styles.text}>
-            {recipeText}
+          <div className={styles.box}>
+            <Recipe str={recipe} />
             <span>Время приготовления {cookingTime}</span>
           </div>
 
