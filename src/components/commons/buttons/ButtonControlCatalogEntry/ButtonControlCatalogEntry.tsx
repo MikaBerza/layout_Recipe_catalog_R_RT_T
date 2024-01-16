@@ -15,7 +15,7 @@ const ButtonControlCatalogEntry = ({
     );
   } else {
     return (
-      <Link className={styles.btn} to={link}>
+      <Link className={styles.btn} to={link} onClick={onClick}>
         {nameBtn}
       </Link>
     );

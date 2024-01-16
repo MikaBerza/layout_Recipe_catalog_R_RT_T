@@ -21,17 +21,21 @@ const Trow = React.memo(
   ({ item, dishNumber }: { item: CatalogItemDataType; dishNumber: number }) => {
     const dispatch = useDispatch();
 
-    // функция, открыть модальное окно
-    const openModalWindow = (obj: CatalogItemDataType, editing: boolean) => {
-      dispatch(setModalEditingActive(editing));
-      dispatch(setModalDataActive(!editing));
-      //
+    // функция, получить данные элемента
+    const getItemData = (obj: CatalogItemDataType) => {
       dispatch(setId(obj.id));
       dispatch(setColor(obj.color));
       dispatch(setDate(obj.date));
       dispatch(setTitle(obj.title));
       dispatch(setRecipe(obj.recipe));
       dispatch(setCookingTime(obj.cookingTime));
+    };
+
+    // функция, открыть модальное окно
+    const openModalWindow = (obj: CatalogItemDataType, editing: boolean) => {
+      getItemData(obj);
+      dispatch(setModalEditingActive(editing));
+      dispatch(setModalDataActive(!editing));
     };
 
     return (
@@ -54,6 +58,7 @@ const Trow = React.memo(
               '/layout_Recipe_catalog_R_RT_T/recipe-catalog-page/recipe-card-page/' +
               dishNumber
             }
+            onClick={() => getItemData(item)}
           />
         </td>
         <td>

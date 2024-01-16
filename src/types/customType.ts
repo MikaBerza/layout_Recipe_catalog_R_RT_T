@@ -46,6 +46,7 @@ export type ButtonType = {
     event:
       | React.MouseEvent<HTMLButtonElement>
       | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLAnchorElement>
   ) => void;
   link?: string | null;
 };

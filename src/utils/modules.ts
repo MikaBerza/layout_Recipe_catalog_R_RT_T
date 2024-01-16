@@ -75,7 +75,3 @@ export const searchForTitle = (
 
   return newData;
 };
-
-// функция, получить элемент каталога
-export const getCatalogItem = (arr: CatalogItemDataType[], num: number) =>
-  arr.filter((_, index) => num === index + 1);
