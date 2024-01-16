@@ -39,14 +39,6 @@
   font-weight: 500;
 }
 
-.secondaryText {
-  display: block;
-  font-size: 17px;
-  line-height: 142%;
-  letter-spacing: -0.17px;
-  color: var(--gray300-color);
-}
-
 .footer {
   display: flex;
   align-items: center;
@@ -54,7 +46,7 @@
   margin-top: 50px;
 }
 
-.dateText {
+.box {
   padding-right: 50px;
 }
 
@@ -78,8 +70,7 @@
 
 .dishNumber,
 .title,
-.dateText,
-.secondaryText {
+.box  {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

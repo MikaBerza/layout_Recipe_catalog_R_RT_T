@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { Recipe } from '../../commons/Recipe';
+import { MinorText } from '../../commons/MinorText';
+
 import { getCatalogItem } from '../../../utils/modules';
 import styles from './RecipeCardPage.module.css';
 
@@ -26,14 +28,12 @@ const RecipeCardPage = () => {
         <div className={styles.content} key={id}>
           <p className={styles.dishNumber}>#{dishNumber}</p>
           <h3 className={styles.title}>{title}</h3>
-          <span className={styles.secondaryText}>
-            Время приготовления {cookingTime}
-          </span>
+          <MinorText str={`Время приготовления ${cookingTime}`} />
           <Recipe str={recipe} />
           <div className={styles.footer}>
-            <div className={styles.dateText}>
-              <span className={styles.secondaryText}>Дата добавления</span>
-              <span className={styles.secondaryText}>{date}</span>
+            <div className={styles.box}>
+              <MinorText str={'Дата добавления'} />
+              <MinorText str={date} />
             </div>
             <Link
               className={styles.linkBtn}

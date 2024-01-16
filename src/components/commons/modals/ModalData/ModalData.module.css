@@ -30,15 +30,6 @@
   border-radius: 15px;
 }
 
-.box span {
-  margin: 0;
-  font-size: 17px;
-  line-height: 142%;
-  letter-spacing: -0.17px;
-  word-break: break-all;
-  color: var(--gray300-color);
-}
-
 .buttons {
   display: flex;
   justify-content: flex-end;

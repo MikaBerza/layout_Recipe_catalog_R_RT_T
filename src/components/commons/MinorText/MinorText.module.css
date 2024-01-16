@@ -1,0 +1,9 @@
+.text {
+  display: block;
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 142%;
+  letter-spacing: -0.17px;
+  text-overflow: ellipsis;
+  color: var(--gray300-color);
+}

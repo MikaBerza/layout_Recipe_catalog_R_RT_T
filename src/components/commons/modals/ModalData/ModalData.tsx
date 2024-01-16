@@ -12,6 +12,7 @@ import {
 
 import { FormTitle } from '../../titles';
 import { Recipe } from '../../Recipe';
+import { MinorText } from '../../MinorText';
 import { ButtonModal } from '../../buttons';
 import styles from './ModalData.module.css';
 
@@ -47,7 +48,7 @@ const ModalData = () => {
           <FormTitle textTitle={title} />
           <div className={styles.box}>
             <Recipe str={recipe} />
-            <span>Время приготовления {cookingTime}</span>
+            <MinorText str={`Время приготовления ${cookingTime}`} />
           </div>
 
           <div className={styles.buttons}>
