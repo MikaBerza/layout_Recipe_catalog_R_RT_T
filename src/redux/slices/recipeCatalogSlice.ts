@@ -4,6 +4,8 @@ import { CatalogDataInitialStateType } from '../../types/customType';
 // первое состояние
 const initialState: CatalogDataInitialStateType = {
   recipeCatalogData: [],
+  isLoading: false,
+  isErrors: false,
 };
 
 export const recipeCatalogDataSlice = createSlice({
@@ -13,8 +15,15 @@ export const recipeCatalogDataSlice = createSlice({
     setRecipeCatalogData(state, action) {
       state.recipeCatalogData = action.payload;
     },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
+    setIsErrors(state, action) {
+      state.isErrors = action.payload;
+    },
   },
 });
 
-export const { setRecipeCatalogData } = recipeCatalogDataSlice.actions;
+export const { setRecipeCatalogData, setIsLoading, setIsErrors } =
+  recipeCatalogDataSlice.actions;
 export default recipeCatalogDataSlice.reducer;

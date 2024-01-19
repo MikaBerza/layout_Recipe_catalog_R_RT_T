@@ -66,4 +66,6 @@ export type SearchType = {
 
 export type CatalogDataInitialStateType = {
   recipeCatalogData: CatalogItemDataType[] | [];
+  isLoading: boolean;
+  isErrors: boolean;
 };

@@ -78,40 +78,55 @@ export const searchForTitle = (
 };
 
 // функция,
-export const func123 = (obj: any) => {
-  // Метод POST применяется для передачи пользовательских данных
-  // Метод PATCH указывает серверу, что клиент хочет изменить данные, хранящиеся на сервере для данного URI
-  // Метод DELETE явно указывает серверу, что клиент хочет удалить данные, хранящиеся на сервере для данного URI
-  const result = fetch('http://localhost:4000/catalogData', {
-    method: 'POST',
-    // Это означает, что вы сообщаете серверу, что данные, которые вы отправляете, являются JSON-данными, и их кодировка UTF-8.
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    /*
-      Данные будут преобразованы в строку JSON и отправлены в теле HTTP-запроса. 
-      Это позволяет передавать структурированные данные на сервер в формате JSON.
-    */
-    body: JSON.stringify(obj),
-  });
-  return result;
-  // .then((response) => {
-  //   if (!response.ok) {
-  //     // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
-  //     throw new Error('Ошибка сети: ' + response.status);
-  //   }
-  //   return response.json();
-  // })
-  // .then((data) => {
-  //   // Дополнительные действия после успешного добавления записи
-  //   console.log('Новая запись успешно добавлена:', data);
-  // })
-  // .catch((error) => {
-  //   // Обработка ошибки
-  //   console.error('Произошла ошибка при добавлении записи:', error);
-  // })
-  // .finally(() => {
-  //   // Действия в блоке finally
-  //   console.log('finally');
-  // });
+export const handleHttpRequest = (
+  data: CatalogItemDataType[] | null = null,
+  dataItem: CatalogItemDataType,
+  newDataItem: CatalogItemDataType | null = null,
+  methodHTTP: string
+) => {
+  // Метод POST используется для создания новых данных на сервере
+  let resultPromise: Promise<Response> | null = null;
+  if (data === null && methodHTTP === 'POST') {
+    resultPromise = fetch('http://localhost:4000/catalogData', {
+      method: `${methodHTTP}`,
+      // сообщаем серверу, что данные, которые мы отправляем, являются JSON-данными, и их кодировка UTF-8
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      /* Данные будут преобразованы в строку JSON и отправлены в теле HTTP-запроса 
+         Это позволяет передавать структурированные данные на сервер в формате JSON */
+      body: JSON.stringify(newDataItem),
+    });
+  }
+  // Метод PATCH используется для частичного обновления существующих данных на сервере
+  if (data !== null && methodHTTP === 'PATCH') {
+    data.map((item) => {
+      if (item.id === dataItem.id) {
+        resultPromise = fetch(`http://localhost:4000/catalogData/${item.id}`, {
+          method: `${methodHTTP}`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newDataItem),
+        });
+      }
+      return null;
+    });
+  }
+  // Метод DELETE используется для удаления данных на сервере
+  if (data !== null && newDataItem === null && methodHTTP === 'DELETE') {
+    data.map((item) => {
+      if (item.id === dataItem.id) {
+        resultPromise = fetch(`http://localhost:4000/catalogData/${item.id}`, {
+          method: `${methodHTTP}`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      }
+      return null;
+    });
+  }
+
+  return resultPromise;
 };

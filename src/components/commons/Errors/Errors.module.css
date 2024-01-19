@@ -1,0 +1,35 @@
+.wrapper {
+  overflow: auto;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  background-image: url('../../../assets/images/Errors.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 72px;
+  letter-spacing: 15px;
+  color: tomato;
+}
+
+/*770px___________________________________________________*/
+@media (max-width: 770px) {
+
+  .text {
+    font-size: 48px;
+  }
+}
+
+/*550px___________________________________________________*/
+@media (max-width: 550px) {
+
+  .text {
+    font-size: 34px;
+  }
+}
