@@ -11,6 +11,7 @@ const Thead = () => {
   const recipeCatalogData = useSelector(
     (state: RootState) => state.recipeCatalogDataSlice.recipeCatalogData
   );
+  console.log(recipeCatalogData, 'recipeCatalogData');
 
   // функция, сгенерировать ячейки заголовка со значком
   const generateHeaderCellWithIcon = (

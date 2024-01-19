@@ -10,21 +10,22 @@ import {
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-import { setRecipeCatalogData } from '../../../../redux/slices/recipeCatalogSlice';
+
+import { func123 } from '../../../../utils/modules';
 
 import { FormTitle } from '../../titles';
 import { ButtonModal } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
-import {
-  saveDatasetToLocalStorage,
-  generateId,
-  getTheCurrentDate,
-} from '../../../../utils/modules';
+import { generateId, getTheCurrentDate } from '../../../../utils/modules';
 
 import styles from './ModalForm.module.css';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const ModalForm = () => {
+  const recipeCatalogData = useSelector(
+    (state: RootState) => state.recipeCatalogDataSlice.recipeCatalogData
+  );
+
   const {
     modalActive,
     modalEditingActive,
@@ -44,17 +45,6 @@ const ModalForm = () => {
     return str;
   }, [modalActive, modalEditingActive]);
 
-  // функция, обновить данные каталога
-  const updateCatalogData = React.useCallback(
-    (newData: CatalogItemDataType[]) => {
-      // сохраняем массив с данными в localStorage
-      saveDatasetToLocalStorage('catalogRecipeDataset', newData);
-      // сохраняем массив с данными в store (redux toolkit)
-      dispatch(setRecipeCatalogData(newData));
-    },
-    [dispatch]
-  );
-
   // функция, обработать закрытие модального окна формы
   const handleCloseModalWindowForm = React.useCallback(() => {
     // изменяем флаг true на false
@@ -72,12 +62,7 @@ const ModalForm = () => {
 
   // функция, обработать добавление записи
   const handleAddEntries = React.useCallback(
-    (
-      event:
-        | React.FormEvent<HTMLFormElement>
-        | React.MouseEvent<HTMLButtonElement>
-    ) => {
-      // отменяет действие по умолчанию
+    (event: any) => {
       event.preventDefault();
       // формируем объект с данными каталога
       const objCatalogData: CatalogItemDataType = {
@@ -88,108 +73,174 @@ const ModalForm = () => {
         recipe: dataItem.recipe.trim(),
         cookingTime: dataItem.cookingTime,
       };
-      // набор данных LocalStorage
-      const datasetLocalStorage: string | null = window.localStorage.getItem(
-        'catalogRecipeDataset'
-      );
 
-      if (datasetLocalStorage === null) {
-        // ___Первая запись
-        // добавляем объект в массив данных
-        const newCatalogData = [objCatalogData];
-        // обновляем данные каталога
-        updateCatalogData(newCatalogData);
-      } else {
-        // ___Очередная запись
-        // преобразуем строку JSON в объект
-        const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
-        // обновляем массив с данными
-        const newCatalogData = [objCatalogData, ...arrDataLocalStorage];
-        // обновляем данные каталога
-        updateCatalogData(newCatalogData);
-      }
-      // закрываем модальное окно с формой
-      handleCloseModalWindowForm();
+      console.log(func123(objCatalogData), 'func123(');
+
+      // Метод POST применяется для передачи пользовательских данных
+      // fetch('http://localhost:4000/catalogData', {
+      //   method: 'POST',
+      //   // Это означает, что вы сообщаете серверу, что данные, которые вы отправляете, являются JSON-данными, и их кодировка UTF-8.
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   /*
+      //     Данные из константы (objCatalogData) будут преобразованы в строку JSON и отправлены в теле HTTP-запроса.
+      //     Это позволяет передавать структурированные данные на сервер в формате JSON.
+      //     */
+      //   body: JSON.stringify(objCatalogData),
+      // })
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
+      //       throw new Error('Ошибка сети: ' + response.status);
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((data) => {
+      //     // Дополнительные действия после успешного добавления записи
+      //     console.log('Новая запись успешно добавлена:', data);
+      //   })
+      //   .catch((error) => {
+      //     // Обработка ошибки
+      //     console.error('Произошла ошибка при добавлении записи:', error);
+      //   })
+      //   .finally(() => {
+      //     // Действия в блоке finally
+      //     console.log('finally');
+      //   });
+      // // закрываем модальное окно с формой
+      // handleCloseModalWindowForm();
     },
-
     [
       dataItem.color,
-      dataItem.title,
-      dataItem.recipe,
       dataItem.cookingTime,
+      dataItem.recipe,
+      dataItem.title,
       handleCloseModalWindowForm,
-      updateCatalogData,
     ]
   );
 
   // функция, обработать сохранение редактируемой записи
-  const handleSaveEditingEntries = React.useCallback(
-    (
-      event:
-        | React.FormEvent<HTMLFormElement>
-        | React.MouseEvent<HTMLButtonElement>
-    ) => {
-      event.preventDefault();
-      const objCatalogData: CatalogItemDataType = {
-        id: generateId(),
-        color: dataItem.color,
-        date: getTheCurrentDate(),
-        title: dataItem.title.trim(),
-        recipe: dataItem.recipe.trim(),
-        cookingTime: dataItem.cookingTime,
-      };
+  const handleSaveEditingEntries = React.useCallback(() => {
+    const objCatalogData: CatalogItemDataType = {
+      id: generateId(),
+      color: dataItem.color,
+      date: getTheCurrentDate(),
+      title: dataItem.title.trim(),
+      recipe: dataItem.recipe.trim(),
+      cookingTime: dataItem.cookingTime,
+    };
 
-      const datasetLocalStorage: string | null = window.localStorage.getItem(
-        'catalogRecipeDataset'
-      );
-      if (datasetLocalStorage !== null) {
-        const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
-
-        // Создаем новый массив, заменяя объект с нужным идентификатором
-        const newCatalogData = arrDataLocalStorage.map(
-          (item: CatalogItemDataType) => {
-            if (item.id === dataItem.id) {
-              return objCatalogData;
+    recipeCatalogData.map((item: CatalogItemDataType) => {
+      if (item.id === dataItem.id) {
+        // Метод PATCH указывает серверу, что клиент хочет изменить данные, хранящиеся на сервере для данного URI.
+        fetch(`http://localhost:4000/catalogData/${item.id}`, {
+          method: 'PATCH',
+          // Это означает, что вы сообщаете серверу, что данные, которые вы отправляете, являются JSON-данными, и их кодировка UTF-8.
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          /*
+        Данные из константы (objCatalogData) будут преобразованы в строку JSON и отправлены в теле HTTP-запроса.
+        Это позволяет передавать структурированные данные на сервер в формате JSON.
+        */
+          body: JSON.stringify(objCatalogData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
+              throw new Error('Ошибка сети: ' + response.status);
             }
-            return item;
-          }
-        );
-        // обновляем данные каталога
-        updateCatalogData(newCatalogData);
+            return response.json();
+          })
+          .then((data) => {
+            // Дополнительные действия после успешного добавления записи
+            console.log('Новая запись успешно добавлена:', data);
+          })
+          .catch((error) => {
+            // Обработка ошибки
+            console.error('Произошла ошибка при добавлении записи:', error);
+          })
+          .finally(() => {
+            // Действия в блоке finally
+            console.log('finally');
+          });
+        // закрываем модальное окно с формой
+        handleCloseModalWindowForm();
+        console.log('закрываем модальное окно с формой');
       }
-      // закрываем модальное окно с формой
-      handleCloseModalWindowForm();
-    },
-    [
-      dataItem.color,
-      dataItem.title,
-      dataItem.recipe,
-      dataItem.cookingTime,
-      dataItem.id,
-      handleCloseModalWindowForm,
-      updateCatalogData,
-    ]
-  );
+      return null;
+    });
+  }, [
+    dataItem.color,
+    dataItem.cookingTime,
+    dataItem.id,
+    dataItem.recipe,
+    dataItem.title,
+    handleCloseModalWindowForm,
+    recipeCatalogData,
+  ]);
 
   // функция, обработать удаление записи
   const handleRemoveEntries = React.useCallback(() => {
-    // набор данных LocalStorage
-    const datasetLocalStorage: string | null = window.localStorage.getItem(
-      'catalogRecipeDataset'
-    );
-    if (datasetLocalStorage !== null) {
-      // преобразуем строку JSON в объект
-      const arrDataLocalStorage = JSON.parse(datasetLocalStorage);
-      // удаляем задачу из списка, обновляем массив с данными
-      const newCatalogData = arrDataLocalStorage.filter(
-        (item: CatalogItemDataType) => item.id !== dataItem.id
-      );
-      // обновляем данные каталога
-      updateCatalogData(newCatalogData);
-    }
-    // закрываем модальное окно с формой
-    handleCloseModalWindowForm();
-  }, [handleCloseModalWindowForm, updateCatalogData, dataItem.id]);
+    const objCatalogData: CatalogItemDataType = {
+      id: generateId(),
+      color: dataItem.color,
+      date: getTheCurrentDate(),
+      title: dataItem.title.trim(),
+      recipe: dataItem.recipe.trim(),
+      cookingTime: dataItem.cookingTime,
+    };
+
+    recipeCatalogData.map((item: CatalogItemDataType) => {
+      if (item.id === dataItem.id) {
+        // Метод DELETE явно указывает серверу, что клиент хочет удалить данные, хранящиеся на сервере для данного URI
+        fetch(`http://localhost:4000/catalogData/${item.id}`, {
+          method: 'DELETE',
+          // Это означает, что вы сообщаете серверу, что данные, которые вы отправляете, являются JSON-данными, и их кодировка UTF-8.
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          /*
+      Данные из константы (objCatalogData) будут преобразованы в строку JSON и отправлены в теле HTTP-запроса.
+      Это позволяет передавать структурированные данные на сервер в формате JSON.
+      */
+          body: JSON.stringify(objCatalogData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
+              throw new Error('Ошибка сети: ' + response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Дополнительные действия после успешного добавления записи
+            console.log('Новая запись успешно добавлена:', data);
+          })
+          .catch((error) => {
+            // Обработка ошибки
+            console.error('Произошла ошибка при добавлении записи:', error);
+          })
+          .finally(() => {
+            // Действия в блоке finally
+            console.log('finally');
+          });
+        // закрываем модальное окно с формой
+        handleCloseModalWindowForm();
+        console.log('закрываем модальное окно с формой');
+      }
+      return null;
+    });
+  }, [
+    dataItem.color,
+    dataItem.cookingTime,
+    dataItem.id,
+    dataItem.recipe,
+    dataItem.title,
+    handleCloseModalWindowForm,
+    recipeCatalogData,
+  ]);
 
   return (
     <div
