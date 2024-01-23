@@ -2,14 +2,22 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
-import { setSearch } from '../../../redux/slices/searchSlice';
+import {
+  setSearch,
+  setSearchFieldActive,
+} from '../../../redux/slices/searchSlice';
 import styles from './Search.module.css';
 
 const Search = () => {
-  const { searchValue } = useSelector(
+  const { searchData, searchValue, searchFlag } = useSelector(
     (state: RootState) => state.searchSlice
   );
   const dispatch = useDispatch();
+  console.log('searchData', searchData);
+
+  const handleSearch = React.useCallback(() => {
+    if (searchFlag) dispatch(setSearchFieldActive(true));
+  }, [dispatch, searchFlag]);
 
   return (
     <div className={styles.wrapper}>
@@ -20,6 +28,11 @@ const Search = () => {
         type='search'
         placeholder='Поиск блюд'
       />
+      <button className={styles.button} onClick={handleSearch}>
+        <svg className={styles.icon} viewBox='0 0 32 32' version='1.1'>
+          <path d='M10.437,19.442l-7.498,7.497c-0.585,0.586 -0.585,1.536 0,2.122c0.586,0.585 1.536,0.585 2.122,-0l7.649,-7.65c1.544,0.976 3.373,1.542 5.333,1.542c5.52,-0 10,-4.481 10,-10c0,-5.52 -4.48,-10 -10,-10c-5.519,-0 -10,4.48 -10,10c0,2.475 0.902,4.741 2.394,6.489Z' />
+        </svg>
+      </button>
     </div>
   );
 };

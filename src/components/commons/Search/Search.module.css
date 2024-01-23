@@ -1,12 +1,12 @@
 .wrapper {
-  display: grid;
+  display: flex;
   height: 50px;
-  grid-template-columns: 1fr;
   padding: 50px 20px 0 20px;
 }
 
 .input {
   position: relative;
+  width: 100%;
   box-sizing: border-box;
   padding: 6px 20px;
   background-color: var(--white-color200);
@@ -20,6 +20,35 @@
   font-weight: 200;
 }
 
-.input:hover {
+.button {
+  width: 85px;
+  padding: 5px;
+  background-color: var(--white-color200);
+  border: 1px solid var(--white-color200);
+  border-left: 3px solid var(--lightgrey300-color);
+  cursor: pointer;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.icon path {
+  fill: var(--lightgrey300-color);
+  transition: fill 0.3s ease,
+}
+
+.input:hover,
+.button:hover {
   background-color: var(--white-color);
+}
+
+.button:active {
+  position: relative;
+  top: 1px;
+}
+
+.button:active .icon path {
+  fill: #c95d8d;
 }

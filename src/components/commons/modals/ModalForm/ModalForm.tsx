@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import { setSearchData } from '../../../../redux/slices/searchSlice';
 import {
   setModalActive,
   setModalEditingActive,
@@ -17,7 +18,7 @@ import { InputField, TextareaField } from '../../forms';
 import {
   generateId,
   getTheCurrentDate,
-  handleHttpRequest,
+  handleHttpRequests,
 } from '../../../../utils/modules';
 
 import styles from './ModalForm.module.css';
@@ -35,6 +36,10 @@ const ModalForm = () => {
     dataItem,
   } = useSelector((state: RootState) => state.modalFormSlice);
   const dispatch = useDispatch();
+
+  const { searchValue, searchFlag } = useSelector(
+    (state: RootState) => state.searchSlice
+  );
 
   // функция, определить имя заголовка
   const defineTitleName = React.useMemo((): string => {
@@ -63,6 +68,32 @@ const ModalForm = () => {
   }, [dispatch, modalActive, modalEditingActive]);
 
   //__________________________________________________________
+  React.useEffect(() => {
+    const result = handleHttpRequests(
+      null,
+      dataItem,
+      null,
+      'GET',
+      searchFlag,
+      searchValue
+    );
+
+    if (result !== null) {
+      result
+        .then((response) => {
+          if (!response.ok) {
+            // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
+            throw new Error('Ошибка сети: ' + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Дополнительные действия после успешного добавления записи
+          console.log('Поиск', data);
+          dispatch(setSearchData(data));
+        });
+    }
+  }, [dataItem, dispatch, searchFlag, searchValue]);
 
   // функция, обработать добавление записи
   const handleAddEntries = React.useCallback(
@@ -82,7 +113,7 @@ const ModalForm = () => {
         cookingTime: dataItem.cookingTime,
       };
 
-      const result = handleHttpRequest(null, dataItem, objCatalogData, 'POST');
+      const result = handleHttpRequests(null, dataItem, objCatalogData, 'POST');
       if (result !== null) {
         result
           .then((response) => {
@@ -126,7 +157,7 @@ const ModalForm = () => {
         cookingTime: dataItem.cookingTime,
       };
 
-      const result = handleHttpRequest(
+      const result = handleHttpRequests(
         recipeCatalogData,
         dataItem,
         objCatalogData,
@@ -163,7 +194,7 @@ const ModalForm = () => {
 
   // функция, обработать удаление записи
   const handleRemoveEntries = React.useCallback(() => {
-    const result = handleHttpRequest(
+    const result = handleHttpRequests(
       recipeCatalogData,
       dataItem,
       null,

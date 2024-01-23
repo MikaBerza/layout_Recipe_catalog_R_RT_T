@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { CatalogItemDataType } from '../types/customType';
 
 // функция, сохранить набор данных в localStorage
@@ -77,15 +76,17 @@ export const searchForTitle = (
   return newData;
 };
 
-// функция,
-export const handleHttpRequest = (
+// функция, обрабатывать HTTP-запросы
+export const handleHttpRequests = (
   data: CatalogItemDataType[] | null = null,
   dataItem: CatalogItemDataType,
   newDataItem: CatalogItemDataType | null = null,
-  methodHTTP: string
+  methodHTTP: string,
+  searchFlag: boolean = false,
+  valueSearch: string = ''
 ) => {
-  // Метод POST используется для создания новых данных на сервере
   let resultPromise: Promise<Response> | null = null;
+  // Метод POST используется для создания новых данных на сервере
   if (data === null && methodHTTP === 'POST') {
     resultPromise = fetch('http://localhost:4000/catalogData', {
       method: `${methodHTTP}`,
@@ -128,5 +129,18 @@ export const handleHttpRequest = (
     });
   }
 
+  // Метод GET используется для получения данных с сервера
+  if (methodHTTP === 'GET' && searchFlag === true) {
+    resultPromise = fetch(
+      `http://localhost:4000/catalogData?title=${valueSearch}`,
+      {
+        method: `${methodHTTP}`,
+        // сообщаем серверу, что данные, которые мы отправляем, являются JSON-данными, и их кодировка UTF-8
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   return resultPromise;
 };

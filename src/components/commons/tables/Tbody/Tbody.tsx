@@ -2,24 +2,20 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { Trow } from '../index';
-import { searchForTitle } from '../../../../utils/modules';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const Tbody = () => {
   const { recipeCatalogData } = useSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
-  const { searchValue, searchFlag } = useSelector(
+  const { searchData, searchFieldActive } = useSelector(
     (state: RootState) => state.searchSlice
   );
 
   // отображаемые данные
   const displayedData = React.useMemo(
-    () =>
-      searchFlag
-        ? searchForTitle(recipeCatalogData, searchValue)
-        : recipeCatalogData,
-    [recipeCatalogData, searchFlag, searchValue]
+    () => (searchFieldActive ? searchData : recipeCatalogData),
+    [recipeCatalogData, searchData, searchFieldActive]
   );
 
   return (

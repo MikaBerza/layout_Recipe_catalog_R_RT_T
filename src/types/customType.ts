@@ -62,6 +62,8 @@ export type ModalActiveInitialStateType = {
 export type SearchType = {
   searchValue: string;
   searchFlag: boolean;
+  searchFieldActive: boolean;
+  searchData: CatalogItemDataType[] | [];
 };
 
 export type CatalogDataInitialStateType = {
