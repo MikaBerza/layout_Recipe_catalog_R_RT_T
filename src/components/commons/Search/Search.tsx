@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
 
 import {
@@ -10,15 +10,14 @@ import {
 import styles from './Search.module.css';
 
 const Search = () => {
-  const dispatch = useDispatch();
-  const { searchValue } = useSelector(
+  const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
 
   const handleSearch = React.useCallback(() => {
     if (searchValue.trim().length > 0) {
       dispatch(setSearchFlag(true));
-      // @ts-ignore
       dispatch(fetchSearchEntries(searchValue));
     }
   }, [dispatch, searchValue]);

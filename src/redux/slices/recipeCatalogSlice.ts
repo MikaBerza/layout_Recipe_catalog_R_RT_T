@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { CatalogDataInitialStateType } from '../../types/customType';
+import {
+  CatalogDataInitialStateType,
+  CatalogItemDataType,
+} from '../../types/customType';
 
 // первое состояние
 const initialState: CatalogDataInitialStateType = {
@@ -28,7 +31,7 @@ export const fetchRecipeCatalogData = createAsyncThunk(
 // добавление записи на сервер
 export const fetchAddEntries = createAsyncThunk(
   'recipeCatalogData/fetchAddEntries',
-  async (newDataItem) => {
+  async (newDataItem: CatalogItemDataType) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     // после задержки, выполняем отправку данных на сервер
     const response = await fetch('http://localhost:4000/catalogData', {
@@ -47,10 +50,15 @@ export const fetchAddEntries = createAsyncThunk(
 // редактирование записи на сервере
 export const fetchEditingEntries = createAsyncThunk(
   'recipeCatalogData/fetchEditingEntries',
-  // @ts-ignore
-  async ({ newDataItem, id }) => {
+  async ({
+    newDataItem,
+    id,
+  }: {
+    newDataItem: CatalogItemDataType;
+    id: string;
+  }) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
+    console.log('typeof id=', typeof id);
     const response = await fetch(`http://localhost:4000/catalogData/${id}`, {
       method: 'PATCH',
       headers: {
@@ -66,8 +74,7 @@ export const fetchEditingEntries = createAsyncThunk(
 // удаление записи на сервере
 export const fetchRemoveEntries = createAsyncThunk(
   'recipeCatalogData/fetchRemoveEntries',
-  // @ts-ignore
-  async (id) => {
+  async (id: string) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const response = await fetch(`http://localhost:4000/catalogData/${id}`, {
@@ -84,7 +91,7 @@ export const fetchRemoveEntries = createAsyncThunk(
 // поиск записи на сервера
 export const fetchSearchEntries = createAsyncThunk(
   'recipeCatalogData/fetchSearchEntries',
-  async (valueSearch) => {
+  async (valueSearch: string) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const response = await fetch(

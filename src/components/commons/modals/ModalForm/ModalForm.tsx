@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
-// import { setSearchData } from '../../../../redux/slices/searchSlice';
+
 import {
   setModalActive,
   setModalEditingActive,
@@ -27,7 +27,7 @@ import {
 } from '../../../../redux/slices/recipeCatalogSlice';
 
 const ModalForm = () => {
-  const { recipeCatalogData } = useSelector(
+  const { recipeCatalogData } = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
 
@@ -36,8 +36,8 @@ const ModalForm = () => {
     modalEditingActive,
     //
     dataItem,
-  } = useSelector((state: RootState) => state.modalFormSlice);
-  const dispatch = useDispatch();
+  } = useAppSelector((state: RootState) => state.modalFormSlice);
+  const dispatch = useAppDispatch();
 
   // функция, определить имя заголовка
   const defineTitleName = React.useMemo((): string => {
@@ -83,7 +83,6 @@ const ModalForm = () => {
         cookingTime: dataItem.cookingTime,
       };
 
-      // @ts-ignore
       dispatch(fetchAddEntries(objCatalogData));
       // закрываем модальное окно с формой
       handleCloseModalWindowForm();
@@ -115,15 +114,15 @@ const ModalForm = () => {
         recipe: dataItem.recipe.trim(),
         cookingTime: dataItem.cookingTime,
       };
-
       const resultId = recipeCatalogData.find((item) => {
         return item.id === dataItem.id;
       });
-      // @ts-ignore
-      dispatch(
-        // @ts-ignore
-        fetchEditingEntries({ newDataItem: objCatalogData, id: resultId.id })
-      );
+
+      if (resultId !== undefined) {
+        dispatch(
+          fetchEditingEntries({ newDataItem: objCatalogData, id: resultId.id })
+        );
+      }
       // закрываем модальное окно с формой
       handleCloseModalWindowForm();
     },
@@ -144,11 +143,10 @@ const ModalForm = () => {
     const resultId = recipeCatalogData.find((item) => {
       return item.id === dataItem.id;
     });
-    // @ts-ignore
-    dispatch(
-      // @ts-ignore
-      fetchRemoveEntries(resultId.id)
-    );
+
+    if (resultId !== undefined) {
+      dispatch(fetchRemoveEntries(resultId.id));
+    }
     // закрываем модальное окно с формой
     handleCloseModalWindowForm();
   }, [dataItem.id, dispatch, handleCloseModalWindowForm, recipeCatalogData]);

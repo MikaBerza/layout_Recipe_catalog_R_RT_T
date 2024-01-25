@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
 
 import { Table } from '../../commons/tables';
@@ -9,7 +9,7 @@ import { Loading } from '../../commons/Loading';
 import { Errors } from '../../commons/Errors';
 
 const RecipeCatalogPage = React.memo(() => {
-  const { isLoading, isErrors } = useSelector(
+  const { isLoading, isErrors } = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
 

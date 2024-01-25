@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
 import {
   setModalDataActive,
@@ -17,8 +17,8 @@ import { ButtonModal } from '../../buttons';
 import styles from './ModalData.module.css';
 
 const ModalData = () => {
-  const dispatch = useDispatch();
-  const { modalDataActive, dataItem } = useSelector(
+  const dispatch = useAppDispatch();
+  const { modalDataActive, dataItem } = useAppSelector(
     (state: RootState) => state.modalFormSlice
   );
   // используем деструктуризацию для получения данных из (dataItem)

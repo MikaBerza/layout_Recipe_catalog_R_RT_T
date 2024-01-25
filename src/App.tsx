@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from './redux/hooks';
 import { fetchRecipeCatalogData } from './redux/slices/recipeCatalogSlice';
 
 import Header from './components/commons/Header/Header';
@@ -13,10 +13,9 @@ import {
 import Footer from './components/commons/Footer/Footer';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    // @ts-ignore
     dispatch(fetchRecipeCatalogData());
   }, [dispatch]);
 

@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
 import { Trow } from '../index';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const Tbody = () => {
-  const { recipeCatalogData, searchData, searchFlag } =
-    useSelector((state: RootState) => state.recipeCatalogDataSlice);
+  const { recipeCatalogData, searchData, searchFlag } = useAppSelector(
+    (state: RootState) => state.recipeCatalogDataSlice
+  );
 
   // отображаемые данные
   const displayedData = React.useMemo(

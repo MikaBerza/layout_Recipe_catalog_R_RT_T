@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
 import { Icon } from '../../Icon';
 import { ButtonCreateEntry } from '../../buttons';
@@ -8,7 +8,7 @@ import { TheadDataType } from '../../../../types/customType';
 import styles from './Thead.module.css';
 
 const Thead = () => {
-  const recipeCatalogData = useSelector(
+  const recipeCatalogData = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice.recipeCatalogData
   );
 

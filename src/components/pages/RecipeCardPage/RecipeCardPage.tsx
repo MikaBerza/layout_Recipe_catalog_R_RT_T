@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+import { useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
 import { Recipe } from '../../commons/Recipe';
 import { MinorText } from '../../commons/MinorText';
@@ -8,7 +8,9 @@ import styles from './RecipeCardPage.module.css';
 
 const RecipeCardPage = () => {
   const { dishNumber } = useParams();
-  const { dataItem } = useSelector((state: RootState) => state.modalFormSlice);
+  const { dataItem } = useAppSelector(
+    (state: RootState) => state.modalFormSlice
+  );
   // используем деструктуризацию для получения данных из (dataItem)
   const { id, title, cookingTime, recipe, date, color } = dataItem;
 
