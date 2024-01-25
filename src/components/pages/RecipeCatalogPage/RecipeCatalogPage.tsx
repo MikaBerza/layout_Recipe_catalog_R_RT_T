@@ -1,14 +1,12 @@
-import React from 'react';
 import { useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
-
+import { Errors } from '../../commons/Errors';
+import { Loading } from '../../commons/Loading';
 import { Table } from '../../commons/tables';
 import { ModalForm, ModalData } from '../../commons/modals';
 import styles from './RecipeCatalogPage.module.css';
-import { Loading } from '../../commons/Loading';
-import { Errors } from '../../commons/Errors';
 
-const RecipeCatalogPage = React.memo(() => {
+const RecipeCatalogPage = () => {
   const { isLoading, isErrors } = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
@@ -24,7 +22,7 @@ const RecipeCatalogPage = React.memo(() => {
       <ModalData />
     </>
   );
-});
+};
 
 RecipeCatalogPage.displayName = 'RecipeCatalogPage';
 export default RecipeCatalogPage;

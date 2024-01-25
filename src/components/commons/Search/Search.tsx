@@ -1,17 +1,18 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
-
 import {
   fetchSearchEntries,
   setSearchValue,
   setSearchFlag,
+  setSearchButtonIsActive,
+  fetchRecipeCatalogData,
 } from '../../../redux/slices/recipeCatalogSlice';
 import styles from './Search.module.css';
 
 const Search = () => {
   const dispatch = useAppDispatch();
-  const { searchValue } = useAppSelector(
+  const { searchValue, searchFlag, searchButtonIsActive } = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice
   );
 
@@ -19,8 +20,16 @@ const Search = () => {
     if (searchValue.trim().length > 0) {
       dispatch(setSearchFlag(true));
       dispatch(fetchSearchEntries(searchValue));
+      dispatch(setSearchButtonIsActive(true));
     }
   }, [dispatch, searchValue]);
+
+  React.useEffect(() => {
+    if (!searchFlag && searchButtonIsActive) {
+      dispatch(setSearchButtonIsActive(false));
+      dispatch(fetchRecipeCatalogData());
+    }
+  }, [dispatch, searchButtonIsActive, searchFlag]);
 
   return (
     <div className={styles.wrapper}>

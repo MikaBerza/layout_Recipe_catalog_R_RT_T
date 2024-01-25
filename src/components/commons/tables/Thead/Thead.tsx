@@ -1,13 +1,13 @@
+import React from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
 import { Icon } from '../../Icon';
 import { ButtonCreateEntry } from '../../buttons';
-
 import { theadData } from '../../../../utils/listsOfData';
 import { TheadDataType } from '../../../../types/customType';
 import styles from './Thead.module.css';
 
-const Thead = () => {
+const Thead = React.memo(() => {
   const recipeCatalogData = useAppSelector(
     (state: RootState) => state.recipeCatalogDataSlice.recipeCatalogData
   );
@@ -36,7 +36,7 @@ const Thead = () => {
       </tr>
     </thead>
   );
-};
+});
 
 Thead.displayName = 'Thead';
 export default Thead;

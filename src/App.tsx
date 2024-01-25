@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { useAppDispatch } from './redux/hooks';
 import { fetchRecipeCatalogData } from './redux/slices/recipeCatalogSlice';
-
 import Header from './components/commons/Header/Header';
 import {
   HomePage,

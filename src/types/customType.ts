@@ -66,5 +66,5 @@ export type CatalogDataInitialStateType = {
   //
   searchValue: string;
   searchFlag: boolean;
-  searchData: CatalogItemDataType[] | [];
+  searchButtonIsActive: boolean;
 };

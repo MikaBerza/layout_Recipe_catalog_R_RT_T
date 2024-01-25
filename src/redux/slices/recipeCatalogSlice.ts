@@ -12,7 +12,7 @@ const initialState: CatalogDataInitialStateType = {
   //
   searchValue: '',
   searchFlag: false,
-  searchData: [],
+  searchButtonIsActive: false,
 };
 
 // получение данных с сервера
@@ -115,15 +115,15 @@ export const recipeCatalogDataSlice = createSlice({
       state.isErrors = action.payload;
     },
     //
-    setSearchData(state, action) {
-      state.searchData = action.payload;
-    },
     setSearchValue(state, action) {
       state.searchValue = action.payload;
       if (!state.searchValue.trim()) state.searchFlag = false;
     },
     setSearchFlag(state, action) {
       state.searchFlag = action.payload;
+    },
+    setSearchButtonIsActive(state, action) {
+      state.searchButtonIsActive = action.payload;
     },
   },
 
@@ -203,7 +203,7 @@ export const recipeCatalogDataSlice = createSlice({
       .addCase(fetchSearchEntries.fulfilled, (state, action) => {
         state.isErrors = false;
         state.isLoading = false;
-        state.searchData = action.payload;
+        state.recipeCatalogData = action.payload;
       })
       .addCase(fetchSearchEntries.rejected, (state) => {
         state.isLoading = false;
@@ -216,8 +216,8 @@ export const {
   setRecipeCatalogData,
   setIsLoading,
   setIsErrors,
-  setSearchData,
   setSearchValue,
   setSearchFlag,
+  setSearchButtonIsActive,
 } = recipeCatalogDataSlice.actions;
 export default recipeCatalogDataSlice.reducer;
