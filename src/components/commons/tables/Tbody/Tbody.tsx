@@ -17,8 +17,8 @@ const Tbody = () => {
 
   return (
     <tbody>
-      {displayedData.map((item: CatalogItemDataType, index: number) => (
-        <Trow key={item.id} item={item} dishNumber={index + 1} />
+      {displayedData.map((item: CatalogItemDataType) => (
+        <Trow key={item.id} item={item} dishNumber={item.id} />
       ))}
     </tbody>
   );

@@ -18,7 +18,7 @@ import styles from './Trow.module.css';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const Trow = React.memo(
-  ({ item, dishNumber }: { item: CatalogItemDataType; dishNumber: number }) => {
+  ({ item, dishNumber }: { item: CatalogItemDataType; dishNumber: string }) => {
     const dispatch = useDispatch();
 
     // функция, получить данные элемента

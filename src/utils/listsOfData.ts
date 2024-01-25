@@ -1,34 +1,33 @@
-import { generateId } from './modules';
 import { TheadDataType, CatalogItemDataType } from '../types/customType';
 
 export const theadData: TheadDataType[] = [
   {
-    id: generateId(),
+    id: '1',
     tooltip: 'Номер блюда',
     patch: require('../assets/images/tableIcon/gridIcon.png'),
   },
   {
-    id: generateId(),
+    id: '2',
     tooltip: 'Персональный цвет',
     patch: require('../assets/images/tableIcon/paintIcon.png'),
   },
   {
-    id: generateId(),
+    id: '3',
     tooltip: 'Дата добавления',
     patch: require('../assets/images/tableIcon/dateIcon.png'),
   },
   {
-    id: generateId(),
+    id: '4',
     tooltip: 'Название блюда',
     patch: require('../assets/images/tableIcon/titleIcon.png'),
   },
   {
-    id: generateId(),
+    id: '5',
     tooltip: 'Рецепт блюда',
     patch: require('../assets/images/tableIcon/recipeIcon.png'),
   },
   {
-    id: generateId(),
+    id: '6',
     tooltip: 'Время приготовления блюда',
     patch: require('../assets/images/tableIcon/timeIcon.png'),
   },
@@ -36,7 +35,7 @@ export const theadData: TheadDataType[] = [
 
 export const catalogData: CatalogItemDataType[] = [
   {
-    id: generateId(),
+    id: '1',
     color: '#e66465',
     date: '20/11/23, 10:00',
     title: 'Салат Цезарь',
@@ -46,7 +45,7 @@ export const catalogData: CatalogItemDataType[] = [
     cookingTime: '00:10',
   },
   {
-    id: generateId(),
+    id: '2',
     color: '#f6b73c',
     date: '21/10/23, 11:00',
     title: 'Паста с креветками',
@@ -56,7 +55,7 @@ export const catalogData: CatalogItemDataType[] = [
     cookingTime: '00:20',
   },
   {
-    id: generateId(),
+    id: '3',
     color: '#B9DFD1',
     date: '22/10/23, 12:00',
     title: 'Омлет',
@@ -66,7 +65,7 @@ export const catalogData: CatalogItemDataType[] = [
     cookingTime: '00:30',
   },
   {
-    id: generateId(),
+    id: '4',
     color: '#F3BCBA',
     date: '23/10/23, 13:00',
     title: 'Греческий салат',
@@ -76,7 +75,7 @@ export const catalogData: CatalogItemDataType[] = [
     cookingTime: '00:40',
   },
   {
-    id: generateId(),
+    id: '5',
     color: '#5E3B3B',
     date: '24/10/23, 14:00',
     title: 'Куриные крылышки BBQ',

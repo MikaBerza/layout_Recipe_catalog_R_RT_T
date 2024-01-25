@@ -20,7 +20,7 @@ export const fetchRecipeCatalogData = createAsyncThunk(
   'recipeCatalogData/fetchRecipeCatalogData',
   async () => {
     // искусственная задержка перед получением данных
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const response = await fetch('http://localhost:4000/catalogData');
     const data = await response.json();
@@ -32,7 +32,7 @@ export const fetchRecipeCatalogData = createAsyncThunk(
 export const fetchAddEntries = createAsyncThunk(
   'recipeCatalogData/fetchAddEntries',
   async (newDataItem: CatalogItemDataType) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     // после задержки, выполняем отправку данных на сервер
     const response = await fetch('http://localhost:4000/catalogData', {
       method: 'POST',
@@ -57,8 +57,7 @@ export const fetchEditingEntries = createAsyncThunk(
     newDataItem: CatalogItemDataType;
     id: string;
   }) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('typeof id=', typeof id);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const response = await fetch(`http://localhost:4000/catalogData/${id}`, {
       method: 'PATCH',
       headers: {
@@ -75,7 +74,7 @@ export const fetchEditingEntries = createAsyncThunk(
 export const fetchRemoveEntries = createAsyncThunk(
   'recipeCatalogData/fetchRemoveEntries',
   async (id: string) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const response = await fetch(`http://localhost:4000/catalogData/${id}`, {
       method: 'DELETE',
@@ -92,16 +91,10 @@ export const fetchRemoveEntries = createAsyncThunk(
 export const fetchSearchEntries = createAsyncThunk(
   'recipeCatalogData/fetchSearchEntries',
   async (valueSearch: string) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const response = await fetch(
-      `http://localhost:4000/catalogData?title=${valueSearch}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      `http://localhost:4000/catalogData?title=${valueSearch}`
     );
     const data = await response.json();
     return data;

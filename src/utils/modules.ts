@@ -9,8 +9,9 @@ export const saveDatasetToLocalStorage = (
 };
 
 // функция для генерации id
-export const generateId = (): string =>
-  Math.round(Math.random() * 100000000000000).toString(16);
+export const generateId = (data: CatalogItemDataType[]): string => {
+  return String(data.map((_, index) => index + 1).length + 1);
+};
 
 // функция, проверяет длину строки
 export const checkLengthOfTheString = (str: string) => str.trim().length > 0;
@@ -59,88 +60,4 @@ export const convertObjectToIndentedLines = (obj: CatalogItemDataType): any => {
   // разделенные строки, разбиение строки на массив строк по символу новой строки
   const separatedLines: string[] = jsonString.split('\n');
   return separatedLines;
-};
-
-// функция, поиск по названию
-export const searchForTitle = (
-  data: CatalogItemDataType[],
-  textValue: string
-): CatalogItemDataType[] => {
-  const textValueUpperCase = textValue.toUpperCase();
-
-  // метод includes проверяет наличие элемента в массиве (метод возвращает либо true, либо false)
-  const newData = data.filter((item) =>
-    item.title.toUpperCase().includes(textValueUpperCase)
-  );
-
-  return newData;
-};
-
-// функция, обрабатывать HTTP-запросы
-export const handleHttpRequests = (
-  data: CatalogItemDataType[] | null = null,
-  dataItem: CatalogItemDataType,
-  newDataItem: CatalogItemDataType | null = null,
-  methodHTTP: string,
-  searchFlag: boolean = false,
-  valueSearch: string = ''
-) => {
-  let resultPromise: Promise<Response> | null = null;
-  // Метод POST используется для создания новых данных на сервере
-  if (data === null && methodHTTP === 'POST') {
-    resultPromise = fetch('http://localhost:4000/catalogData', {
-      method: `${methodHTTP}`,
-      // сообщаем серверу, что данные, которые мы отправляем, являются JSON-данными, и их кодировка UTF-8
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      /* Данные будут преобразованы в строку JSON и отправлены в теле HTTP-запроса 
-         Это позволяет передавать структурированные данные на сервер в формате JSON */
-      body: JSON.stringify(newDataItem),
-    });
-  }
-  // Метод PATCH используется для частичного обновления существующих данных на сервере
-  if (data !== null && methodHTTP === 'PATCH') {
-    data.map((item) => {
-      if (item.id === dataItem.id) {
-        resultPromise = fetch(`http://localhost:4000/catalogData/${item.id}`, {
-          method: `${methodHTTP}`,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newDataItem),
-        });
-      }
-      return null;
-    });
-  }
-  // Метод DELETE используется для удаления данных на сервере
-  if (data !== null && newDataItem === null && methodHTTP === 'DELETE') {
-    data.map((item) => {
-      if (item.id === dataItem.id) {
-        resultPromise = fetch(`http://localhost:4000/catalogData/${item.id}`, {
-          method: `${methodHTTP}`,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-      }
-      return null;
-    });
-  }
-
-  // Метод GET используется для получения данных с сервера
-  if (methodHTTP === 'GET' && searchFlag === true) {
-    resultPromise = fetch(
-      `http://localhost:4000/catalogData?title=${valueSearch}`,
-      {
-        method: `${methodHTTP}`,
-        // сообщаем серверу, что данные, которые мы отправляем, являются JSON-данными, и их кодировка UTF-8
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-  }
-  return resultPromise;
 };

@@ -75,7 +75,7 @@ const ModalForm = () => {
       event.preventDefault();
       // формируем объект с данными каталога
       const objCatalogData: CatalogItemDataType = {
-        id: generateId(),
+        id: generateId(recipeCatalogData),
         color: dataItem.color,
         date: getTheCurrentDate(),
         title: dataItem.title.trim(),
@@ -94,6 +94,7 @@ const ModalForm = () => {
       dataItem.title,
       dispatch,
       handleCloseModalWindowForm,
+      recipeCatalogData,
     ]
   );
 
@@ -107,7 +108,7 @@ const ModalForm = () => {
       event.preventDefault();
       // формируем объект с данными каталога
       const objCatalogData: CatalogItemDataType = {
-        id: generateId(),
+        id: generateId(recipeCatalogData),
         color: dataItem.color,
         date: getTheCurrentDate(),
         title: dataItem.title.trim(),
