@@ -59,15 +59,12 @@ export type ModalActiveInitialStateType = {
   dataItem: CatalogItemDataType;
 };
 
-export type SearchType = {
-  searchValue: string;
-  searchFlag: boolean;
-  searchFieldActive: boolean;
-  searchData: CatalogItemDataType[] | [];
-};
-
 export type CatalogDataInitialStateType = {
   recipeCatalogData: CatalogItemDataType[] | [];
   isLoading: boolean;
   isErrors: boolean;
+  //
+  searchValue: string;
+  searchFlag: boolean;
+  searchData: CatalogItemDataType[] | [];
 };

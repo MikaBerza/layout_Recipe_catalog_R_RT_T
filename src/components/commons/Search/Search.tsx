@@ -3,28 +3,32 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
 import {
-  setSearch,
-  setSearchFieldActive,
-} from '../../../redux/slices/searchSlice';
+  fetchSearchEntries,
+  setSearchValue,
+  setSearchFlag,
+} from '../../../redux/slices/recipeCatalogSlice';
 import styles from './Search.module.css';
 
 const Search = () => {
-  const { searchData, searchValue, searchFlag } = useSelector(
-    (state: RootState) => state.searchSlice
-  );
   const dispatch = useDispatch();
-  console.log('searchData', searchData);
+  const { searchValue } = useSelector(
+    (state: RootState) => state.recipeCatalogDataSlice
+  );
 
   const handleSearch = React.useCallback(() => {
-    if (searchFlag) dispatch(setSearchFieldActive(true));
-  }, [dispatch, searchFlag]);
+    if (searchValue.trim().length > 0) {
+      dispatch(setSearchFlag(true));
+      // @ts-ignore
+      dispatch(fetchSearchEntries(searchValue));
+    }
+  }, [dispatch, searchValue]);
 
   return (
     <div className={styles.wrapper}>
       <input
         className={styles.input}
         value={searchValue}
-        onChange={(event) => dispatch(setSearch(event.target.value))}
+        onChange={(event) => dispatch(setSearchValue(event.target.value))}
         type='search'
         placeholder='Поиск блюд'
       />

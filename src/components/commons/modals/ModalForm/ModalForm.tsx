@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { setSearchData } from '../../../../redux/slices/searchSlice';
+// import { setSearchData } from '../../../../redux/slices/searchSlice';
 import {
   setModalActive,
   setModalEditingActive,
@@ -15,14 +15,16 @@ import {
 import { FormTitle } from '../../titles';
 import { ButtonModal } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
-import {
-  generateId,
-  getTheCurrentDate,
-  handleHttpRequests,
-} from '../../../../utils/modules';
+import { generateId, getTheCurrentDate } from '../../../../utils/modules';
 
 import styles from './ModalForm.module.css';
 import { CatalogItemDataType } from '../../../../types/customType';
+//
+import {
+  fetchAddEntries,
+  fetchEditingEntries,
+  fetchRemoveEntries,
+} from '../../../../redux/slices/recipeCatalogSlice';
 
 const ModalForm = () => {
   const { recipeCatalogData } = useSelector(
@@ -36,10 +38,6 @@ const ModalForm = () => {
     dataItem,
   } = useSelector((state: RootState) => state.modalFormSlice);
   const dispatch = useDispatch();
-
-  const { searchValue, searchFlag } = useSelector(
-    (state: RootState) => state.searchSlice
-  );
 
   // функция, определить имя заголовка
   const defineTitleName = React.useMemo((): string => {
@@ -67,34 +65,6 @@ const ModalForm = () => {
     dispatch(setRecipe(''));
   }, [dispatch, modalActive, modalEditingActive]);
 
-  //__________________________________________________________
-  React.useEffect(() => {
-    const result = handleHttpRequests(
-      null,
-      dataItem,
-      null,
-      'GET',
-      searchFlag,
-      searchValue
-    );
-
-    if (result !== null) {
-      result
-        .then((response) => {
-          if (!response.ok) {
-            // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
-            throw new Error('Ошибка сети: ' + response.status);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Дополнительные действия после успешного добавления записи
-          console.log('Поиск', data);
-          dispatch(setSearchData(data));
-        });
-    }
-  }, [dataItem, dispatch, searchFlag, searchValue]);
-
   // функция, обработать добавление записи
   const handleAddEntries = React.useCallback(
     (
@@ -113,30 +83,19 @@ const ModalForm = () => {
         cookingTime: dataItem.cookingTime,
       };
 
-      const result = handleHttpRequests(null, dataItem, objCatalogData, 'POST');
-      if (result !== null) {
-        result
-          .then((response) => {
-            if (!response.ok) {
-              // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
-              throw new Error('Ошибка сети: ' + response.status);
-            }
-            return response.json();
-          })
-          .catch((error) => {
-            // Обработка ошибки
-            console.error('Произошла ошибка:', error);
-            // Включаем заглушку
-          })
-          .finally(() => {
-            // Действия в блоке finally
-            console.log('finally');
-          });
-      }
+      // @ts-ignore
+      dispatch(fetchAddEntries(objCatalogData));
       // закрываем модальное окно с формой
       handleCloseModalWindowForm();
     },
-    [dataItem, handleCloseModalWindowForm]
+    [
+      dataItem.color,
+      dataItem.cookingTime,
+      dataItem.recipe,
+      dataItem.title,
+      dispatch,
+      handleCloseModalWindowForm,
+    ]
   );
 
   // функция, обработать сохранение редактируемой записи
@@ -157,74 +116,42 @@ const ModalForm = () => {
         cookingTime: dataItem.cookingTime,
       };
 
-      const result = handleHttpRequests(
-        recipeCatalogData,
-        dataItem,
-        objCatalogData,
-        'PATCH'
+      const resultId = recipeCatalogData.find((item) => {
+        return item.id === dataItem.id;
+      });
+      // @ts-ignore
+      dispatch(
+        // @ts-ignore
+        fetchEditingEntries({ newDataItem: objCatalogData, id: resultId.id })
       );
-
-      if (result !== null) {
-        result
-          .then((response) => {
-            if (!response.ok) {
-              // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
-              throw new Error('Ошибка сети: ' + response.status);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            // Дополнительные действия после успешного добавления записи
-            console.log('Новая запись успешно добавлена:', data);
-          })
-          .catch((error) => {
-            // Обработка ошибки
-            console.error('Произошла ошибка при добавлении записи:', error);
-          })
-          .finally(() => {
-            // Действия в блоке finally
-            console.log('finally');
-          });
-      }
       // закрываем модальное окно с формой
       handleCloseModalWindowForm();
     },
-    [dataItem, handleCloseModalWindowForm, recipeCatalogData]
+    [
+      dataItem.color,
+      dataItem.cookingTime,
+      dataItem.id,
+      dataItem.recipe,
+      dataItem.title,
+      dispatch,
+      handleCloseModalWindowForm,
+      recipeCatalogData,
+    ]
   );
 
   // функция, обработать удаление записи
   const handleRemoveEntries = React.useCallback(() => {
-    const result = handleHttpRequests(
-      recipeCatalogData,
-      dataItem,
-      null,
-      'DELETE'
+    const resultId = recipeCatalogData.find((item) => {
+      return item.id === dataItem.id;
+    });
+    // @ts-ignore
+    dispatch(
+      // @ts-ignore
+      fetchRemoveEntries(resultId.id)
     );
-    if (result !== null) {
-      result
-        .then((response) => {
-          if (!response.ok) {
-            // если ответ содержит ошибку, генерируется исключение с сообщением 'Ошибка сети: '
-            throw new Error('Ошибка сети: ' + response.status);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Дополнительные действия после успешного добавления записи
-          console.log('Новая запись успешно добавлена:', data);
-        })
-        .catch((error) => {
-          // Обработка ошибки
-          console.error('Произошла ошибка при добавлении записи:', error);
-        })
-        .finally(() => {
-          // Действия в блоке finally
-          console.log('finally');
-        });
-    }
     // закрываем модальное окно с формой
     handleCloseModalWindowForm();
-  }, [dataItem, handleCloseModalWindowForm, recipeCatalogData]);
+  }, [dataItem.id, dispatch, handleCloseModalWindowForm, recipeCatalogData]);
 
   return (
     <div

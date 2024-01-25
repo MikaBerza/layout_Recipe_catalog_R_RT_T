@@ -5,17 +5,13 @@ import { Trow } from '../index';
 import { CatalogItemDataType } from '../../../../types/customType';
 
 const Tbody = () => {
-  const { recipeCatalogData } = useSelector(
-    (state: RootState) => state.recipeCatalogDataSlice
-  );
-  const { searchData, searchFieldActive } = useSelector(
-    (state: RootState) => state.searchSlice
-  );
+  const { recipeCatalogData, searchData, searchFlag } =
+    useSelector((state: RootState) => state.recipeCatalogDataSlice);
 
   // отображаемые данные
   const displayedData = React.useMemo(
-    () => (searchFieldActive ? searchData : recipeCatalogData),
-    [recipeCatalogData, searchData, searchFieldActive]
+    () => (searchFlag ? searchData : recipeCatalogData),
+    [recipeCatalogData, searchData, searchFlag]
   );
 
   return (
