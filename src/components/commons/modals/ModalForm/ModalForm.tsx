@@ -1,29 +1,25 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
-
 import {
   setModalActive,
   setModalEditingActive,
-  //
   setColor,
   setTitle,
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-
 import { FormTitle } from '../../titles';
 import { ButtonModal } from '../../buttons';
 import { InputField, TextareaField } from '../../forms';
 import { generateId, getTheCurrentDate } from '../../../../utils/modules';
-
 import styles from './ModalForm.module.css';
 import { CatalogItemDataType } from '../../../../types/customType';
-//
 import {
   fetchAddEntries,
   fetchEditingEntries,
   fetchRemoveEntries,
+  setSearchValue,
 } from '../../../../redux/slices/recipeCatalogSlice';
 
 const ModalForm = () => {
@@ -63,6 +59,8 @@ const ModalForm = () => {
     dispatch(setCookingTime(''));
     dispatch(setTitle(''));
     dispatch(setRecipe(''));
+    // очищаем поле поиска
+    dispatch(setSearchValue(''));
   }, [dispatch, modalActive, modalEditingActive]);
 
   // функция, обработать добавление записи

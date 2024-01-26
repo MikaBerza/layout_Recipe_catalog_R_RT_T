@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-
 import { useAppSelector } from '../../../redux/hooks';
 import { RootState } from '../../../redux/store';
 import { Recipe } from '../../commons/Recipe';

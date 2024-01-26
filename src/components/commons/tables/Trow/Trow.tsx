@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import {
   setModalEditingActive,
   setModalDataActive,
-  //
   setId,
   setColor,
   setDate,
@@ -11,7 +10,6 @@ import {
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-
 import { ButtonControlCatalogEntry } from '../../buttons';
 import { Recipe } from '../../Recipe';
 import styles from './Trow.module.css';

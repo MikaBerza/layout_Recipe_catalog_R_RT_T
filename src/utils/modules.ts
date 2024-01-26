@@ -9,15 +9,11 @@ export const checkLengthOfTheString = (str: string) => str.trim().length > 0;
 
 // функция, разделить предложение с разрывом строки
 export const splitSentenceWithLineBreak = (text: string): string[] => {
-  /*
-  разделяем строки в массив по точке и двум пробелам, удаляем пустую строку, 
-  которая появляется после разделения строк
-  */
-  // разделенные предложения
+  /* разделяем строки в массив по точке и двум пробелам, удаляем пустую строку, 
+  которая появляется после разделения строк */
   const splitSentences = text
     .split('\n')
     .filter((sentence) => sentence.trim() !== '');
-
   // счетчик новых строк
   const newlineCounter = splitSentences.length - 1;
 

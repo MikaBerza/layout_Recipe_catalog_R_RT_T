@@ -3,13 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { RootState } from '../../../../redux/store';
 import {
   setModalDataActive,
-  //
   setColor,
   setTitle,
   setRecipe,
   setCookingTime,
 } from '../../../../redux/slices/modalFormSlice';
-
 import { FormTitle } from '../../titles';
 import { Recipe } from '../../Recipe';
 import { MinorText } from '../../MinorText';
