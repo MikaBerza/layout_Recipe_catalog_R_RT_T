@@ -11,8 +11,8 @@ const Tbody = React.memo(() => {
 
   return (
     <tbody>
-      {recipeCatalogData.map((item: CatalogItemDataType) => (
-        <Trow key={item.id} item={item} dishNumber={item.id} />
+      {recipeCatalogData.map((item: CatalogItemDataType, index: number) => (
+        <Trow key={item.id} item={item} dishNumber={String(index + 1)} />
       ))}
     </tbody>
   );

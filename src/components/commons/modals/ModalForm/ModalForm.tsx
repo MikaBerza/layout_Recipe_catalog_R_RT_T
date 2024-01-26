@@ -39,7 +39,7 @@ const ModalForm = () => {
   } = useAppSelector((state: RootState) => state.modalFormSlice);
   const dispatch = useAppDispatch();
 
-  // функция, определить имя заголовка
+  // константа, определить имя заголовка
   const defineTitleName = React.useMemo((): string => {
     let str = '';
     if (modalActive) {
@@ -75,7 +75,7 @@ const ModalForm = () => {
       event.preventDefault();
       // формируем объект с данными каталога
       const objCatalogData: CatalogItemDataType = {
-        id: generateId(recipeCatalogData),
+        id: generateId(),
         color: dataItem.color,
         date: getTheCurrentDate(),
         title: dataItem.title.trim(),
@@ -94,7 +94,6 @@ const ModalForm = () => {
       dataItem.title,
       dispatch,
       handleCloseModalWindowForm,
-      recipeCatalogData,
     ]
   );
 
@@ -108,7 +107,7 @@ const ModalForm = () => {
       event.preventDefault();
       // формируем объект с данными каталога
       const objCatalogData: CatalogItemDataType = {
-        id: generateId(recipeCatalogData),
+        id: dataItem.id,
         color: dataItem.color,
         date: getTheCurrentDate(),
         title: dataItem.title.trim(),

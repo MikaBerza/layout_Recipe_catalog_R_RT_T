@@ -1,17 +1,8 @@
 import { CatalogItemDataType } from '../types/customType';
 
-// функция, сохранить набор данных в localStorage
-export const saveDatasetToLocalStorage = (
-  nameKey: string,
-  dataset: CatalogItemDataType[]
-): void => {
-  localStorage.setItem(nameKey, JSON.stringify(dataset));
-};
-
 // функция для генерации id
-export const generateId = (data: CatalogItemDataType[]): string => {
-  return String(data.map((_, index) => index + 1).length + 1);
-};
+export const generateId = (): string =>
+  Math.round(Math.random() * 100000000000000).toString(16);
 
 // функция, проверяет длину строки
 export const checkLengthOfTheString = (str: string) => str.trim().length > 0;
