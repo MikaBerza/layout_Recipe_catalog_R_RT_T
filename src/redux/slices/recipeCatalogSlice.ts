@@ -150,7 +150,6 @@ export const recipeCatalogDataSlice = createSlice({
       .addCase(fetchAddEntries.fulfilled, (state, action) => {
         state.isErrors = false;
         state.isLoading = false;
-        // @ts-ignore
         state.recipeCatalogData.push(action.payload);
       })
       .addCase(fetchAddEntries.rejected, (state) => {

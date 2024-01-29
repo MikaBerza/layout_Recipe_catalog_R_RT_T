@@ -60,7 +60,7 @@ export type ModalActiveInitialStateType = {
 };
 
 export type CatalogDataInitialStateType = {
-  recipeCatalogData: CatalogItemDataType[] | [];
+  recipeCatalogData: CatalogItemDataType[];
   isLoading: boolean;
   isErrors: boolean;
   //
