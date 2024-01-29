@@ -52,10 +52,7 @@ const Trow = React.memo(
         <td>
           <ButtonControlCatalogEntry
             nameBtn='Подробнее'
-            link={
-              '/layout_Recipe_catalog_R_RT_T/recipe-catalog-page/recipe-card-page/' +
-              dishNumber
-            }
+            link={`/layout_Recipe_catalog_R_RT_T/recipe-catalog-page/recipe-card-page/${dishNumber}`}
             onClick={() => getItemData(item)}
           />
         </td>

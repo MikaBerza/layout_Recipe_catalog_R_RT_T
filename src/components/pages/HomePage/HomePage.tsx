@@ -1,5 +1,5 @@
 import { MainTitle } from '../../commons/titles';
-import { ButtonGoToCatalog } from '../../commons/buttons/index';
+import { ButtonGoToCatalog } from '../../commons/buttons';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {

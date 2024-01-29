@@ -16,7 +16,15 @@ const Search = () => {
     (state: RootState) => state.recipeCatalogDataSlice
   );
 
-  const handleSearch = React.useCallback(() => {
+  // обрабатывать текущее значение поиска
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(setSearchValue(event.target.value));
+  };
+
+  // обработать нажатие кнопки поиска
+  const handleSearchButtonClick = React.useCallback(() => {
     if (searchValue.trim().length > 0) {
       dispatch(setSearchFlag(true));
       dispatch(fetchSearchEntries(searchValue));
@@ -36,11 +44,11 @@ const Search = () => {
       <input
         className={styles.input}
         value={searchValue}
-        onChange={(event) => dispatch(setSearchValue(event.target.value))}
+        onChange={handleSearchInputChange}
         type='search'
         placeholder='Поиск блюд'
       />
-      <button className={styles.button} onClick={handleSearch}>
+      <button className={styles.button} onClick={handleSearchButtonClick}>
         <svg className={styles.icon} viewBox='0 0 32 32' version='1.1'>
           <path d='M10.437,19.442l-7.498,7.497c-0.585,0.586 -0.585,1.536 0,2.122c0.586,0.585 1.536,0.585 2.122,-0l7.649,-7.65c1.544,0.976 3.373,1.542 5.333,1.542c5.52,-0 10,-4.481 10,-10c0,-5.52 -4.48,-10 -10,-10c-5.519,-0 -10,4.48 -10,10c0,2.475 0.902,4.741 2.394,6.489Z' />
         </svg>
