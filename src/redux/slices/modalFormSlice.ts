@@ -1,12 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ModalActiveInitialStateType } from '../../types/customType';
+import { CatalogItemDataType } from '../../types/customType';
 
 // первое состояние
-const initialState: ModalActiveInitialStateType = {
-  modalActive: false,
-  modalEditingActive: false,
-  modalDataActive: false,
-  //
+const initialState: { dataItem: CatalogItemDataType } = {
   dataItem: {
     id: '',
     color: '#000000',
@@ -21,16 +17,6 @@ export const modalFormSlice = createSlice({
   name: 'modalForm',
   initialState,
   reducers: {
-    setModalActive(state, action) {
-      state.modalActive = action.payload;
-    },
-    setModalEditingActive(state, action) {
-      state.modalEditingActive = action.payload;
-    },
-    setModalDataActive(state, action) {
-      state.modalDataActive = action.payload;
-    },
-    //
     setId(state, action) {
       state.dataItem.id = action.payload;
     },
@@ -52,16 +38,6 @@ export const modalFormSlice = createSlice({
   },
 });
 
-export const {
-  setModalActive,
-  setModalEditingActive,
-  setModalDataActive,
-  //
-  setId,
-  setColor,
-  setDate,
-  setTitle,
-  setRecipe,
-  setCookingTime,
-} = modalFormSlice.actions;
+export const { setId, setColor, setDate, setTitle, setRecipe, setCookingTime } =
+  modalFormSlice.actions;
 export default modalFormSlice.reducer;

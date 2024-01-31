@@ -51,14 +51,6 @@ export type ButtonType = {
   link?: string | null;
 };
 
-export type ModalActiveInitialStateType = {
-  modalActive: boolean;
-  modalEditingActive: boolean;
-  modalDataActive: boolean;
-  //
-  dataItem: CatalogItemDataType;
-};
-
 export type CatalogDataInitialStateType = {
   recipeCatalogData: CatalogItemDataType[];
   isLoading: boolean;
@@ -67,4 +59,17 @@ export type CatalogDataInitialStateType = {
   searchValue: string;
   searchFlag: boolean;
   searchButtonIsActive: boolean;
+};
+
+export type ModalFormPropsType = {
+  modalName: string;
+  modalFormActive: boolean;
+  setModalFormActive: (active: boolean) => void;
+  catalogItemData: CatalogItemDataType;
+};
+
+export type ModalDataPropsType = {
+  modalDataActive: boolean;
+  setModalDataActive: (active: boolean) => void;
+  catalogItemData: CatalogItemDataType;
 };

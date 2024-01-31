@@ -40,7 +40,7 @@
   max-width: 70px;
 }
 
-.wrapper td span {
+.tdColor {
   display: block;
   width: 40px;
   height: 20px;

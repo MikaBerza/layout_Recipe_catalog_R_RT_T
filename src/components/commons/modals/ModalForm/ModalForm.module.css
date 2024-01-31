@@ -12,10 +12,6 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.dn {
-  display: none;
-}
-
 .formFill {
   box-sizing: border-box;
   max-width: 1170px;
@@ -31,7 +27,7 @@
   width: 100%;
 }
 
-.container>* {
+.container {
   font-size: 20px;
   font-weight: 400;
   line-height: 142%;
@@ -43,6 +39,9 @@
   width: 100%;
 }
 
+.dn {
+  display: none;
+}
 
 /*550px___________________________________________________*/
 @media (max-width: 550px) {

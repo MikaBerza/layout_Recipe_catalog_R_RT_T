@@ -1,19 +1,11 @@
-import { useDispatch } from 'react-redux';
-import { setModalActive } from '../../../../redux/slices/modalFormSlice';
 import styles from './ButtonCreateEntry.module.css';
+import { ButtonType } from '../../../../types/customType';
 
-const ButtonCreateEntry = ({ name }: { name: string }) => {
-  const dispatch = useDispatch();
-
-  // функция, открыть модальное окно для создания записи
-  const openModalWindowToCreateEntry = () => {
-    dispatch(setModalActive(true));
-  };
-
+const ButtonCreateEntry = ({ nameBtn, onClick }: ButtonType) => {
   return (
     <div className={styles.wrapper}>
-      <button className={styles.linkBtn} onClick={openModalWindowToCreateEntry}>
-        {name}
+      <button className={styles.linkBtn} onClick={onClick}>
+        {nameBtn}
       </button>
     </div>
   );

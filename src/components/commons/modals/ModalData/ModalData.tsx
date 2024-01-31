@@ -1,52 +1,31 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { RootState } from '../../../../redux/store';
-import {
-  setModalDataActive,
-  setColor,
-  setTitle,
-  setRecipe,
-  setCookingTime,
-} from '../../../../redux/slices/modalFormSlice';
 import { FormTitle } from '../../titles';
 import { Recipe } from '../../Recipe';
 import { MinorText } from '../../MinorText';
 import { ButtonModal } from '../../buttons';
 import styles from './ModalData.module.css';
+import { ModalDataPropsType } from '../../../../types/customType';
 
-const ModalData = () => {
-  const dispatch = useAppDispatch();
-  const { modalDataActive, dataItem } = useAppSelector(
-    (state: RootState) => state.modalFormSlice
-  );
-  // используем деструктуризацию для получения данных из (dataItem)
-  const { title, cookingTime, recipe } = dataItem;
-
+const ModalData = ({
+  modalDataActive,
+  setModalDataActive,
+  catalogItemData,
+}: ModalDataPropsType) => {
   // функция, обработать закрытие модального окна
   const handleCloseModalWindow = React.useCallback(() => {
-    // изменяем флаг true на false
-    if (modalDataActive) {
-      dispatch(setModalDataActive(false));
-    }
-    // очищаем значение полей формы
-    dispatch(setColor('#000000'));
-    dispatch(setCookingTime(''));
-    dispatch(setTitle(''));
-    dispatch(setRecipe(''));
-  }, [dispatch, modalDataActive]);
+    setModalDataActive(false);
+  }, [setModalDataActive]);
 
   return (
-    <div
-      className={`${styles.wrapper} ${
-        modalDataActive === false ? styles.dn : ''
-      }`}
-    >
+    <div className={`${styles.wrapper} ${modalDataActive ? '' : styles.dn}`}>
       <div className={styles.inner}>
         <div className={styles.content}>
-          <FormTitle textTitle={title} />
+          <FormTitle textTitle={catalogItemData.title} />
           <div className={styles.box}>
-            <Recipe str={recipe} />
-            <MinorText str={`Время приготовления ${cookingTime}`} />
+            <Recipe str={catalogItemData.recipe} />
+            <MinorText
+              str={`Время приготовления ${catalogItemData.cookingTime}`}
+            />
           </div>
 
           <div className={styles.buttons}>
